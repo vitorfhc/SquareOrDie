@@ -12,6 +12,7 @@ class InputSystem {
     void UpdateStates();
     bool GetKeyDown(SDL_Scancode key);
     bool GetKeyUp(SDL_Scancode key);
+    bool GetKeyPressed(SDL_Scancode key);
 
     private:
     // constructor and destructor

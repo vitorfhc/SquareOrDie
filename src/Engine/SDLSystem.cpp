@@ -22,7 +22,7 @@ void SDLSystem::Init() {
     if(!(CreateWindow() && CreateRenderer())) {
         ERROR("SDLSystem::Init() failed.");
         return;
-    }    
+    }
 
     INFO("SDLSystem::Init() completed");
 }
@@ -36,6 +36,11 @@ void SDLSystem::Run() {
         InputSystem::GetInstance()->UpdateStates();
 
         if(InputSystem::GetInstance()->GetKeyUp(SDL_SCANCODE_ESCAPE)) m_isRunning = false;
+        for (int key = 0; key < SDL_SCANCODE_APP2; key++) {
+            if(InputSystem::GetInstance()->GetKeyDown((SDL_Scancode)key)) {};
+            if(InputSystem::GetInstance()->GetKeyPressed((SDL_Scancode)key)) {};
+            if(InputSystem::GetInstance()->GetKeyUp((SDL_Scancode)key)) {};
+        }
 
         SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
         SDL_RenderClear(m_renderer);
@@ -67,7 +72,7 @@ bool SDLSystem::InitSDL() {
     int init = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO |
                         SDL_INIT_VIDEO | SDL_INIT_JOYSTICK |
                         SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
-                        
+
     if (init != 0) {
         SDL_ERROR("SDLSystem::InitSDL() failed.");
         return false;
@@ -79,7 +84,7 @@ bool SDLSystem::InitSDL() {
 
 bool SDLSystem::InitIMG() {
     INFO("Initializing IMG");
-    
+
     int flags = IMG_INIT_PNG | IMG_INIT_JPG;
     int init = IMG_Init(flags);
 
@@ -110,7 +115,7 @@ bool SDLSystem::InitTTF() {
     INFO("Initializing TTF");
 
     int init = TTF_Init();
-    
+
     if (init != 0) {
         SDL_TTF_ERROR("SDLSystem::InitTTF() failed.");
         return false;
@@ -127,7 +132,7 @@ bool SDLSystem::CreateWindow() {
                                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                 EngineGlobals::screen_width, EngineGlobals::screen_height,
                                 SDL_WINDOW_SHOWN);
-    
+
     if(!m_window) {
         SDL_ERROR("SDLSystem::CreateWindow() failed.");
         return false;
@@ -139,10 +144,10 @@ bool SDLSystem::CreateWindow() {
 
 bool SDLSystem::CreateRenderer() {
     INFO("Creating renderer.");
-    
+
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED |
                                     SDL_RENDERER_PRESENTVSYNC);
-    
+
     if(!m_renderer) {
         SDL_ERROR("SDLSystem::CreateRenderer() failed.");
         return false;

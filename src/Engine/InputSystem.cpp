@@ -45,3 +45,13 @@ bool InputSystem::GetKeyUp(SDL_Scancode key) {
     return false;
 }
 
+bool InputSystem::GetKeyPressed(SDL_Scancode key) {
+    if(m_states[key]) {
+        char message[] = "Key pressed: ";
+        strcat(message, SDL_GetScancodeName(key));
+        INFO(message);
+        return true;
+    }
+    return false;
+}
+
