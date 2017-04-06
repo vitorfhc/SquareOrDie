@@ -25,30 +25,30 @@ void InputSystem::UpdateStates() {
     SDL_PumpEvents();
 }
 
-bool InputSystem::GetKeyDown(SDL_Scancode key) {
+bool InputSystem::GetKeyDown(InputGlobal key) {
     if(m_states[key] && !m_oldStates[key]) {
         char message[] = "Key down: ";
-        strcat(message, SDL_GetScancodeName(key));
+        strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
         INFO(message);
         return true;
     }
     return false;
 }
 
-bool InputSystem::GetKeyUp(SDL_Scancode key) {
+bool InputSystem::GetKeyUp(InputGlobal key) {
     if(!m_states[key] && m_oldStates[key]) {
         char message[] = "Key up: ";
-        strcat(message, SDL_GetScancodeName(key));
+        strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
         INFO(message);
         return true;
     }
     return false;
 }
 
-bool InputSystem::GetKeyPressed(SDL_Scancode key) {
+bool InputSystem::GetKeyPressed(InputGlobal key) {
     if(m_states[key]) {
         char message[] = "Key pressed: ";
-        strcat(message, SDL_GetScancodeName(key));
+        strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
         INFO(message);
         return true;
     }

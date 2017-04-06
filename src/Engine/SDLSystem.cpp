@@ -1,5 +1,6 @@
 #include "Engine/SDLSystem.h"
 #include "Engine/InputSystem.h"
+#include "Globals/InputGlobals.h"
 
 // static variables initialization
 SDLSystem* SDLSystem::m_instance = 0;
@@ -35,11 +36,11 @@ void SDLSystem::Run() {
     while(m_isRunning) {
         InputSystem::GetInstance()->UpdateStates();
 
-        if(InputSystem::GetInstance()->GetKeyUp(SDL_SCANCODE_ESCAPE)) m_isRunning = false;
-        for (int key = 0; key < SDL_SCANCODE_APP2; key++) {
-            if(InputSystem::GetInstance()->GetKeyDown((SDL_Scancode)key)) {};
-            if(InputSystem::GetInstance()->GetKeyPressed((SDL_Scancode)key)) {};
-            if(InputSystem::GetInstance()->GetKeyUp((SDL_Scancode)key)) {};
+        if(InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE)) m_isRunning = false;
+        for (int key = 0; key < INPUT_AC_BOOKMARKS; key++) {
+            if(InputSystem::GetInstance()->GetKeyDown((InputGlobal)key)) {};
+            if(InputSystem::GetInstance()->GetKeyPressed((InputGlobal)key)) {};
+            if(InputSystem::GetInstance()->GetKeyUp((InputGlobal)key)) {};
         }
 
         SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);

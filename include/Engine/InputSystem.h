@@ -3,6 +3,7 @@
 
 #include "Engine/sdl2include.h"
 #include "Log/log.h"
+#include "Globals/InputGlobals.h"
 
 class InputSystem {
     public:
@@ -10,9 +11,9 @@ class InputSystem {
     static InputSystem* GetInstance();
     // update m_states and m_oldStates every frame
     void UpdateStates();
-    bool GetKeyDown(SDL_Scancode key);
-    bool GetKeyUp(SDL_Scancode key);
-    bool GetKeyPressed(SDL_Scancode key);
+    bool GetKeyDown(InputGlobal key);
+    bool GetKeyUp(InputGlobal key);
+    bool GetKeyPressed(InputGlobal key);
 
     private:
     // constructor and destructor
