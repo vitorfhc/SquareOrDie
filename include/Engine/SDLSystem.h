@@ -1,12 +1,10 @@
 #ifndef __SDLSYSTEM_H__
 #define __SDLSYSTEM_H__
 
-#include <memory>
-
 #include "Log/log.h"
 #include "Log/sdl_log.h"
 #include "Engine/sdl2include.h"
-#include "Engine/EngineGlobals.h"
+#include "Globals/EngineGlobals.h"
 
 using namespace std;
 

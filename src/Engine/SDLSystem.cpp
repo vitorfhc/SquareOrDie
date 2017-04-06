@@ -1,4 +1,5 @@
 #include "Engine/SDLSystem.h"
+#include "Engine/InputSystem.h"
 
 // static variables initialization
 SDLSystem* SDLSystem::m_instance = 0;
@@ -30,16 +31,11 @@ void SDLSystem::Run() {
     INFO("Starting Run().");
 
     m_isRunning = true;
-    SDL_Event e;
 
     while(m_isRunning) {
-        while(SDL_PollEvent(&e) != 0) {
-            switch (e.type) {
-                case SDL_QUIT:
-                    m_isRunning = false;
-                    break;
-            }
-        }
+        InputSystem::GetInstance()->UpdateStates();
+
+        if(InputSystem::GetInstance()->GetKeyUp(SDL_SCANCODE_ESCAPE)) m_isRunning = false;
 
         SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
         SDL_RenderClear(m_renderer);
