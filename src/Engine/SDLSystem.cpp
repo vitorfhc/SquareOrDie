@@ -5,7 +5,10 @@
 // static variables initialization
 SDLSystem* SDLSystem::m_instance = 0;
 
-SDLSystem::SDLSystem() {}
+SDLSystem::SDLSystem() {
+    m_frameCounter = 0;
+    m_lastFrameTicks = 0;
+}
 SDLSystem::~SDLSystem() {
     m_instance = nullptr;
     m_window = nullptr;
@@ -34,6 +37,7 @@ void SDLSystem::Run() {
     m_isRunning = true;
 
     while(m_isRunning) {
+        CalculateFramerate();
         InputSystem::GetInstance()->UpdateStates();
 
         //std::pair<int,int> pos = InputSystem::GetInstance()->GetMousePosition();
@@ -54,6 +58,9 @@ void SDLSystem::Run() {
 
 void SDLSystem::Shutdown() {
     INFO("Shutdown() Initialized.")
+
+    // get ticks when it is being shutdown
+    m_gameEndTicks = SDL_GetTicks();
 
     IMG_Quit();
     Mix_Quit();
@@ -157,4 +164,15 @@ bool SDLSystem::CreateRenderer() {
 
     INFO("Created renderer successfully.");
     return true;
+}
+
+void SDLSystem::CalculateFramerate() {
+    m_currentTicks = SDL_GetTicks();
+    if(m_currentTicks - m_lastFrameTicks >= 1000) {
+        m_framerate = m_frameCounter;
+        m_frameCounter = 0;
+        m_lastFrameTicks = m_currentTicks;
+        INFO("Framerate per second: " << m_framerate);
+    }
+    m_frameCounter++;
 }

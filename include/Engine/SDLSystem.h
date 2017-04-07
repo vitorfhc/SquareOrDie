@@ -20,11 +20,18 @@ class SDLSystem {
     static SDLSystem* GetInstance();
 
     private:
-    // attributes
+    // SDL attributes
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
+    // singleton instance
     static SDLSystem* m_instance;
+    // game attributes
     bool m_isRunning;
+    int m_framerate;
+    int m_frameCounter;
+    Uint32 m_currentTicks;
+    Uint32 m_lastFrameTicks;
+    Uint32 m_gameEndTicks;
 
     // constructor and destructor
     SDLSystem();
@@ -40,6 +47,8 @@ class SDLSystem {
     // graphics methods
     bool CreateWindow();
     bool CreateRenderer();
+    // system framerate counter
+    void CalculateFramerate();
 };
 
 #endif //__SDLSYSTEM_H__
