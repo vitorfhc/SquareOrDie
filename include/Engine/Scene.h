@@ -12,6 +12,9 @@ class Scene {
     ~Scene();
     // update handling
     void Update();
+    // handle gameobjects
+    void AddGameObject(GameObject* gameObject);
+    void AddGameObject(std::vector<GameObject*> gameObjects);
 
     private:
     // gameobjects array
