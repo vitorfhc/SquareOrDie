@@ -36,12 +36,13 @@ void SDLSystem::Run() {
     while(m_isRunning) {
         InputSystem::GetInstance()->UpdateStates();
 
-        if(InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE)) m_isRunning = false;
-        for (int key = 0; key < INPUT_AC_BOOKMARKS; key++) {
-            if(InputSystem::GetInstance()->GetKeyDown((InputGlobal)key)) {};
-            if(InputSystem::GetInstance()->GetKeyPressed((InputGlobal)key)) {};
-            if(InputSystem::GetInstance()->GetKeyUp((InputGlobal)key)) {};
-        }
+        //std::pair<int,int> pos = InputSystem::GetInstance()->GetMousePosition();
+        //std::cout << pos.first << " " << pos.second << std::endl;
+        //InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT);
+        //InputSystem::GetInstance()->GetMouseButtonPressed(M_INPUT_LEFT);
+        //InputSystem::GetInstance()->GetMouseButtonUp(M_INPUT_LEFT);
+        if(InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
+            m_isRunning = false;
 
         SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
         SDL_RenderClear(m_renderer);

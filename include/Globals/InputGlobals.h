@@ -264,6 +264,20 @@ typedef enum {
 
     INPUT_NUM_SCANCODES = 512 
 
-} InputGlobal;
+} KeyboardInputGlobal;
+
+typedef enum {
+
+    M_INPUT_LEFT = 1,
+    M_INPUT_MIDDLE = 2,
+    M_INPUT_RIGHT = 3,
+    
+    M_INPUT_WHEELUP = 4,
+    M_INPUT_WHEELDOWN = 5
+
+    M_INPUT_EXTRA1 = 6,
+    M_INPUT_EXTRA2 = 7
+
+} MouseInputGlobal;
 
 #endif
