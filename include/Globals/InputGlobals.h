@@ -273,7 +273,7 @@ typedef enum {
     M_INPUT_RIGHT = 3,
     
     M_INPUT_WHEELUP = 4,
-    M_INPUT_WHEELDOWN = 5
+    M_INPUT_WHEELDOWN = 5,
 
     M_INPUT_EXTRA1 = 6,
     M_INPUT_EXTRA2 = 7
