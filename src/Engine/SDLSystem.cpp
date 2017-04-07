@@ -9,6 +9,7 @@ SDLSystem::SDLSystem() {
     m_frameCounter = 0;
     m_lastFrameTicks = 0;
 }
+
 SDLSystem::~SDLSystem() {
     m_instance = nullptr;
     m_window = nullptr;
@@ -40,11 +41,12 @@ void SDLSystem::Run() {
         CalculateFramerate();
         InputSystem::GetInstance()->UpdateStates();
 
-        //std::pair<int,int> pos = InputSystem::GetInstance()->GetMousePosition();
-        //std::cout << pos.first << " " << pos.second << std::endl;
-        //InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT);
-        //InputSystem::GetInstance()->GetMouseButtonPressed(M_INPUT_LEFT);
-        //InputSystem::GetInstance()->GetMouseButtonUp(M_INPUT_LEFT);
+        // std::pair<int,int> pos = InputSystem::GetInstance()->GetMousePosition();
+        // std::cout << pos.first << " " << pos.second << std::endl;
+        // InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT);
+        // InputSystem::GetInstance()->GetMouseButtonPressed(M_INPUT_LEFT);
+        // InputSystem::GetInstance()->GetMouseButtonUp(M_INPUT_LEFT);
+
         if(InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
             m_isRunning = false;
 
