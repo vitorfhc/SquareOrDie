@@ -3,8 +3,10 @@
 
 #include "Log/log.h"
 #include "Log/sdl_log.h"
-#include "Engine/sdl2include.h"
 #include "Globals/EngineGlobals.h"
+#include "Globals/InputGlobals.h"
+#include "Engine/sdl2include.h"
+#include "Engine/InputSystem.h"
 
 using namespace std;
 

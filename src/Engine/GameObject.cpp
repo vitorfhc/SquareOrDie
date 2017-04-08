@@ -56,9 +56,10 @@ void GameObject::AddComponent(Component* component) {
 
     if(it != m_components.end())
         it->second.push_back(component);  
-    else
-        m_components.insert(std::make_pair<Uint32, std::vector<Component*>>
-                        (type, std::vector<Component*>(1, component)));
+    else {
+        m_components.emplace(type, std::vector<Component*>());
+        m_components.at(type).push_back(component);
+    }
                         
     component->SetOwner(this);
 }

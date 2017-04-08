@@ -1,7 +1,7 @@
 #ifndef __COMPONENT__
 #define __COMPONENT__
 
-#include "Engine/GameObject.h"
+class GameObject;
 #include "Globals/ComponentTypes.h"
 
 class Component {
@@ -10,10 +10,10 @@ class Component {
     Component();
     ~Component();
     // getters and setters
-    inline virtual ComponentType GetType() final { return m_type; };
-    inline virtual void SetOwner(GameObject* go) final { m_owner = go; };
+    inline ComponentType GetType() { return m_type; };
+    inline void SetOwner(GameObject* gameObject) { m_owner = gameObject; };
     // unoverridable update
-    virtual void Update() final {};
+    virtual void Update() final;
 
     private:
     ComponentType m_type;

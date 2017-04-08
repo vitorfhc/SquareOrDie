@@ -1,6 +1,4 @@
 #include "Engine/SDLSystem.h"
-#include "Engine/InputSystem.h"
-#include "Globals/InputGlobals.h"
 
 // static variables initialization
 SDLSystem* SDLSystem::m_instance = 0;
