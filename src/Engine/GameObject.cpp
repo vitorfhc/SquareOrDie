@@ -12,26 +12,55 @@ GameObject::GameObject(Component* component) {
 GameObject::~GameObject() {}
 
 void GameObject::Update() {
+    ComponentsUpdate();
     PhysicsUpdate();
     DrawUpdate();
 }
 
 void GameObject::DrawUpdate() {
+    ComponentType drawTypes[] = { C_RENDERER };
 
+    for(auto type : drawTypes) {
+        auto it = m_components.find(type);
+
+        if(it != m_components.end())
+            for(auto component : it->second) component->Update();
+    }
 }
 
 void GameObject::PhysicsUpdate() {
+    ComponentType physicsTypes[] = { C_RIGIDBODY };
 
+    for(auto type : physicsTypes) {
+        auto it = m_components.find(type);
+
+        if(it != m_components.end())
+            for(auto component : it->second) component->Update();
+    }
+}
+
+void GameObject::ComponentsUpdate() {
+    ComponentType commonTypes[] = { C_AUDIO };
+
+    for(auto type : commonTypes) {
+        auto it = m_components.find(type);
+
+        if(it != m_components.end())
+            for(auto component : it->second) component->Update();
+    }
 }
 
 void GameObject::AddComponent(Component* component) {
-    auto it = m_components.find(component->GetType());
-    if(it != m_components.end()) {
-        it->second.push_back(component);
-        return;
-    }
-    m_components.insert(std::make_pair<Uint8, Component*>
-                        (component->GetType(), component));
+    auto type = component->GetType();
+    auto it = m_components.find(type);
+
+    if(it != m_components.end())
+        it->second.push_back(component);  
+    else
+        m_components.insert(std::make_pair<Uint32, std::vector<Component*>>
+                        (type, std::vector<Component*>(1, component)));
+                        
+    component->SetOwner(this);
 }
 
 void GameObject::AddComponent(std::vector<Component*> components) {

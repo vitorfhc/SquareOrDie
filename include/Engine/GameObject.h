@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <utility>
 
 #include "Globals/ComponentTypes.h"
 #include "Engine/Component.h"
@@ -22,11 +23,12 @@ class GameObject {
     
     private:
     // map of components
-    std::unordered_map<Uint8, std::vector<Component*>> m_components;
+    std::unordered_map<Uint32, std::vector<Component*>> m_components;
 
     // methods for handling specific update
     void PhysicsUpdate();
     void DrawUpdate();
+    void ComponentsUpdate();
 };
 
 #endif // __GAME_OBJECT__
