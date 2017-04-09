@@ -14,40 +14,28 @@ GameObject::~GameObject() {}
 void GameObject::Update() {
     ComponentsUpdate();
     PhysicsUpdate();
-    DrawUpdate();
 }
 
 void GameObject::DrawUpdate() {
-    ComponentType drawTypes[] = { C_RENDERER };
+    auto it = m_components.find(C_DRAW);
 
-    for(auto type : drawTypes) {
-        auto it = m_components.find(type);
-
-        if(it != m_components.end())
-            for(auto component : it->second) component->Update();
-    }
+    if(it != m_components.end())
+        for(auto component : it->second) component->Update();
+    
 }
 
 void GameObject::PhysicsUpdate() {
-    ComponentType physicsTypes[] = { C_RIGIDBODY };
+    auto it = m_components.find(C_PHYSICS);
 
-    for(auto type : physicsTypes) {
-        auto it = m_components.find(type);
-
-        if(it != m_components.end())
-            for(auto component : it->second) component->Update();
-    }
+    if(it != m_components.end())
+        for(auto component : it->second) component->Update();
 }
 
 void GameObject::ComponentsUpdate() {
-    ComponentType commonTypes[] = { C_AUDIO };
+    auto it = m_components.find(C_COMMON);
 
-    for(auto type : commonTypes) {
-        auto it = m_components.find(type);
-
-        if(it != m_components.end())
-            for(auto component : it->second) component->Update();
-    }
+    if(it != m_components.end())
+        for(auto component : it->second) component->Update();
 }
 
 void GameObject::AddComponent(Component* component) {

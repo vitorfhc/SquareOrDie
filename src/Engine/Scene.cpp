@@ -9,6 +9,11 @@ void Scene::Update() {
         it->Update();
 }
 
+void Scene::DrawUpdate() {
+    for (auto it : m_gameObjects)
+        it->DrawUpdate();
+}
+
 void Scene::AddGameObject(GameObject* gameObject) {
     m_gameObjects.push_back(gameObject);
 }

@@ -7,6 +7,7 @@
 #include "Globals/InputGlobals.h"
 #include "Engine/sdl2include.h"
 #include "Engine/InputSystem.h"
+#include "Engine/SceneManager.h"
 
 using namespace std;
 

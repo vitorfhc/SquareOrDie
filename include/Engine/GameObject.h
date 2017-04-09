@@ -18,6 +18,8 @@ class GameObject {
     ~GameObject();
     // method for handling updates
     void Update();
+    void DrawUpdate();
+    // components management
     void AddComponent(Component* component);
     void AddComponent(std::vector<Component*> components);
     
@@ -27,7 +29,6 @@ class GameObject {
     
     // methods for handling specific update
     void PhysicsUpdate();
-    void DrawUpdate();
     void ComponentsUpdate();
 };
 

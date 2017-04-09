@@ -38,6 +38,8 @@ void SDLSystem::Run() {
     while(m_isRunning) {
         CalculateFramerate();
         InputSystem::GetInstance()->UpdateStates();
+        if(InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
+            m_isRunning = false;
 
         // std::pair<int,int> pos = InputSystem::GetInstance()->GetMousePosition();
         // std::cout << pos.first << " " << pos.second << std::endl;
@@ -45,11 +47,15 @@ void SDLSystem::Run() {
         // InputSystem::GetInstance()->GetMouseButtonPressed(M_INPUT_LEFT);
         // InputSystem::GetInstance()->GetMouseButtonUp(M_INPUT_LEFT);
 
-        if(InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
-            m_isRunning = false;
+        // all updates but draw are called here
+        //SceneManager::GetInstance()->Update();
 
+        // clearing front buffer
         SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
         SDL_RenderClear(m_renderer);
+        // draw update changing the back buffer
+        //SceneManager::GetInstance()->DrawUpdate();
+        // getting back buffer and sending to front buffer
         SDL_RenderPresent(m_renderer);
     }
 

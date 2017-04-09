@@ -2,9 +2,9 @@
 #define __COMPONENT_TYPES__
 
 typedef enum {
-    C_RENDERER          = 1,
-    C_RIGIDBODY         = 2,
-    C_AUDIO             = 4
+    C_PHYSICS           = 1,
+    C_DRAW              = 2,
+    C_COMMON            = 3
 } ComponentType;
 
 #endif // __COMPONENT_TYPES__

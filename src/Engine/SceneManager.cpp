@@ -26,6 +26,9 @@ void SceneManager::AddScene(std::pair<std::string, Scene*> scenePair) {
 }
 
 void SceneManager::Update() {
-    for (auto it : m_scenes)
-        it.second->Update();
+    m_currentScene.second->Update();
+}
+
+void SceneManager::DrawUpdate() {
+    m_currentScene.second->DrawUpdate();
 }

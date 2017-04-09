@@ -12,6 +12,7 @@ class Scene {
     ~Scene();
     // update handling
     void Update();
+    void DrawUpdate();
     // handle gameobjects
     void AddGameObject(GameObject* gameObject);
     void AddGameObject(std::vector<GameObject*> gameObjects);
