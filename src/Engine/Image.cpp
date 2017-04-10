@@ -1,6 +1,6 @@
 #include "Engine/Image.h"
-#include "Log/log.h"
 #include "Engine/SDLSystem.h"
+#include "Log/log.h"
 
 Image::Image() {}
 
@@ -38,3 +38,21 @@ void Image::LoadImage(std::string path, int x, int y, int _width, int _height) {
 SDL_Texture *Image::GetTexture() { return m_texture; }
 
 SDL_Rect *Image::GetRect() { return &m_rectangle; }
+
+void Image::SetPivot(int x, int y) {
+  sdlPivot.x = x;
+  sdlPivot.y = y;
+}
+
+void Image::Flip(bool horizontal, bool vertical) {
+  m_horizontalFlip = horizontal;
+  m_verticalFlip = vertical;
+
+  SDL_RendererFlip flag = SDL_FLIP_NONE;
+  if (horizontal)
+    flag = SDL_FLIP_HORIZONTAL;
+  if (vertical)
+    flag = (SDL_RendererFlip)(flag | SDL_FLIP_VERTICAL);
+
+  sdlFlip = flag;
+}

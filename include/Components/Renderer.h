@@ -17,6 +17,8 @@ public:
   inline std::string GetComponentName() override { return "Renderer"; };
   inline Vector GetPosition() { return *m_position; };
   inline void SetPosition(Vector vector) { *m_position = vector; };
+  // getter for image
+  inline Image* GetImage() { return m_image; };
 
 protected:
   // overriding method called by final update

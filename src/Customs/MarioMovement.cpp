@@ -24,11 +24,19 @@ void MarioMovement::ComponentUpdate() {
   Vector position = renderer->GetPosition();
   float speed = 5;
 
+
   // checking input for movement
-  position.m_x += input->GetKeyPressed(INPUT_D) * speed;
-  position.m_x -= input->GetKeyPressed(INPUT_A) * speed;
+  bool right = input->GetKeyPressed(INPUT_D);
+  bool left = input->GetKeyPressed(INPUT_A);
+
+  position.m_x += right * speed;
+  position.m_x -= left * speed;
   position.m_y -= input->GetKeyPressed(INPUT_W) * speed;
   position.m_y += input->GetKeyPressed(INPUT_S) * speed;
+
+  // flip image
+  if (left) renderer->GetImage()->Flip(true, false);
+  else if (right) renderer->GetImage()->Flip(false, false);
 
   // updating position according to new position
   renderer->SetPosition(position);

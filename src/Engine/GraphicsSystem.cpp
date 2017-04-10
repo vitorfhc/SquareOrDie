@@ -23,8 +23,10 @@ void GraphicsSystem::Draw(Image *img, Vector position,
   dest.x = position.m_x;
   dest.y = position.m_y;
 
-  int result = SDL_RenderCopy(SDLSystem::GetInstance()->GetRenderer(),
-                              img->GetTexture(), img->GetRect(), &dest);
+  int result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
+                                img->GetTexture(), img->GetRect(), &dest,
+                                img->GetRotationAngle(), img->GetSDLPivot(),
+                                img->GetSDLFlip());
 
   if (result < 0) {
     ERROR(SDL_GetError());
