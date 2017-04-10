@@ -9,6 +9,9 @@ class GameObject;
 
 class Component {
 public:
+  // active attribute
+  bool active = true;
+
   // constructor and destructor
   Component(GameObject *owner, ComponentType type);
   ~Component();

@@ -50,7 +50,7 @@ void SDLSystem::Run() {
   GameObject *mario = new GameObject("Mario");
   MarioMovement *marioMovement = new MarioMovement(mario);
   Renderer *marioRenderer = new Renderer(mario, new Vector(100, 100),
-                                         marioImage, std::make_pair(100, 100));
+                                         marioImage, std::make_pair(50, 50));
   scene->AddGameObject(mario);
   // END OF TEST CODE
 

@@ -24,6 +24,13 @@ void MarioMovement::ComponentUpdate() {
   Vector position = renderer->GetPosition();
   float speed = 5;
 
+  // deactivate object
+  bool deactivate = input->GetKeyUp(INPUT_Q);
+  GetOwner()->active = !deactivate;
+
+  // deactivate this script
+  bool deactivateComponent = input->GetKeyUp(INPUT_E);
+  GetObjectComponent(GetComponentName())->active = !deactivateComponent;
 
   // checking input for movement
   bool right = input->GetKeyPressed(INPUT_D);

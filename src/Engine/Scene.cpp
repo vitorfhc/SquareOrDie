@@ -12,12 +12,12 @@ void Scene::Start() {
 
 void Scene::Update() {
   for (auto it : m_gameObjects)
-    it->Update();
+    if (it->active) it->Update();
 }
 
 void Scene::DrawUpdate() {
   for (auto it : m_gameObjects)
-    it->DrawUpdate();
+    if (it->active) it->DrawUpdate();
 }
 
 void Scene::AddGameObject(GameObject *gameObject) {

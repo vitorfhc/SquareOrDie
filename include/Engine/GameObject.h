@@ -12,6 +12,9 @@
 
 class GameObject {
 public:
+  // active atribbute
+  bool active = true;
+
   // constructor and destructor
   GameObject(std::string name, std::vector<Component *> components);
   GameObject(std::string name, Component *component);

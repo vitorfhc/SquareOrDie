@@ -33,7 +33,7 @@ void GameObject::DrawUpdate() {
 
   if (it != m_components.end())
     for (auto component : it->second)
-      component->Update();
+      if (component->active) component->Update();
 }
 
 void GameObject::PhysicsUpdate() {
@@ -41,7 +41,7 @@ void GameObject::PhysicsUpdate() {
 
   if (it != m_components.end())
     for (auto component : it->second)
-      component->Update();
+      if (component->active) component->Update();
 }
 
 void GameObject::ComponentsUpdate() {
@@ -49,7 +49,7 @@ void GameObject::ComponentsUpdate() {
 
   if (it != m_components.end())
     for (auto component : it->second)
-      component->Update();
+      if (component->active) component->Update();
 }
 
 void GameObject::AddComponent(Component *component) {
