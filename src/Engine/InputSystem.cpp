@@ -1,4 +1,5 @@
 #include "Engine/InputSystem.h"
+#include "Log/log.h"
 
 // static variables initialization
 InputSystem *InputSystem::m_instance = 0;

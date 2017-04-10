@@ -1,4 +1,7 @@
 #include "Engine/GraphicsSystem.h"
+#include "Engine/SDLSystem.h"
+#include "Engine/sdl2include.h"
+#include "Log/log.h"
 
 GraphicsSystem *GraphicsSystem::m_instance = 0;
 

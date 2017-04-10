@@ -35,14 +35,8 @@ void SDLSystem::Run() {
 
   m_isRunning = true;
 
-  Image *img = new Image("assets/8-Bit_Mario.png", 0, 0, 277, 522);
-  Renderer *rend =
-      new Renderer(new Vector(100, 100), img, std::make_pair(500, 522));
-  GameObject *go = new GameObject("mario", rend);
-
-  Scene *main = new Scene();
-  main->AddGameObject(go);
-  SceneManager::GetInstance()->AddScene(std::make_pair("main", main));
+  Scene* scene = new Scene();
+  SceneManager::GetInstance()->AddScene(std::make_pair("main", scene));
   SceneManager::GetInstance()->SetCurrentScene("main");
 
   while (m_isRunning) {
@@ -51,12 +45,6 @@ void SDLSystem::Run() {
 
     if (InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
       m_isRunning = false;
-
-    // std::pair<int,int> pos = InputSystem::GetInstance()->GetMousePosition();
-    // std::cout << pos.first << " " << pos.second << std::endl;
-    // InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT);
-    // InputSystem::GetInstance()->GetMouseButtonPressed(M_INPUT_LEFT);
-    // InputSystem::GetInstance()->GetMouseButtonUp(M_INPUT_LEFT);
 
     // all updates but draw are called here
     SceneManager::GetInstance()->Update();

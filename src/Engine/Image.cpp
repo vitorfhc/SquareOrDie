@@ -1,4 +1,6 @@
 #include "Engine/Image.h"
+#include "Log/log.h"
+#include "Engine/SDLSystem.h"
 
 Image::Image() {}
 

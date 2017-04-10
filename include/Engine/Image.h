@@ -3,7 +3,6 @@
 
 #include <string>
 
-#include "Engine/SDLSystem.h"
 #include "Engine/sdl2include.h"
 
 class Image {

@@ -5,7 +5,6 @@
 
 #include "Engine/sdl2include.h"
 #include "Globals/InputGlobals.h"
-#include "Log/log.h"
 
 class InputSystem {
 public:

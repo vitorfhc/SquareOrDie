@@ -4,18 +4,19 @@
 #include <utility>
 
 #include "Engine/Component.h"
-#include "Engine/GraphicsSystem.h"
 #include "Engine/Image.h"
-#include "Globals/ComponentTypes.h"
 #include "Math/Vector.h"
 
 class Renderer : public Component {
 public:
   // constructor and destructor
-  Renderer(Vector *position, Image *img, std::pair<int, int> sizes);
+  Renderer(GameObject *owner, Vector *position, Image *img,
+           std::pair<int, int> sizes);
   ~Renderer();
   // overriding method for getting component name
   inline std::string GetComponentName() override { return "Renderer"; };
+  inline Vector GetPosition() { return *m_position; };
+  inline void SetPosition(Vector vector) { *m_position = vector; };
 
 protected:
   // overriding method called by final update

@@ -54,8 +54,6 @@ void GameObject::AddComponent(Component *component) {
     m_components.emplace(type, std::vector<Component *>());
     m_components.at(type).push_back(component);
   }
-
-  component->SetOwner(this);
 }
 
 void GameObject::AddComponent(std::vector<Component *> components) {

@@ -1,9 +1,7 @@
 #ifndef __GRAPHICS_SYSTEM__
 #define __GRAPHICS_SYSTEM__
 
-#include "Engine/SDLSystem.h"
-#include "Engine/sdl2include.h"
-#include "Log/log.h"
+#include "Engine/Image.h"
 #include "Math/Vector.h"
 
 class Image;
