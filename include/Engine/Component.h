@@ -22,6 +22,8 @@ public:
   virtual void Update() final;
   // method for getting the component name
   virtual std::string GetComponentName() = 0;
+  // start method
+  virtual void Start() {};
 
 protected:
   // method to be overriden in derives components

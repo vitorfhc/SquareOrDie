@@ -10,7 +10,6 @@ class Script : public Component {
 public:
   // constructor and destructor
   Script(GameObject *owner);
-  // ~Script();
   // pure virtual name getter
   virtual std::string GetComponentName() = 0;
 

@@ -13,7 +13,8 @@ public:
   // scene managing methods
   void SetCurrentScene(std::string sceneName);
   void AddScene(std::pair<std::string, Scene *> scenePair);
-  // update handlers
+  // start and update handlers
+  void Start();
   void Update();
   void DrawUpdate();
 

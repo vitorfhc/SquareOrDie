@@ -10,7 +10,8 @@ public:
   // constructor and destructor
   Scene();
   ~Scene();
-  // update handling
+  // start and update handling
+  void Start();
   void Update();
   void DrawUpdate();
   // handle gameobjects

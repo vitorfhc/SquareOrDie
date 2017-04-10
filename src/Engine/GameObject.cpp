@@ -15,6 +15,14 @@ GameObject::GameObject(std::string name, Component *component) {
 
 GameObject::~GameObject() {}
 
+void GameObject::Start() {
+  for (auto key = m_components.begin(); key != m_components.end(); key++) {
+    for(auto component : key->second) {
+     component->Start();
+    }
+  }
+}
+
 void GameObject::Update() {
   ComponentsUpdate();
   PhysicsUpdate();

@@ -17,7 +17,8 @@ public:
   GameObject(std::string name, Component *component);
   GameObject(std::string name);
   ~GameObject();
-  // method for handling updates
+  // method for handling start and updates
+  void Start();
   void Update();
   void DrawUpdate();
   // components management

@@ -4,6 +4,12 @@ Scene::Scene() {}
 
 Scene::~Scene() {}
 
+void Scene::Start() {
+  for (auto obj : m_gameObjects) {
+    obj->Start();
+  }
+}
+
 void Scene::Update() {
   for (auto it : m_gameObjects)
     it->Update();
