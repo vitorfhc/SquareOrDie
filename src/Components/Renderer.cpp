@@ -8,7 +8,7 @@ void Renderer::ComponentUpdate() {
 
 Renderer::Renderer(GameObject *owner, Vector *position, Image *img,
                    std::pair<int, int> sizes)
-    : Component(owner) {
+    : Component(owner, C_DRAW) {
   m_type = C_DRAW;
   m_position = position;
   m_image = img;

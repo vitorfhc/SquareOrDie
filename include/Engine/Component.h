@@ -10,7 +10,7 @@ class GameObject;
 class Component {
 public:
   // constructor and destructor
-  Component(GameObject *owner);
+  Component(GameObject *owner, ComponentType type);
   ~Component();
   // getters and setters
   virtual inline ComponentType GetType() final { return m_type; };

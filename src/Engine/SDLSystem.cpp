@@ -1,5 +1,9 @@
 #include "Engine/SDLSystem.h"
 
+// BEGIN OF TEST INCLUDE
+// #include "Components/Renderer.h"
+// END OF TEST INCLUDE
+
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = 0;
 
@@ -35,9 +39,20 @@ void SDLSystem::Run() {
 
   m_isRunning = true;
 
-  Scene* scene = new Scene();
-  SceneManager::GetInstance()->AddScene(std::make_pair("main", scene));
-  SceneManager::GetInstance()->SetCurrentScene("main");
+  // BEGIN OF TEST CODE
+  // Scene *scene = new Scene();
+  // SceneManager::GetInstance()->AddScene(std::make_pair("main", scene));
+  // SceneManager::GetInstance()->SetCurrentScene("main");
+
+  // GameObject *mario = new GameObject("Mario");
+  // Renderer *marioRenderer =
+  //     new Renderer(mario, new Vector(100, 100),
+  //                  new Image("assets/8-Bit_Mario.png", 0, 0, 277, 522),
+  //                  std::make_pair(100, 100));
+  // // mario->AddComponent(marioRenderer);
+
+  // scene->AddGameObject(mario);
+  // END OF TEST CODE
 
   while (m_isRunning) {
     CalculateFramerate();
