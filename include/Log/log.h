@@ -5,8 +5,8 @@
  * This library defines macros to log your program.
  */
 
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
 
 /* In the release version define NDEBUG macro */
 // #define NDEBUG  // Clears out the DEBUG macro
@@ -15,16 +15,14 @@
 // #define NINFO   // Clears out the INFO macro
 // #define NERROR  // Clears out the ERROR macro
 
-
 /*
  * INFO macro prints a message in the screen using the std iostream
  **/
 
 #ifndef NINFO
-#   define INFO(...) \
-        std::cout << "[INFO] " << __VA_ARGS__ << std::endl;
+#define INFO(...) std::cout << "[INFO] " << __VA_ARGS__ << std::endl;
 #else
-#   define INFO(...)
+#define INFO(...)
 #endif
 
 /*
@@ -32,10 +30,9 @@
  **/
 
 #ifndef NWARN
-#   define WARN(...) \
-        std::cout << "[WARN] " << __VA_ARGS__ << std::endl;
+#define WARN(...) std::cout << "[WARN] " << __VA_ARGS__ << std::endl;
 #else
-#   define WARN(...)
+#define WARN(...)
 #endif
 
 /*
@@ -43,14 +40,14 @@
  **/
 
 #ifndef NERROR
-#   define ERROR(...)                                                         \
-    do {                                                                      \
-        std::cout << "[ERROR] " << __FILE__ << " line " << __LINE__           \
-                  << std::endl << __VA_ARGS__ << std::endl;                   \
-        std::exit(EXIT_FAILURE);                                              \
-    } while (false)
+#define ERROR(...)                                                             \
+  do {                                                                         \
+    std::cout << "[ERROR] " << __FILE__ << " line " << __LINE__ << std::endl   \
+              << __VA_ARGS__ << std::endl;                                     \
+    std::exit(EXIT_FAILURE);                                                   \
+  } while (false)
 #else
-#   define ERROR(...)
+#define ERROR(...)
 #endif
 
 /**
@@ -60,12 +57,11 @@
  */
 
 #ifndef DEBUG
-    #ifndef NDEBUG
-    #   define DEBUG(...) \
-            std::cerr << "[DEBUG] " << __VA_ARGS__ << std::endl;
-    #else
-    #   define DEBUG(...)
-    #endif
+#ifndef NDEBUG
+#define DEBUG(...) std::cerr << "[DEBUG] " << __VA_ARGS__ << std::endl;
+#else
+#define DEBUG(...)
+#endif
 #endif
 
 /**
@@ -76,16 +72,16 @@
  **/
 
 #ifndef NASSERT
-#   define ASSERT(condition, ...) \
-    do { \
-        if (! (condition)) { \
-            std::cerr << "Assertion `" #condition "` failed in " << __FILE__ \
-                      << " line " << __LINE__ << ": " << __VA_ARGS__ << std::endl; \
-            std::exit(EXIT_FAILURE); \
-        } \
-    } while (false)
+#define ASSERT(condition, ...)                                                 \
+  do {                                                                         \
+    if (!(condition)) {                                                        \
+      std::cerr << "Assertion `" #condition "` failed in " << __FILE__         \
+                << " line " << __LINE__ << ": " << __VA_ARGS__ << std::endl;   \
+      std::exit(EXIT_FAILURE);                                                 \
+    }                                                                          \
+  } while (false)
 #else
-#   define ASSERT(condition, ...)
+#define ASSERT(condition, ...)
 #endif
 
 #endif

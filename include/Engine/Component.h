@@ -1,31 +1,37 @@
 #ifndef __COMPONENT__
 #define __COMPONENT__
 
-class GameObject;
+#include <string>
+
 #include "Globals/ComponentTypes.h"
 
-class Component
-{
-  public:
-    // constructor and destructor
-    Component();
-    ~Component();
-    // getters and setters
-    virtual inline ComponentType GetType() final { return m_type; };
-    virtual inline void SetOwner(GameObject *gameObject) final { m_owner = gameObject; };
-    // unoverridable update
-    virtual void Update() final;
+class GameObject;
 
-  protected:
-    // method to be overriden in derives components
-    virtual void ComponentUpdate() = 0;
+class Component {
+public:
+  // constructor and destructor
+  Component();
+  ~Component();
+  // getters and setters
+  virtual inline ComponentType GetType() final { return m_type; };
+  virtual inline void SetOwner(GameObject *gameObject) final {
+    m_owner = gameObject;
+  };
+  // unoverridable update
+  virtual void Update() final;
+  // method for getting the component name
+  virtual std::string GetComponentName() = 0;
 
-    // component type
-    ComponentType m_type;
+protected:
+  // method to be overriden in derives components
+  virtual void ComponentUpdate() = 0;
 
-  private:
-    // gameobject that owns the component
-    GameObject *m_owner;
+  // component type
+  ComponentType m_type;
+
+private:
+  // gameobject that owns the component
+  GameObject *m_owner;
 };
 
 #endif // __COMPONENT__

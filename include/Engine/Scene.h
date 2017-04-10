@@ -5,22 +5,21 @@
 
 #include "Engine/GameObject.h"
 
-class Scene
-{
-  public:
-    // constructor and destructor
-    Scene();
-    ~Scene();
-    // update handling
-    void Update();
-    void DrawUpdate();
-    // handle gameobjects
-    void AddGameObject(GameObject *gameObject);
-    void AddGameObject(std::vector<GameObject *> gameObjects);
+class Scene {
+public:
+  // constructor and destructor
+  Scene();
+  ~Scene();
+  // update handling
+  void Update();
+  void DrawUpdate();
+  // handle gameobjects
+  void AddGameObject(GameObject *gameObject);
+  void AddGameObject(std::vector<GameObject *> gameObjects);
 
-  private:
-    // gameobjects vector
-    std::vector<GameObject *> m_gameObjects;
+private:
+  // gameobjects vector
+  std::vector<GameObject *> m_gameObjects;
 };
 
 #endif // __SCENE__

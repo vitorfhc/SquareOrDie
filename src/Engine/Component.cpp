@@ -2,12 +2,6 @@
 
 Component::Component() {}
 
-Component::~Component()
-{
-    m_owner = nullptr;
-}
+Component::~Component() { m_owner = nullptr; }
 
-void Component::Update()
-{
-    ComponentUpdate();
-}
+void Component::Update() { ComponentUpdate(); }
