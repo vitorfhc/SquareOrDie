@@ -5,8 +5,9 @@
 
 #include "Engine/GameObject.h"
 
-class Scene {
-    public:
+class Scene
+{
+  public:
     // constructor and destructor
     Scene();
     ~Scene();
@@ -14,12 +15,12 @@ class Scene {
     void Update();
     void DrawUpdate();
     // handle gameobjects
-    void AddGameObject(GameObject* gameObject);
-    void AddGameObject(std::vector<GameObject*> gameObjects);
+    void AddGameObject(GameObject *gameObject);
+    void AddGameObject(std::vector<GameObject *> gameObjects);
 
-    private:
-    // gameobjects array
-    std::vector<GameObject*> m_gameObjects;
+  private:
+    // gameobjects vector
+    std::vector<GameObject *> m_gameObjects;
 };
 
 #endif // __SCENE__

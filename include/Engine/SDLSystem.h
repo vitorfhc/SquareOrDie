@@ -8,11 +8,15 @@
 #include "Engine/sdl2include.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
+#include "Engine/Image.h"
+#include "Components/Renderer.h"
+#include "Engine/GameObject.h"
 
 using namespace std;
 
-class SDLSystem {
-    public:
+class SDLSystem
+{
+  public:
     // initialize all systems
     void Init();
     // run system
@@ -20,14 +24,17 @@ class SDLSystem {
     // systems shutdown
     void Shutdown();
     // get singleton instance
-    static SDLSystem* GetInstance();
+    static SDLSystem *GetInstance();
+    // getters and setters
+    SDL_Window *GetWindow() const { return m_window; };
+    SDL_Renderer *GetRenderer() const { return m_renderer; };
 
-    private:
+  private:
     // SDL attributes
-    SDL_Window* m_window;
-    SDL_Renderer* m_renderer;
+    SDL_Window *m_window;
+    SDL_Renderer *m_renderer;
     // singleton instance
-    static SDLSystem* m_instance;
+    static SDLSystem *m_instance;
     // game attributes
     bool m_isRunning;
     int m_framerate;
@@ -39,9 +46,6 @@ class SDLSystem {
     // constructor and destructor
     SDLSystem();
     ~SDLSystem();
-    // getters and setters
-    SDL_Window* GetWindow() const { return m_window; };
-    SDL_Renderer* GetRenderer() const { return m_renderer; };
     // systems init
     bool InitSDL();
     bool InitIMG();

@@ -7,10 +7,11 @@
 #include "Log/log.h"
 #include "Globals/InputGlobals.h"
 
-class InputSystem {
-    public:
+class InputSystem
+{
+  public:
     // singleton getter
-    static InputSystem* GetInstance();
+    static InputSystem *GetInstance();
     // update m_states and m_oldStates every frame
     void UpdateStates();
     bool GetKeyDown(KeyboardInputGlobal key);
@@ -21,21 +22,20 @@ class InputSystem {
     bool GetMouseButtonPressed(MouseInputGlobal button);
     std::pair<int, int> GetMousePosition();
 
-    private:
+  private:
     // constructor and destructor
     InputSystem();
     ~InputSystem();
     // private attributes
-    static InputSystem* m_instance;
+    static InputSystem *m_instance;
     // keyboard states
-    const Uint8* m_states;
-    Uint8* m_oldStates;
+    const Uint8 *m_states;
+    Uint8 *m_oldStates;
     int m_statesSize;
     // mouse states
     Uint32 m_mouseStates = 0;
     Uint32 m_oldMouseStates = 0;
     int m_mouseX, m_mouseY;
-
 };
 
 #endif // __INPUT_SYSTEM__

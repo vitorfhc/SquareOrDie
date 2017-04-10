@@ -4,22 +4,28 @@
 class GameObject;
 #include "Globals/ComponentTypes.h"
 
-class Component {
-    public:
+class Component
+{
+  public:
     // constructor and destructor
     Component();
     ~Component();
     // getters and setters
-    inline ComponentType GetType() { return m_type; };
-    inline void SetOwner(GameObject* gameObject) { m_owner = gameObject; };
+    virtual inline ComponentType GetType() final { return m_type; };
+    virtual inline void SetOwner(GameObject *gameObject) final { m_owner = gameObject; };
     // unoverridable update
     virtual void Update() final;
 
-    private:
-    ComponentType m_type;
-    GameObject* m_owner;
-
+  protected:
+    // method to be overriden in derives components
     virtual void ComponentUpdate() = 0;
+
+    // component type
+    ComponentType m_type;
+
+  private:
+    // gameobject that owns the component
+    GameObject *m_owner;
 };
 
 #endif // __COMPONENT__

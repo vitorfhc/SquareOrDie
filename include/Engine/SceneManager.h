@@ -6,25 +6,26 @@
 
 #include "Engine/Scene.h"
 
-class SceneManager {
-    public:
+class SceneManager
+{
+  public:
     // singleton getter
-    static SceneManager* GetInstance();
+    static SceneManager *GetInstance();
     // scene managing methods
     void SetCurrentScene(std::string sceneName);
-    void AddScene(std::pair<std::string, Scene*> scenePair);
+    void AddScene(std::pair<std::string, Scene *> scenePair);
     // update handlers
     void Update();
     void DrawUpdate();
 
-    private:
+  private:
     // constructor and destructor
     SceneManager();
     ~SceneManager();
     // scene handling attributes
-    static SceneManager* m_instance;
-    std::unordered_map<std::string, Scene*> m_scenes;
-    std::pair<std::string, Scene*> m_currentScene;
+    static SceneManager *m_instance;
+    std::unordered_map<std::string, Scene *> m_scenes;
+    std::pair<std::string, Scene *> m_currentScene;
 };
 
 #endif // __SCENE_MANAGER__

@@ -1,7 +1,8 @@
 #ifndef __ENGINE_GLOBALS__
 #define __ENGINE_GLOBALS__
 
-namespace EngineGlobals {
+namespace EngineGlobals
+{
     const std::string engine_name = "ZebraEngine";
     const std::string engine_version = "1.0";
     const std::string window_title = engine_name + " " + engine_version;
