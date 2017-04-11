@@ -16,8 +16,6 @@ public:
 protected:
   // pure virtual comp update
   virtual void ComponentUpdate() = 0;
-  // method for getting owner gameobject component
-  virtual Component *GetObjectComponent(std::string name) final;
 };
 
 #endif // __SCRIPT__

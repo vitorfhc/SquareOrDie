@@ -11,7 +11,7 @@ MarioMovement::MarioMovement(GameObject *owner) : Script(owner) {
 
 void MarioMovement::Start() {
   // getting reference for the renderer component
-  renderer = (Renderer *)GetObjectComponent("Renderer");
+  renderer = (Renderer *)GetOwner()->GetComponent("Renderer");
   // making an error raise if there no renderer component
   if (!renderer) {
     ERROR("NO RENDERER FOUND!");
@@ -29,8 +29,8 @@ void MarioMovement::ComponentUpdate() {
   GetOwner()->active = !deactivate;
 
   // deactivate this script
-  bool deactivateComponent = input->GetKeyUp(INPUT_E);
-  GetObjectComponent(GetComponentName())->active = !deactivateComponent;
+  if(input->GetKeyDown(INPUT_E)) isVisible = !isVisible;
+  GetOwner()->GetComponent("Renderer")->active = isVisible;
 
   // checking input for movement
   bool right = input->GetKeyPressed(INPUT_D);

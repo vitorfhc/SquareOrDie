@@ -16,6 +16,7 @@ protected:
   void ComponentUpdate() override;
   std::string GetComponentName() override { return "MarioMovement"; };
 private:
+  bool isVisible = true;
   Renderer *renderer;
   InputSystem *input;
 };
