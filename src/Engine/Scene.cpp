@@ -12,12 +12,14 @@ void Scene::Start() {
 
 void Scene::Update() {
   for (auto it : m_gameObjects)
-    if (it->active) it->Update();
+    if (it->active)
+      it->Update();
 }
 
 void Scene::DrawUpdate() {
   for (auto it : m_gameObjects)
-    if (it->active) it->DrawUpdate();
+    if (it->active)
+      it->DrawUpdate();
 }
 
 void Scene::AddGameObject(GameObject *gameObject) {
@@ -27,4 +29,10 @@ void Scene::AddGameObject(GameObject *gameObject) {
 void Scene::AddGameObject(std::vector<GameObject *> gameObjects) {
   m_gameObjects.insert(std::end(m_gameObjects), std::begin(gameObjects),
                        std::end(gameObjects));
+}
+
+void Scene::FixedUpdate() {
+  for (auto it : m_gameObjects)
+    if (it->active)
+      it->FixedUpdate();
 }

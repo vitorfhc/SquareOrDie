@@ -17,23 +17,21 @@ GameObject::~GameObject() {}
 
 void GameObject::Start() {
   for (auto key = m_components.begin(); key != m_components.end(); key++) {
-    for(auto component : key->second) {
-     component->Start();
+    for (auto component : key->second) {
+      component->Start();
     }
   }
 }
 
-void GameObject::Update() {
-  ComponentsUpdate();
-  PhysicsUpdate();
-}
+void GameObject::Update() { ComponentsUpdate(); }
 
 void GameObject::DrawUpdate() {
   auto it = m_components.find(C_DRAW);
 
   if (it != m_components.end())
     for (auto component : it->second)
-      if (component->active) component->Update();
+      if (component->active)
+        component->Update();
 }
 
 void GameObject::PhysicsUpdate() {
@@ -41,7 +39,8 @@ void GameObject::PhysicsUpdate() {
 
   if (it != m_components.end())
     for (auto component : it->second)
-      if (component->active) component->Update();
+      if (component->active)
+        component->Update();
 }
 
 void GameObject::ComponentsUpdate() {
@@ -49,7 +48,8 @@ void GameObject::ComponentsUpdate() {
 
   if (it != m_components.end())
     for (auto component : it->second)
-      if (component->active) component->Update();
+      if (component->active)
+        component->Update();
 }
 
 void GameObject::AddComponent(Component *component) {
@@ -71,9 +71,19 @@ void GameObject::AddComponent(std::vector<Component *> components) {
 
 Component *GameObject::GetComponent(std::string name) {
   for (auto key = m_components.begin(); key != m_components.end(); key++) {
-    for(auto value : key->second) {
-     if(value->GetComponentName() == name) return value;
+    for (auto value : key->second) {
+      if (value->GetComponentName() == name)
+        return value;
     }
   }
   return nullptr;
+}
+
+void GameObject::FixedUpdate() {
+  PhysicsUpdate();
+
+  for (auto key = m_components.begin(); key != m_components.end(); key++) {
+    for (auto value : key->second)
+      value->FixedComponentUpdate();
+  }
 }

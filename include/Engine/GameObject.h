@@ -23,6 +23,7 @@ public:
   // method for handling start and updates
   void Start();
   void Update();
+  void FixedUpdate();
   void DrawUpdate();
   // components management
   void AddComponent(Component *component);

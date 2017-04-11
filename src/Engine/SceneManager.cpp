@@ -37,3 +37,8 @@ void SceneManager::DrawUpdate() {
   if (m_currentScene.second)
     m_currentScene.second->DrawUpdate();
 }
+
+void SceneManager::FixedUpdate() {
+  if (m_currentScene.second)
+    m_currentScene.second->FixedUpdate();
+}

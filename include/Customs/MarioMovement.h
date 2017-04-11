@@ -14,8 +14,12 @@ public:
 
 protected:
   void ComponentUpdate() override;
+  void FixedComponentUpdate() override;
   std::string GetComponentName() override { return "MarioMovement"; };
+
 private:
+  bool right, left;
+  float speed = 5;
   bool isVisible = true;
   Renderer *renderer;
   InputSystem *input;

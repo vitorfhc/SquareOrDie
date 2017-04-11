@@ -10,5 +10,3 @@ Component::Component(GameObject *owner, ComponentType type) {
 Component::~Component() { m_owner = nullptr; }
 
 void Component::Update() { ComponentUpdate(); }
-
-void Component::ComponentUpdate() {}

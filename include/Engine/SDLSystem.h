@@ -38,6 +38,7 @@ private:
   Uint32 m_currentTicks;
   Uint32 m_lastFrameTicks;
   Uint32 m_gameEndTicks;
+  Uint32 m_lastFixedUpdate;
 
   // constructor and destructor
   SDLSystem();

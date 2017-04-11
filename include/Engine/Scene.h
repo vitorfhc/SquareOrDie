@@ -13,6 +13,7 @@ public:
   // start and update handling
   void Start();
   void Update();
+  void FixedUpdate();
   void DrawUpdate();
   // handle gameobjects
   void AddGameObject(GameObject *gameObject);

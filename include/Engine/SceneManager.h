@@ -16,6 +16,7 @@ public:
   // start and update handlers
   void Start();
   void Update();
+  void FixedUpdate();
   void DrawUpdate();
 
 private:

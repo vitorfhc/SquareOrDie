@@ -64,6 +64,10 @@ void SDLSystem::Run() {
 
     // all updates but draw are called here
     SceneManager::GetInstance()->Update();
+    if (SDL_GetTicks() - m_lastFixedUpdate > EngineGlobals::fixed_update_interval) {
+      SceneManager::GetInstance()->FixedUpdate();
+      m_lastFixedUpdate = SDL_GetTicks();
+    }
 
     // clearing front buffer
     SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
@@ -176,8 +180,7 @@ bool SDLSystem::CreateWindow() {
 bool SDLSystem::CreateRenderer() {
   INFO("Creating renderer.");
 
-  m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED |
-                                                    SDL_RENDERER_PRESENTVSYNC);
+  m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
   if (!m_renderer) {
     SDL_ERROR("SDLSystem::CreateRenderer() failed.");
