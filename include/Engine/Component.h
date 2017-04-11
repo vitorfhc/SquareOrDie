@@ -30,7 +30,7 @@ public:
 
 protected:
   // method to be overriden in derives components
-  virtual void ComponentUpdate() = 0;
+  virtual void ComponentUpdate();
 
   // component type
   ComponentType m_type;

@@ -15,7 +15,7 @@ public:
 
 protected:
   // pure virtual comp update
-  virtual void ComponentUpdate() = 0;
+  virtual void ComponentUpdate();
 };
 
 #endif // __SCRIPT__
