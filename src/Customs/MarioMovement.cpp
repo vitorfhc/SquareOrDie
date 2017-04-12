@@ -30,6 +30,12 @@ void MarioMovement::ComponentUpdate() {
     isVisible = !isVisible;
   renderer->active = isVisible;
 
+  // super speed
+  if (input->GetKeyDown(INPUT_SPACE))
+    speed = 20;
+  if (input->GetKeyUp(INPUT_SPACE))
+    speed = 10;
+
   // checking input for movement
   right = input->GetKeyPressed(INPUT_D);
   left = input->GetKeyPressed(INPUT_A);
@@ -50,6 +56,12 @@ void MarioMovement::FixedComponentUpdate() {
   position.m_x -= left * speed;
   position.m_y -= input->GetKeyPressed(INPUT_W) * speed;
   position.m_y += input->GetKeyPressed(INPUT_S) * speed;
+
+  // window edge collision
+  if (position.m_x + renderer->GetWidth() > 1280)
+    position.m_x = 1280 - renderer->GetWidth();
+  if (position.m_x < 0)
+    position.m_x = 0;
 
   // updating position according to new position
   renderer->SetPosition(position);

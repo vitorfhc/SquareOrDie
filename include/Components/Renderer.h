@@ -19,6 +19,8 @@ public:
   inline void SetPosition(Vector vector) { *m_position = vector; };
   // getter for image
   inline Image* GetImage() { return m_image; };
+  inline int GetWidth() { return m_sizes.first; };
+  inline int GetHeight() { return m_sizes.second; };
 
 protected:
   // overriding method called by final update

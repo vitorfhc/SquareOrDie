@@ -19,7 +19,7 @@ protected:
 
 private:
   bool right, left;
-  float speed = 5;
+  float speed = 10;
   bool isVisible = true;
   Renderer *renderer;
   InputSystem *input;
