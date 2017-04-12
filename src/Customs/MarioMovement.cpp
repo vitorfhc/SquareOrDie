@@ -1,6 +1,7 @@
 #include "Customs/MarioMovement.h"
 #include "Components/Renderer.h"
 #include "Engine/InputSystem.h"
+#include "Engine/SDLSystem.h"
 #include "Log/log.h"
 #include "Math/Vector.h"
 
@@ -15,7 +16,7 @@ void MarioMovement::Start() {
   // making an error raise if there no renderer component
   if (!renderer) {
     ERROR("NO RENDERER FOUND!");
-    exit(1);
+    SDLSystem::GetInstance()->SetRunning(false);
   }
 }
 
@@ -24,10 +25,10 @@ void MarioMovement::ComponentUpdate() {
   bool deactivate = input->GetKeyUp(INPUT_Q);
   GetOwner()->active = !deactivate;
 
-  // deactivate this script
+  // deactivate the renderer
   if (input->GetKeyDown(INPUT_E))
     isVisible = !isVisible;
-  GetOwner()->GetComponent("Renderer")->active = isVisible;
+  renderer->active = isVisible;
 
   // checking input for movement
   right = input->GetKeyPressed(INPUT_D);

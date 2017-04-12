@@ -3,6 +3,8 @@
 #include "Engine/sdl2include.h"
 #include "Log/log.h"
 
+#include <iostream>
+
 GraphicsSystem *GraphicsSystem::m_instance = 0;
 
 GraphicsSystem::GraphicsSystem() {}
@@ -30,6 +32,6 @@ void GraphicsSystem::Draw(Image *img, Vector position,
 
   if (result < 0) {
     ERROR(SDL_GetError());
-    exit(1);
+    SDLSystem::GetInstance()->SetRunning(false);
   }
 }

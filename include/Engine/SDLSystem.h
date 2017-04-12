@@ -24,6 +24,8 @@ public:
   // getters and setters
   SDL_Window *GetWindow() const { return m_window; };
   SDL_Renderer *GetRenderer() const { return m_renderer; };
+  // change loop variable
+  inline void SetRunning(bool condition) { m_isRunning = condition; };
 
 private:
   // SDL attributes

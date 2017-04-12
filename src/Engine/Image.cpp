@@ -6,23 +6,20 @@ Image::Image() {}
 
 Image::Image(std::string path, int x, int y, int width, int height) {
   LoadImage(path, x, y, width, height);
+  SetPivot(width / 2, height / 2);
 }
 
 void Image::LoadImage(std::string path, int x, int y, int _width, int _height) {
   SDL_Surface *surface = IMG_Load(path.c_str());
 
-  if (!surface) {
+  if (!surface)
     ERROR(IMG_GetError());
-    exit(1);
-  }
 
   m_texture = SDL_CreateTextureFromSurface(
       SDLSystem::GetInstance()->GetRenderer(), surface);
 
-  if (!m_texture) {
+  if (!m_texture)
     ERROR(SDL_GetError());
-    exit(1);
-  }
 
   SDL_FreeSurface(surface);
 
@@ -42,6 +39,10 @@ SDL_Rect *Image::GetRect() { return &m_rectangle; }
 void Image::SetPivot(int x, int y) {
   sdlPivot.x = x;
   sdlPivot.y = y;
+
+  if (!m_pivot) m_pivot = new Vector(0, 0);
+  m_pivot->m_x = x;
+  m_pivot->m_y = y;
 }
 
 void Image::Flip(bool horizontal, bool vertical) {
