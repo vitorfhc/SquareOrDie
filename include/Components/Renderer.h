@@ -18,9 +18,11 @@ public:
   inline Vector GetPosition() { return *m_position; };
   inline void SetPosition(Vector vector) { *m_position = vector; };
   // getter for image
-  inline Image* GetImage() { return m_image; };
+  inline Image *GetImage() { return m_image; };
   inline int GetWidth() { return m_sizes.first; };
   inline int GetHeight() { return m_sizes.second; };
+  // setter
+  inline void SetSizes(std::pair<int, int> newSizes) { m_sizes = newSizes; };
 
 protected:
   // overriding method called by final update

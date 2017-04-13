@@ -29,6 +29,7 @@ public:
   void AddComponent(Component *component);
   void AddComponent(std::vector<Component *> components);
   Component *GetComponent(std::string name);
+  std::string GetName() { return m_name; };
 
 private:
   // map of components
