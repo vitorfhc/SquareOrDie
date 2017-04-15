@@ -40,11 +40,19 @@ void MarioMovement::ComponentUpdate() {
   right = input->GetKeyPressed(INPUT_D);
   left = input->GetKeyPressed(INPUT_A);
 
+  // change scene
+  if (input->GetKeyDown(INPUT_Z))
+    SceneManager::GetInstance()->SetCurrentScene("luigi");
+
   // flip image
-  if (left)
-    renderer->GetImage()->Flip(true, false);
-  else if (right)
-    renderer->GetImage()->Flip(false, false);
+  // if (left)
+  //   renderer->GetImage()->Flip(true, false);
+  // else if (right)
+  //   renderer->GetImage()->Flip(false, false);
+
+  // rotate Mario to mouse
+  std::pair<int, int> mousePos = input->GetMousePosition();
+  renderer->RotateTowards(new Vector(mousePos.first, mousePos.second));
 }
 
 void MarioMovement::FixedComponentUpdate() {

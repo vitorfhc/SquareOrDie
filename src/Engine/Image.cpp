@@ -6,7 +6,6 @@ Image::Image() {}
 
 Image::Image(std::string path, int x, int y, int width, int height) {
   LoadImage(path, x, y, width, height);
-  SetPivot(width / 2, height / 2);
 }
 
 void Image::LoadImage(std::string path, int x, int y, int _width, int _height) {
@@ -37,10 +36,12 @@ SDL_Texture *Image::GetTexture() { return m_texture; }
 SDL_Rect *Image::GetRect() { return &m_rectangle; }
 
 void Image::SetPivot(int x, int y) {
+  if (!sdlPivotPtr) sdlPivotPtr = &sdlPivot;
   sdlPivot.x = x;
   sdlPivot.y = y;
 
-  if (!m_pivot) m_pivot = new Vector(0, 0);
+  if (!m_pivot)
+    m_pivot = new Vector(0, 0);
   m_pivot->m_x = x;
   m_pivot->m_y = y;
 }

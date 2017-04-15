@@ -2,7 +2,9 @@
 
 // BEGIN OF TEST INCLUDE
 #include "Components/Renderer.h"
+#include "Components/UIButton.h"
 #include "Customs/MarioMovement.h"
+#include "Customs/LuigiScript.h"
 // END OF TEST INCLUDE
 
 // static variables initialization
@@ -45,13 +47,26 @@ void SDLSystem::Run() {
   SceneManager::GetInstance()->AddScene(std::make_pair("main", scene));
   SceneManager::GetInstance()->SetCurrentScene("main");
 
-  Image *marioImage = new Image("assets/8-Bit_Mario.png", 0, 0, 277, 522);
+  Image *marioImage = new Image("assets/topdown.png", 0, 0, 313, 207);
 
   GameObject *mario = new GameObject("Mario");
   MarioMovement *marioMovement = new MarioMovement(mario);
   Renderer *marioRenderer = new Renderer(mario, new Vector(100, 100),
-                                         marioImage, std::make_pair(50, 50));
+                                         marioImage, std::make_pair(200, 150));
   scene->AddGameObject(mario);
+
+  Scene *luigiScene = new Scene();
+  SceneManager::GetInstance()->AddScene(std::make_pair("luigi", luigiScene));
+
+  Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
+
+  GameObject *luigi = new GameObject("Luigi");
+  Renderer *luigiRenderer = new Renderer(luigi, new Vector(0, 0), luigiImage,
+                                         std::make_pair(100, 100));
+  LuigiScript *luigiScript = new LuigiScript(luigi);
+  UIButton *luigiButton = new UIButton(luigi);
+
+  luigiScene->AddGameObject(luigi);
   // END OF TEST CODE
 
   SceneManager::GetInstance()->Start();
@@ -64,7 +79,8 @@ void SDLSystem::Run() {
 
     // all updates but draw are called here
     SceneManager::GetInstance()->Update();
-    if (SDL_GetTicks() - m_lastFixedUpdate > EngineGlobals::fixed_update_interval) {
+    if (SDL_GetTicks() - m_lastFixedUpdate >
+        EngineGlobals::fixed_update_interval) {
       SceneManager::GetInstance()->FixedUpdate();
       m_lastFixedUpdate = SDL_GetTicks();
     }

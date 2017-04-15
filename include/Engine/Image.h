@@ -21,7 +21,7 @@ public:
   SDL_Texture *GetTexture();
   SDL_Rect *GetRect();
   inline double GetRotationAngle() { return m_rotation; };
-  inline SDL_Point *GetSDLPivot() { return &sdlPivot; };
+  inline SDL_Point *GetSDLPivot() { return sdlPivotPtr; };
   inline Vector *GetPivot() { return m_pivot; };
   inline SDL_RendererFlip GetSDLFlip() { return sdlFlip; };
   inline void Rotate(double angles) { m_rotation = angles; };
@@ -34,7 +34,8 @@ private:
   SDL_Rect m_rectangle;
   double m_rotation = 0;
   SDL_Point sdlPivot;
-  SDL_RendererFlip sdlFlip;
+  SDL_Point *sdlPivotPtr = nullptr;
+  SDL_RendererFlip sdlFlip = (SDL_RendererFlip)0;
   // adpted image properties
   Vector *m_pivot = nullptr;
   bool m_horizontalFlip = false;
