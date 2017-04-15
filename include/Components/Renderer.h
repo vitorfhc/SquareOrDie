@@ -23,6 +23,9 @@ public:
   inline int GetHeight() { return m_sizes.second; };
   // setter
   inline void SetSizes(std::pair<int, int> newSizes) { m_sizes = newSizes; };
+  // image handling
+  void Rotate(double angles);
+  void RotateTowards(Vector *point);
 
 protected:
   // overriding method called by final update

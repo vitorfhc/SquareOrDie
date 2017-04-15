@@ -47,12 +47,12 @@ void SDLSystem::Run() {
   SceneManager::GetInstance()->AddScene(std::make_pair("main", scene));
   SceneManager::GetInstance()->SetCurrentScene("main");
 
-  Image *marioImage = new Image("assets/8-Bit_Mario.png", 0, 0, 277, 522);
+  Image *marioImage = new Image("assets/topdown.png", 0, 0, 313, 207);
 
   GameObject *mario = new GameObject("Mario");
   MarioMovement *marioMovement = new MarioMovement(mario);
   Renderer *marioRenderer = new Renderer(mario, new Vector(100, 100),
-                                         marioImage, std::make_pair(100, 100));
+                                         marioImage, std::make_pair(200, 150));
   scene->AddGameObject(mario);
 
   Scene *luigiScene = new Scene();
