@@ -14,9 +14,9 @@ public:
 
   // constructors
   Image();
-  Image(std::string path, int x, int y, int width, int height);
+  Image(std::string path, int _x, int _y, int _width, int _height);
   // method for loading the image
-  void LoadImage(std::string path, int x, int y, int width, int height);
+  void LoadImage(std::string path, int _x, int _y, int width, int height);
   // getters and setters
   SDL_Texture *GetTexture();
   SDL_Rect *GetRect();
@@ -25,7 +25,7 @@ public:
   inline Vector *GetPivot() { return m_pivot; };
   inline SDL_RendererFlip GetSDLFlip() { return sdlFlip; };
   inline void Rotate(double angles) { m_rotation = angles; };
-  void SetPivot(int x, int y);
+  void SetPivot(int _x, int _y);
   void Flip(bool horizontal, bool vertical);
 
 private:

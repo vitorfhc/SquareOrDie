@@ -4,11 +4,11 @@
 
 Image::Image() {}
 
-Image::Image(std::string path, int x, int y, int width, int height) {
-  LoadImage(path, x, y, width, height);
+Image::Image(std::string path, int _x, int _y, int _width, int _height) {
+  LoadImage(path, _x, _y, _width, _height);
 }
 
-void Image::LoadImage(std::string path, int x, int y, int _width, int _height) {
+void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height) {
   SDL_Surface *surface = IMG_Load(path.c_str());
 
   if (!surface)
@@ -22,8 +22,8 @@ void Image::LoadImage(std::string path, int x, int y, int _width, int _height) {
 
   SDL_FreeSurface(surface);
 
-  m_rectangle.x = x;
-  m_rectangle.y = y;
+  m_rectangle.x = _x;
+  m_rectangle.y = _y;
   m_rectangle.w = _width;
   m_rectangle.h = _height;
 
@@ -35,15 +35,15 @@ SDL_Texture *Image::GetTexture() { return m_texture; }
 
 SDL_Rect *Image::GetRect() { return &m_rectangle; }
 
-void Image::SetPivot(int x, int y) {
+void Image::SetPivot(int _x, int _y) {
   if (!sdlPivotPtr) sdlPivotPtr = &sdlPivot;
-  sdlPivot.x = x;
-  sdlPivot.y = y;
+  sdlPivot.x = _x;
+  sdlPivot.y = _y;
 
   if (!m_pivot)
     m_pivot = new Vector(0, 0);
-  m_pivot->m_x = x;
-  m_pivot->m_y = y;
+  m_pivot->m_x = _x;
+  m_pivot->m_y = _y;
 }
 
 void Image::Flip(bool horizontal, bool vertical) {
