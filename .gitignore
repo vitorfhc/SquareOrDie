@@ -5,3 +5,11 @@ lib/*
 
 # Ignore any executables
 bin/*
+
+# CMake and Make
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Executable
+ZebraEngine
