@@ -11,7 +11,7 @@ public:
   // singleton getter
   static GraphicsSystem *GetInstance();
   // draw to renderer function
-  void Draw(Image *img, Vector position, std::pair<int, int> sizes);
+  void Draw(Image *img, Vector *position, std::pair<int, int> sizes);
 
 private:
   // singleton instance

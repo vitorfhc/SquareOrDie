@@ -6,7 +6,7 @@
 #include <math.h>
 
 void Renderer::ComponentUpdate() {
-  GraphicsSystem::GetInstance()->Draw(m_image, *m_position, m_sizes);
+  GraphicsSystem::GetInstance()->Draw(m_image, m_position, m_sizes);
 }
 
 Renderer::Renderer(GameObject *owner, Vector *position, Image *img,
@@ -27,10 +27,9 @@ void Renderer::RotateTowards(Vector *point) {
   double angles;
   angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
   angles = angles * 180 / 3.1415;
-  if (angles < 0) angles = 360 - (-angles);
+  if (angles < 0)
+    angles = 360 - (-angles);
   Rotate(angles);
 }
 
-void Renderer::Rotate(double angles) {
-  GetImage()->Rotate(angles);
-}
+void Renderer::Rotate(double angles) { GetImage()->Rotate(angles); }
