@@ -2,26 +2,42 @@
 ## About
 
 <p align="justify">
-Zebra Engine is 2D personal engine made for learning.
+Zebra Engine is a 2D personal engine made for learning.
+</p>
+
+## Dependencies
+
+<p align="justify">
+This project depends on
+
+    SDL2
+    SDL2_image
+    SDL2_mixer
+    SDL2_TTF
+    CMake 3.5.1
+</p>
+
+### Ubuntu
+
+<p align="justify">
+For installing run:
+    
+    sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
 </p>
 
 ## Compiling
 ### Ubuntu
 
 <p align="justify">
-For compiling you must have installed all SDL2 libs. For installing run:
-    
-    sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+Go to the project folder and run:
 
-After installing go to the project folder and run:
-
-    make clean
+    cmake ./
     make
-    make run
+    ./ZebraEngine
 </p>
 
 ### Windows
 
 <p align="justify">
-We still have no support for compiling and running in Windows. It will soon be available.
+We still working on better ways to supporting Windows.
 </p>
