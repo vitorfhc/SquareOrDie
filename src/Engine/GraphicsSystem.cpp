@@ -17,13 +17,19 @@ GraphicsSystem *GraphicsSystem::GetInstance() {
   return m_instance;
 }
 
-void GraphicsSystem::Draw(Image *img, Vector position,
+void GraphicsSystem::Draw(Image *img, Vector *position,
                           std::pair<int, int> sizes) {
   SDL_Rect dest;
   dest.w = sizes.first;
   dest.h = sizes.second;
-  dest.x = position.m_x;
-  dest.y = position.m_y;
+  dest.x = position->m_x;
+  dest.y = position->m_y;
+
+  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 0, 255, 0,
+                         255);
+  SDL_RenderDrawRect(SDLSystem::GetInstance()->GetRenderer(), &dest);
+  SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), 0, 0, dest.x,
+                     dest.y);
 
   int result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
                                 img->GetTexture(), img->GetRect(), &dest,

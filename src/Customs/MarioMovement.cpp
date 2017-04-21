@@ -52,7 +52,9 @@ void MarioMovement::ComponentUpdate() {
 
   // rotate Mario to mouse
   std::pair<int, int> mousePos = input->GetMousePosition();
-  renderer->RotateTowards(new Vector(mousePos.first, mousePos.second));
+  renderer->RotateTowards(
+      new Vector(mousePos.first - renderer->GetWidth() / 2,
+                 mousePos.second - renderer->GetHeight() / 2));
 }
 
 void MarioMovement::FixedComponentUpdate() {
