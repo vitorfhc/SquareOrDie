@@ -2,6 +2,7 @@
 #define __INPUT_SYSTEM__
 
 #include <utility>
+#include <vector>
 
 #include "Engine/sdl2include.h"
 #include "Globals/InputGlobals.h"
@@ -24,6 +25,8 @@ private:
   // constructor and destructor
   InputSystem();
   ~InputSystem();
+  // Joystick handling
+  void LoadJoysticks();
   // private attributes
   static InputSystem *m_instance;
   // keyboard states
@@ -34,6 +37,8 @@ private:
   Uint32 m_mouseStates = 0;
   Uint32 m_oldMouseStates = 0;
   int m_mouseX, m_mouseY;
+  // joysticks
+  std::vector<SDL_Joystick *> m_joysticks;
 };
 
 #endif // __INPUT_SYSTEM__
