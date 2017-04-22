@@ -1,13 +1,13 @@
 #include "Engine/Scene.h"
+#include "Log/log.h"
 
 Scene::Scene() {}
 
 Scene::~Scene() {}
 
 void Scene::Start() {
-  for (auto obj : m_gameObjects) {
+  for (auto obj : m_gameObjects)
     obj->Start();
-  }
 }
 
 void Scene::Update() {
@@ -36,3 +36,28 @@ void Scene::FixedUpdate() {
     if (it->active)
       it->FixedUpdate();
 }
+
+void Scene::SetState(SceneStates state) {
+  m_currentState = state;
+  INFO("[SCENE] " << m_name << " state: " << m_currentState);
+
+  if (state == SCENE_ACTIVATED)
+    Activation();
+  else if (state == SCENE_DEACTIVATED)
+    Deactivation();
+  else if (state == SCENE_HIDDEN)
+    Hidden();
+  else if (state == SCENE_SHOWN)
+    Shown();
+}
+
+void Scene::Activation() {
+  OnActivation();
+  Start();
+}
+
+void Scene::Deactivation() { OnDeactivation(); }
+
+void Scene::Shown() { OnShown(); }
+
+void Scene::Hidden() { OnHidden(); }
