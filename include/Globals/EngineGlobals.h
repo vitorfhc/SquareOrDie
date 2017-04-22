@@ -6,8 +6,8 @@ const std::string engine_name = "ZebraEngine";
 const std::string engine_version = "1.0";
 const std::string window_title = engine_name + " " + engine_version;
 
-const int screen_width = 1280;
-const int screen_height = 720;
+const int screen_width = 1024;
+const int screen_height = 800;
 
 const int fixed_update_rate = 50;
 const int fixed_update_interval = 1000 / fixed_update_rate;

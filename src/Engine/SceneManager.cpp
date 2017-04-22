@@ -1,4 +1,7 @@
+#include <iostream>
+
 #include "Engine/SceneManager.h"
+#include "Log/log.h"
 
 SceneManager *SceneManager::m_instance = 0;
 
@@ -25,6 +28,9 @@ void SceneManager::AddScene(std::pair<std::string, Scene *> scenePair) {
 void SceneManager::Start() {
   for (auto scene : m_scenes) {
     scene.second->Start();
+
+    scene.second->SetState(SCENE_ACTIVATED);
+    INFO(scene.first << ": scene activated");
   }
 }
 

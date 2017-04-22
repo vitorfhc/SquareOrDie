@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Engine/GameObject.h"
+#include "Globals/SceneStates.h"
 
 class Scene {
 public:
@@ -18,8 +19,13 @@ public:
   // handle gameobjects
   void AddGameObject(GameObject *gameObject);
   void AddGameObject(std::vector<GameObject *> gameObjects);
+  // states
+  inline void SetState(SceneStates state) { m_currentState = state; };
+  inline SceneStates GetState() { return m_currentState; };
 
 private:
+  // scene state
+  SceneStates m_currentState;
   // gameobjects vector
   std::vector<GameObject *> m_gameObjects;
 };

@@ -1,13 +1,13 @@
 #include "Engine/Scene.h"
+#include "Log/log.h"
 
 Scene::Scene() {}
 
 Scene::~Scene() {}
 
 void Scene::Start() {
-  for (auto obj : m_gameObjects) {
+  for (auto obj : m_gameObjects)
     obj->Start();
-  }
 }
 
 void Scene::Update() {
