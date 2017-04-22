@@ -35,7 +35,6 @@ void SceneManager::AddScene(std::pair<std::string, Scene *> scenePair) {
 
 void SceneManager::Start() {
   for (auto scene : m_scenes) {
-      scene.second->Start();
     if (scene.second->GetState() == SCENE_DEACTIVATED)
       scene.second->SetState(SCENE_ACTIVATED);
   }

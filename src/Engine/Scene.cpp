@@ -40,6 +40,15 @@ void Scene::FixedUpdate() {
 void Scene::SetState(SceneStates state) {
   m_currentState = state;
   INFO("[SCENE] " << m_name << " state: " << m_currentState);
+
+  if (state == SCENE_ACTIVATED)
+    Activation();
+  else if (state == SCENE_DEACTIVATED)
+    Deactivation();
+  else if (state == SCENE_HIDDEN)
+    Hidden();
+  else if (state == SCENE_SHOWN)
+    Shown();
 }
 
 void Scene::Activation() { Start(); }

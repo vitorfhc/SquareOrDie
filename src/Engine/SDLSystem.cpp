@@ -45,7 +45,6 @@ void SDLSystem::Run() {
   // BEGIN OF TEST CODE
   Scene *scene = new Scene();
   SceneManager::GetInstance()->AddScene(std::make_pair("main", scene));
-  SceneManager::GetInstance()->SetCurrentScene("main");
 
   Image *marioImage = new Image("assets/topdown.png", 0, 0, 313, 207);
 
@@ -67,6 +66,8 @@ void SDLSystem::Run() {
   UIButton *luigiButton = new UIButton(luigi);
 
   luigiScene->AddGameObject(luigi);
+  
+  SceneManager::GetInstance()->SetCurrentScene("main");
   // END OF TEST CODE
 
   SceneManager::GetInstance()->Start();
