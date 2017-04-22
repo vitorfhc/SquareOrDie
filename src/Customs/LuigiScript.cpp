@@ -17,7 +17,7 @@ void LuigiScript::ComponentUpdate() {
   Renderer *renderer = (Renderer *)GetOwner()->GetComponent("Renderer");
 
   if (button->IsClicked())
-    SceneManager::GetInstance()->SetCurrentScene("main");
+    SceneManager::GetInstance()->SetCurrentScene("Main");
   if (button->IsOver())
     renderer->SetSizes(std::make_pair(200, 200));
   else

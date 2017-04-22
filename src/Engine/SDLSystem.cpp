@@ -3,8 +3,9 @@
 // BEGIN OF TEST INCLUDE
 #include "Components/Renderer.h"
 #include "Components/UIButton.h"
-#include "Customs/MarioMovement.h"
+#include "Customs/CustomScene.h"
 #include "Customs/LuigiScript.h"
+#include "Customs/MarioMovement.h"
 // END OF TEST INCLUDE
 
 // static variables initialization
@@ -43,17 +44,13 @@ void SDLSystem::Run() {
   m_isRunning = true;
 
   // BEGIN OF TEST CODE
-  Scene *scene = new Scene();
-  SceneManager::GetInstance()->AddScene(std::make_pair("main", scene));
 
-  Image *marioImage = new Image("assets/topdown.png", 0, 0, 313, 207);
+  // CustomScene derives Scene
+  CustomScene *customScene = new CustomScene();
+  SceneManager::GetInstance()->AddScene(
+      std::make_pair("Main", customScene));
 
-  GameObject *mario = new GameObject("Mario");
-  MarioMovement *marioMovement = new MarioMovement(mario);
-  Renderer *marioRenderer = new Renderer(mario, new Vector(100, 100),
-                                         marioImage, std::make_pair(200, 150));
-  scene->AddGameObject(mario);
-
+  // Common scene
   Scene *luigiScene = new Scene();
   SceneManager::GetInstance()->AddScene(std::make_pair("luigi", luigiScene));
 
@@ -66,10 +63,10 @@ void SDLSystem::Run() {
   UIButton *luigiButton = new UIButton(luigi);
 
   luigiScene->AddGameObject(luigi);
-  
-  SceneManager::GetInstance()->SetCurrentScene("main");
+
   // END OF TEST CODE
 
+  SceneManager::GetInstance()->SetCurrentScene("Main"); // must be called here but scene name can be changed
   SceneManager::GetInstance()->Start();
   while (m_isRunning) {
     CalculateFramerate();

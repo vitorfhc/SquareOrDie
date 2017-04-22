@@ -31,11 +31,10 @@ public:
   virtual void Shown() final;
   virtual void Hidden() final;
   // method for being overrided
-  virtual void OnActivation();
-  virtual void OnDeactivation();
-  virtual void OnShown();
-  virtual void OnHidden();
-
+  virtual void OnActivation(){};
+  virtual void OnDeactivation(){};
+  virtual void OnShown(){};
+  virtual void OnHidden(){};
 
 private:
   // scene name

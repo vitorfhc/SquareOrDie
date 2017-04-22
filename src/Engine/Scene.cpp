@@ -51,18 +51,13 @@ void Scene::SetState(SceneStates state) {
     Shown();
 }
 
-void Scene::Activation() { Start(); }
+void Scene::Activation() {
+  OnActivation();
+  Start();
+}
 
-void Scene::Deactivation() {}
+void Scene::Deactivation() { OnDeactivation(); }
 
-void Scene::Shown() {}
+void Scene::Shown() { OnShown(); }
 
-void Scene::Hidden() {}
-
-void Scene::OnActivation() {}
-
-void Scene::OnDeactivation() {}
-
-void Scene::OnShown() {}
-
-void Scene::OnHidden() {}
+void Scene::Hidden() { OnHidden(); }
