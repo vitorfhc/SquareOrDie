@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "Engine/InputSystem.h"
 #include "Log/log.h"
 
@@ -6,9 +8,13 @@ InputSystem *InputSystem::m_instance = 0;
 
 InputSystem::InputSystem() {
   SDL_PumpEvents();
+  SDL_JoystickUpdate();
+
   m_states = SDL_GetKeyboardState(&m_statesSize);
   m_oldStates = new Uint8[m_statesSize];
   m_mouseStates = SDL_GetMouseState(&m_mouseX, &m_mouseY);
+
+  SDL_JoystickEventState(SDL_IGNORE);
   LoadJoysticks();
 }
 
@@ -31,6 +37,9 @@ void InputSystem::UpdateStates() {
   m_oldMouseStates = m_mouseStates;
   // update actual states
   SDL_PumpEvents();
+  SDL_JoystickUpdate();
+  UpdateJoysticks();
+
   m_mouseStates = SDL_GetMouseState(&m_mouseX, &m_mouseY);
 }
 
@@ -99,16 +108,43 @@ std::pair<int, int> InputSystem::GetMousePosition() {
 
 void InputSystem::LoadJoysticks() {
   INFO("[INPUT] Loading joysticks");
-  int joysticksQuantity = SDL_NumJoysticks();
-  INFO("[INPUT] Found " << joysticksQuantity << " available joysticks");
+  m_joysticksQuantity = SDL_NumJoysticks();
+  INFO("[INPUT] Found " << m_joysticksQuantity << " available joysticks");
 
-  for (int i = 0; i < SDL_NumJoysticks(); i++) {
+  for (int i = 0; i < m_joysticksQuantity; i++) {
     SDL_Joystick *joystick = SDL_JoystickOpen(i);
     if (joystick) {
       m_joysticks.push_back(joystick);
       INFO("    " << SDL_JoystickName(joystick) << " opened");
+      INFO("    with " << SDL_JoystickNumAxes(joystick) << " axis");
     } else {
       INFO("    " << SDL_JoystickName(joystick) << " could not be opened");
+      INFO(SDL_GetError());
     }
+  }
+}
+
+void InputSystem::UpdateJoysticks() {
+  CheckJoystickConnections();
+  for (joystick : m_joysticks) {
+    Sint16 inputX = SDL_JoystickGetAxis(joystick, 0);
+    Sint16 inputY = SDL_JoystickGetAxis(joystick, 1);
+
+    float parsedX = inputX  / 32767;
+    float parsedY = inputY / 32767;
+
+    //INFO("X " << parsedX << " Y " << parsedY); 
+  }
+}
+
+void InputSystem::CheckJoystickConnections() {
+  int newQuantity = SDL_NumJoysticks();
+  if (m_joysticksQuantity > newQuantity) {
+    INFO("Lost connection to a joystick");
+    m_joysticksQuantity = newQuantity;
+
+  } else if (m_joysticksQuantity < newQuantity) {
+    INFO("New connection to a joystick");
+    m_joysticksQuantity = newQuantity;
   }
 }

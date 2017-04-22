@@ -27,6 +27,8 @@ private:
   ~InputSystem();
   // Joystick handling
   void LoadJoysticks();
+  void UpdateJoysticks();
+  void CheckJoystickConnections();
   // private attributes
   static InputSystem *m_instance;
   // keyboard states
@@ -39,6 +41,7 @@ private:
   int m_mouseX, m_mouseY;
   // joysticks
   std::vector<SDL_Joystick *> m_joysticks;
+  int m_joysticksQuantity = 0;
 };
 
 #endif // __INPUT_SYSTEM__
