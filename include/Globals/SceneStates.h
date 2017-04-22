@@ -2,8 +2,8 @@
 #define __SCENE_STATES__
 
 typedef enum {
-    SCENE_DEACTIVATED = 0,
-    SCENE_ACTIVATED = 1,
+    SCENE_DEACTIVATED = 0, // starts deactivated
+    SCENE_ACTIVATED = 1, // when added to scenemanager
     SCENE_SHOWN = 2,
     SCENE_HIDDEN = 3
   } SceneStates;

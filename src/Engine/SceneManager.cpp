@@ -17,20 +17,27 @@ SceneManager *SceneManager::GetInstance() {
 
 void SceneManager::SetCurrentScene(std::string sceneName) {
   auto found = m_scenes.find(sceneName);
-  if (found != m_scenes.end())
+  if (found != m_scenes.end()) {
+    if (m_currentScene.second != nullptr)
+      m_currentScene.second->SetState(SCENE_HIDDEN);
+
     m_currentScene = std::make_pair(found->first, found->second);
+    if (m_currentScene.second->GetState() == SCENE_DEACTIVATED)
+      m_currentScene.second->SetState(SCENE_ACTIVATED);
+    m_currentScene.second->SetState(SCENE_SHOWN);
+  }
 }
 
 void SceneManager::AddScene(std::pair<std::string, Scene *> scenePair) {
+  scenePair.second->SetName(scenePair.first);
   m_scenes.insert(scenePair);
 }
 
 void SceneManager::Start() {
   for (auto scene : m_scenes) {
-    scene.second->Start();
-
-    scene.second->SetState(SCENE_ACTIVATED);
-    INFO(scene.first << ": scene activated");
+      scene.second->Start();
+    if (scene.second->GetState() == SCENE_DEACTIVATED)
+      scene.second->SetState(SCENE_ACTIVATED);
   }
 }
 

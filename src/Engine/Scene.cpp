@@ -36,3 +36,24 @@ void Scene::FixedUpdate() {
     if (it->active)
       it->FixedUpdate();
 }
+
+void Scene::SetState(SceneStates state) {
+  m_currentState = state;
+  INFO("[SCENE] " << m_name << " state: " << m_currentState);
+}
+
+void Scene::Activation() { Start(); }
+
+void Scene::Deactivation() {}
+
+void Scene::Shown() {}
+
+void Scene::Hidden() {}
+
+void Scene::OnActivation() {}
+
+void Scene::OnDeactivation() {}
+
+void Scene::OnShown() {}
+
+void Scene::OnHidden() {}
