@@ -59,20 +59,20 @@ void MarioMovement::ComponentUpdate() {
 
 void MarioMovement::FixedComponentUpdate() {
   // getting current position ans setting speed
-  Vector position = renderer->GetPosition();
+  Vector* position = GetOwner()->GetPosition();
 
   // changing position values
-  position.m_x += right * speed;
-  position.m_x -= left * speed;
-  position.m_y -= input->GetKeyPressed(INPUT_W) * speed;
-  position.m_y += input->GetKeyPressed(INPUT_S) * speed;
+  position->m_x += right * speed;
+  position->m_x -= left * speed;
+  position->m_y -= input->GetKeyPressed(INPUT_W) * speed;
+  position->m_y += input->GetKeyPressed(INPUT_S) * speed;
 
   // window edge collision
-  if (position.m_x + renderer->GetWidth() > 1280)
-    position.m_x = 1280 - renderer->GetWidth();
-  if (position.m_x < 0)
-    position.m_x = 0;
+  if (position->m_x + renderer->GetWidth() > 1280)
+    position->m_x = 1280 - renderer->GetWidth();
+  if (position->m_x < 0)
+    position->m_x = 0;
 
   // updating position according to new position
-  renderer->SetPosition(position);
+  GetOwner()->SetPosition(position);
 }

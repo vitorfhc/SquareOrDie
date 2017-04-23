@@ -1,19 +1,28 @@
 #include "Engine/GameObject.h"
 
-GameObject::GameObject(std::string name) { m_name = name; }
-
-GameObject::GameObject(std::string name, std::vector<Component *> components) {
+GameObject::GameObject(std::string name, Vector *position) {
   m_name = name;
+  m_position = position;
+}
+
+GameObject::GameObject(std::string name, std::vector<Component *> components,
+                       Vector *position) {
+  m_name = name;
+  m_position = position;
   for (auto it : components)
     AddComponent(it);
 }
 
-GameObject::GameObject(std::string name, Component *component) {
+GameObject::GameObject(std::string name, Component *component,
+                       Vector *position) {
   m_name = name;
+  m_position = position;
   AddComponent(component);
 }
 
-GameObject::~GameObject() {}
+GameObject::~GameObject() {
+  delete m_position;
+}
 
 void GameObject::Start() {
   for (auto key = m_components.begin(); key != m_components.end(); key++) {

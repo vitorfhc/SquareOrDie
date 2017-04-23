@@ -47,8 +47,7 @@ void SDLSystem::Run() {
 
   // CustomScene derives Scene
   CustomScene *customScene = new CustomScene();
-  SceneManager::GetInstance()->AddScene(
-      std::make_pair("Main", customScene));
+  SceneManager::GetInstance()->AddScene(std::make_pair("Main", customScene));
 
   // Common scene
   Scene *luigiScene = new Scene();
@@ -56,9 +55,9 @@ void SDLSystem::Run() {
 
   Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
 
-  GameObject *luigi = new GameObject("Luigi");
-  Renderer *luigiRenderer = new Renderer(luigi, new Vector(0, 0), luigiImage,
-                                         std::make_pair(100, 100));
+  GameObject *luigi = new GameObject("Luigi", new Vector(500, 200));
+  Renderer *luigiRenderer =
+      new Renderer(luigi, luigiImage, std::make_pair(100, 100));
   LuigiScript *luigiScript = new LuigiScript(luigi);
   UIButton *luigiButton = new UIButton(luigi);
 
@@ -66,7 +65,8 @@ void SDLSystem::Run() {
 
   // END OF TEST CODE
 
-  SceneManager::GetInstance()->SetCurrentScene("Main"); // must be called here but scene name can be changed
+  SceneManager::GetInstance()->SetCurrentScene(
+      "Main"); // must be called here but scene name can be changed
   SceneManager::GetInstance()->Start();
   while (m_isRunning) {
     CalculateFramerate();
