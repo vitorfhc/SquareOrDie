@@ -67,6 +67,9 @@ void MarioMovement::FixedComponentUpdate() {
   position->m_y -= input->GetJoystick(1)->GetButtonPressed(4) * speed;
   position->m_y += input->GetJoystick(1)->GetButtonPressed(6) * speed;
 
+  position->m_x += input->GetJoystick(1)->GetAxis(0) * speed / 32768.0;
+  position->m_y += input->GetJoystick(1)->GetAxis(1) * speed / 32768.0;
+
   // window edge collision
   if (position->m_x + renderer->GetWidth() > 1280)
     position->m_x = 1280 - renderer->GetWidth();

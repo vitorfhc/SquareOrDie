@@ -13,6 +13,7 @@ public:
   bool GetButtonDown(int index);
   bool GetButtonUp(int index);
   bool GetButtonPressed(int index);
+  int GetAxis(int index);
 
 private:
   SDL_Joystick *m_joystick = nullptr;

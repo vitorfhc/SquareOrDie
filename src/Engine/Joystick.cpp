@@ -39,3 +39,7 @@ bool Joystick::GetButtonPressed(int index) {
     return true;
   return false;
 }
+
+int Joystick::GetAxis(int index) {
+  return m_currentAxes[index];
+}
