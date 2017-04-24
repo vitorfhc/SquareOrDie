@@ -8,14 +8,13 @@ InputSystem *InputSystem::m_instance = 0;
 
 InputSystem::InputSystem() {
   SDL_PumpEvents();
-  SDL_JoystickUpdate();
+  SDL_GameControllerEventState(SDL_IGNORE);
+
+  LoadGameControllers();
 
   m_states = SDL_GetKeyboardState(&m_statesSize);
   m_oldStates = new Uint8[m_statesSize];
   m_mouseStates = SDL_GetMouseState(&m_mouseX, &m_mouseY);
-
-  SDL_JoystickEventState(SDL_IGNORE);
-  LoadJoysticks();
 }
 
 InputSystem::~InputSystem() {
@@ -35,10 +34,11 @@ void InputSystem::UpdateStates() {
   for (int i = 0; i < m_statesSize; i++)
     m_oldStates[i] = m_states[i];
   m_oldMouseStates = m_mouseStates;
-  // update actual states
+
   SDL_PumpEvents();
-  SDL_JoystickUpdate();
-  UpdateJoysticks();
+  SDL_GameControllerUpdate();
+
+  UpdateGameControllers();
 
   m_mouseStates = SDL_GetMouseState(&m_mouseX, &m_mouseY);
 }
@@ -106,46 +106,30 @@ std::pair<int, int> InputSystem::GetMousePosition() {
   return position;
 }
 
-void InputSystem::LoadJoysticks() {
-  INFO("[INPUT] Loading joysticks");
+void InputSystem::LoadGameControllers() {
   int quantity = SDL_NumJoysticks();
-  INFO("[INPUT] Found " << quantity << " available joysticks");
+  INFO("[INPUT] Loading game controllers");
 
   for (int i = 0; i < quantity; i++) {
-    SDL_Joystick *sdl_joystick = SDL_JoystickOpen(i);
-
-    if (sdl_joystick) {
-
-      Joystick *joy = new Joystick(sdl_joystick);
-
-      m_joysticks.push_back(joy);
-      INFO("    " << SDL_JoystickName(sdl_joystick) << " opened");
-
-    } else {
-
-      INFO("    " << SDL_JoystickName(sdl_joystick) << " could not be opened");
-      INFO(SDL_GetError());
+    if (SDL_IsGameController(i)) {
+      SDL_GameController *sdl_gc = SDL_GameControllerOpen(i);
+      GameController *gc = new GameController(sdl_gc);
+      if (sdl_gc) m_gameControllers.push_back(gc);
     }
   }
 }
 
-void InputSystem::UpdateJoysticks() {
-  CheckJoystickConnections();
-  for (auto joystick : m_joysticks)
-    joystick->Update();
+
+void InputSystem::UpdateGameControllers() {
+  CheckGameControllersConnections();
+  for (auto gc : m_gameControllers)
+    gc->Update();
 }
 
-void InputSystem::CheckJoystickConnections() {
-  unsigned int newQuantity = SDL_NumJoysticks();
-  if (m_joysticks.size() > newQuantity) {
-    INFO("Lost connection to a joystick");
-  } else if (m_joysticks.size() < newQuantity) {
-    INFO("New connection to a joystick");
-  }
-}
+void InputSystem::CheckGameControllersConnections() {}
 
-Joystick *InputSystem::GetJoystick(int index) {
-  if (m_joysticks.size() < index + 1)
+GameController *InputSystem::GetGameController(int index) {
+  if (m_gameControllers.size() < index + 1)
     return nullptr;
-  return m_joysticks.at(index);
+  return m_gameControllers.at(index);
 }

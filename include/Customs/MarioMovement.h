@@ -2,7 +2,8 @@
 #define __MARIO_MOVEMENT__
 
 #include "Components/Script.h"
-#include "Engine/Joystick.h"
+#include "Engine/GameController.h"
+#include "Engine/sdl2include.h"
 
 class Renderer;
 class InputSystem;
@@ -20,15 +21,20 @@ protected:
 
 private:
   Vector *position;
+
+  int xMovement = 0, yMovement = 0;
+
   bool right, left, up, down;
+  bool boost, crouch;
+
   float normalSpeed = 5;
   float movementSpeed = normalSpeed;
   float boostedSpeed = 10;
   float crouchedSpeed = 2;
-  bool boost, crouch;
+  
   Renderer *renderer;
   InputSystem *input;
-  Joystick *joystick = nullptr;
+  GameController *gc = nullptr;
 };
 
 #endif // __MARIO_MOVEMENT__
