@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Engine/sdl2include.h"
+#include "Engine/Joystick.h"
 #include "Globals/InputGlobals.h"
 
 class InputSystem {
@@ -13,6 +14,7 @@ public:
   static InputSystem *GetInstance();
   // update m_states and m_oldStates every frame
   void UpdateStates();
+  // event handling
   bool GetKeyDown(KeyboardInputGlobal key);
   bool GetKeyUp(KeyboardInputGlobal key);
   bool GetKeyPressed(KeyboardInputGlobal key);
@@ -20,6 +22,7 @@ public:
   bool GetMouseButtonUp(MouseInputGlobal button);
   bool GetMouseButtonPressed(MouseInputGlobal button);
   std::pair<int, int> GetMousePosition();
+  inline Joystick *GetJoystick(int index) { return m_joysticks.at(index); };
 
 private:
   // constructor and destructor
@@ -40,8 +43,7 @@ private:
   Uint32 m_oldMouseStates = 0;
   int m_mouseX, m_mouseY;
   // joysticks
-  std::vector<SDL_Joystick *> m_joysticks;
-  int m_joysticksQuantity = 0;
+  std::vector<Joystick *> m_joysticks;
 };
 
 #endif // __INPUT_SYSTEM__

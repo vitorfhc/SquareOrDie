@@ -108,17 +108,22 @@ std::pair<int, int> InputSystem::GetMousePosition() {
 
 void InputSystem::LoadJoysticks() {
   INFO("[INPUT] Loading joysticks");
-  m_joysticksQuantity = SDL_NumJoysticks();
-  INFO("[INPUT] Found " << m_joysticksQuantity << " available joysticks");
+  int quantity = SDL_NumJoysticks();
+  INFO("[INPUT] Found " << quantity << " available joysticks");
 
-  for (int i = 0; i < m_joysticksQuantity; i++) {
-    SDL_Joystick *joystick = SDL_JoystickOpen(i);
-    if (joystick) {
-      m_joysticks.push_back(joystick);
-      INFO("    " << SDL_JoystickName(joystick) << " opened");
-      INFO("    with " << SDL_JoystickNumAxes(joystick) << " axis");
+  for (int i = 0; i < quantity; i++) {
+    SDL_Joystick *sdl_joystick = SDL_JoystickOpen(i);
+
+    if (sdl_joystick) {
+
+      Joystick *joy = new Joystick(sdl_joystick);
+
+      m_joysticks.push_back(joy);
+      INFO("    " << SDL_JoystickName(sdl_joystick) << " opened");
+
     } else {
-      INFO("    " << SDL_JoystickName(joystick) << " could not be opened");
+
+      INFO("    " << SDL_JoystickName(sdl_joystick) << " could not be opened");
       INFO(SDL_GetError());
     }
   }
@@ -126,25 +131,15 @@ void InputSystem::LoadJoysticks() {
 
 void InputSystem::UpdateJoysticks() {
   CheckJoystickConnections();
-  for (joystick : m_joysticks) {
-    Sint16 inputX = SDL_JoystickGetAxis(joystick, 0);
-    Sint16 inputY = SDL_JoystickGetAxis(joystick, 1);
-
-    float parsedX = inputX  / 32767;
-    float parsedY = inputY / 32767;
-
-    //INFO("X " << parsedX << " Y " << parsedY); 
-  }
+  for (auto joystick : m_joysticks)
+    joystick->Update();
 }
 
 void InputSystem::CheckJoystickConnections() {
-  int newQuantity = SDL_NumJoysticks();
-  if (m_joysticksQuantity > newQuantity) {
+  unsigned int newQuantity = SDL_NumJoysticks();
+  if (m_joysticks.size() > newQuantity) {
     INFO("Lost connection to a joystick");
-    m_joysticksQuantity = newQuantity;
-
-  } else if (m_joysticksQuantity < newQuantity) {
+  } else if (m_joysticks.size() < newQuantity) {
     INFO("New connection to a joystick");
-    m_joysticksQuantity = newQuantity;
   }
 }
