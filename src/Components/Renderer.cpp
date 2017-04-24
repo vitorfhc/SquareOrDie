@@ -7,14 +7,16 @@
 #include <math.h>
 
 void Renderer::ComponentUpdate() {
-  GraphicsSystem::GetInstance()->Draw(m_image, m_position, m_sizes);
+  std::pair<int, int> sizes =
+      std::make_pair(GetOwner()->GetWidth(), GetOwner()->GetHeight());
+  GraphicsSystem::GetInstance()->Draw(m_image, m_position, sizes);
 }
 
-Renderer::Renderer(GameObject *owner, Image *img, std::pair<int, int> sizes)
-    : Component(owner, C_DRAW) {
+Renderer::Renderer(GameObject *owner, Image *img) : Component(owner, C_DRAW) {
   m_type = C_DRAW;
   m_image = img;
-  m_sizes = sizes;
+
+  m_position = GetOwner()->GetPosition();
 
   if (!m_image)
     ERROR("Null image on renderer");
@@ -22,7 +24,7 @@ Renderer::Renderer(GameObject *owner, Image *img, std::pair<int, int> sizes)
 
 Renderer::~Renderer() { delete m_image; }
 
-void Renderer::Start() { m_position = GetOwner()->GetPosition(); }
+void Renderer::Start() {}
 
 void Renderer::RotateTowards(Vector *point) {
   double angles;

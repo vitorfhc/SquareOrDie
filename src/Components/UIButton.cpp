@@ -17,8 +17,6 @@ void UIButton::Start() {
   }
 
   // case exists
-  m_rendererWidth = m_rendererComponent->GetWidth();
-  m_rendererHeight = m_rendererComponent->GetHeight();
   m_position = GetOwner()->GetPosition();
 }
 
@@ -32,15 +30,15 @@ bool UIButton::IsClicked() {
 bool UIButton::IsOver() {
   // getting button and mouse position
   m_position = GetOwner()->GetPosition();
-  m_rendererWidth = m_rendererComponent->GetWidth();
-  m_rendererHeight = m_rendererComponent->GetHeight();
+  int rendererWidth = GetOwner()->GetWidth();
+  int rendererHeight = GetOwner()->GetHeight();
   std::pair<int, int> mousePos = InputSystem::GetInstance()->GetMousePosition();
 
   // checking if mouse is over
   if (mousePos.first > m_position->m_x &&
-      mousePos.first < m_position->m_x + m_rendererWidth &&
+      mousePos.first < m_position->m_x + rendererWidth &&
       mousePos.second > m_position->m_y &&
-      mousePos.second < m_position->m_y + m_rendererHeight)
+      mousePos.second < m_position->m_y + rendererHeight)
     return true;
   return false;
 }

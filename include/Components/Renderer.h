@@ -10,17 +10,12 @@
 class Renderer : public Component {
 public:
   // constructor and destructor
-  Renderer(GameObject *owner, Image *img,
-           std::pair<int, int> sizes);
+  Renderer(GameObject *owner, Image *img);
   ~Renderer();
   // overriding method for getting component name
   inline std::string GetComponentName() override { return "Renderer"; };
   // getter for image
   inline Image *GetImage() { return m_image; };
-  inline int GetWidth() { return m_sizes.first; };
-  inline int GetHeight() { return m_sizes.second; };
-  // setter
-  inline void SetSizes(std::pair<int, int> newSizes) { m_sizes = newSizes; };
   // image handling
   void Rotate(double angles);
   void RotateTowards(Vector *point);
@@ -34,7 +29,6 @@ protected:
 private:
   Image *m_image = nullptr;
   Vector *m_position = nullptr;
-  std::pair<int, int> m_sizes;
 };
 
 #endif // __RENDERER__

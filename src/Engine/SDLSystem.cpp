@@ -55,9 +55,9 @@ void SDLSystem::Run() {
 
   Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
 
-  GameObject *luigi = new GameObject("Luigi", new Vector(500, 200));
+  GameObject *luigi = new GameObject("Luigi", new Vector(500, 200), 77, 102);
   Renderer *luigiRenderer =
-      new Renderer(luigi, luigiImage, std::make_pair(100, 100));
+      new Renderer(luigi, luigiImage);
   LuigiScript *luigiScript = new LuigiScript(luigi);
   UIButton *luigiButton = new UIButton(luigi);
 

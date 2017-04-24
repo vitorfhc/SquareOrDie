@@ -58,12 +58,15 @@ void MarioMovement::ComponentUpdate() {
 
   if (gc && gc->GetButtonUp(GC_INPUT_GUIDE))
     SDLSystem::GetInstance()->SetRunning(false);
+  
+  if (input->GetKeyDown(INPUT_Z))
+    SceneManager::GetInstance()->SetCurrentScene("luigi");
 
   // rotate Mario to mouse
   std::pair<int, int> mousePos = input->GetMousePosition();
   renderer->RotateTowards(
-      new Vector(mousePos.first - renderer->GetWidth() / 2,
-                 mousePos.second - renderer->GetHeight() / 2));
+      new Vector(mousePos.first - GetOwner()->GetWidth() / 2,
+                 mousePos.second - GetOwner()->GetHeight() / 2));
 }
 
 void MarioMovement::FixedComponentUpdate() {
@@ -77,15 +80,15 @@ void MarioMovement::FixedComponentUpdate() {
   position->m_y += yMovement * movementSpeed;
 
   // window edge collision
-  if (position->m_x + renderer->GetWidth() > EngineGlobals::screen_width)
-    position->m_x = EngineGlobals::screen_width - renderer->GetWidth();
+  if (position->m_x + GetOwner()->GetWidth() > EngineGlobals::screen_width)
+    position->m_x = EngineGlobals::screen_width - GetOwner()->GetWidth();
   else if (position->m_x < 0)
     position->m_x = 0;
 
   if (position->m_y < 0)
     position->m_y = 0;
-  else if (position->m_y + renderer->GetHeight() > EngineGlobals::screen_height)
-    position->m_y = EngineGlobals::screen_height - renderer->GetHeight();
+  else if (position->m_y + GetOwner()->GetHeight() > EngineGlobals::screen_height)
+    position->m_y = EngineGlobals::screen_height - GetOwner()->GetHeight();
 
   // updating position according to new position
   // GetOwner()->SetPosition(position);

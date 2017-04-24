@@ -1,28 +1,13 @@
 #include "Engine/GameObject.h"
 
-GameObject::GameObject(std::string name, Vector *position) {
+GameObject::GameObject(std::string name, Vector *position, int width, int height) {
   m_name = name;
   m_position = position;
+  m_width = width;
+  m_height = height;
 }
 
-GameObject::GameObject(std::string name, std::vector<Component *> components,
-                       Vector *position) {
-  m_name = name;
-  m_position = position;
-  for (auto it : components)
-    AddComponent(it);
-}
-
-GameObject::GameObject(std::string name, Component *component,
-                       Vector *position) {
-  m_name = name;
-  m_position = position;
-  AddComponent(component);
-}
-
-GameObject::~GameObject() {
-  delete m_position;
-}
+GameObject::~GameObject() { delete m_position; }
 
 void GameObject::Start() {
   for (auto key = m_components.begin(); key != m_components.end(); key++) {
@@ -95,4 +80,9 @@ void GameObject::FixedUpdate() {
     for (auto value : key->second)
       value->FixedComponentUpdate();
   }
+}
+
+void GameObject::SetSize(int width, int height) {
+  m_width = width;
+  m_height = height;
 }

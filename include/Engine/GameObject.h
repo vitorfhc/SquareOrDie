@@ -17,9 +17,7 @@ public:
   bool active = true;
 
   // constructor and destructor
-  GameObject(std::string name, std::vector<Component *> components, Vector *position = new Vector(0,0));
-  GameObject(std::string name, Component *component, Vector *position = new Vector(0,0));
-  GameObject(std::string name, Vector *position = new Vector(0,0));
+  GameObject(std::string name, Vector *position = new Vector(0, 0), int width = 0, int height = 0);
   ~GameObject();
   // method for handling start and updates
   void Start();
@@ -32,8 +30,11 @@ public:
   Component *GetComponent(std::string name);
   std::string GetName() { return m_name; };
   // getter and setter
-  inline Vector* GetPosition() { return m_position; };
-  inline void SetPosition(Vector* value) { m_position = value; };
+  inline Vector *GetPosition() { return m_position; };
+  inline void SetPosition(Vector *value) { m_position = value; };
+  inline int GetWidth() { return m_width; };
+  inline int GetHeight() { return m_height; };
+  void SetSize(int width, int height);
 
 private:
   // map of components
@@ -41,6 +42,8 @@ private:
   // object properties
   std::string m_name = "no_name_defined";
   Vector *m_position = new Vector(0, 0);
+  int m_width = 0;
+  int m_height = 0;
 
   // methods for handling specific update
   void PhysicsUpdate();

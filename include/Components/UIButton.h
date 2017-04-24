@@ -16,12 +16,11 @@ public:
   void Start() override;
   // uibutton methods
   bool IsClicked();
-  bool IsOver();  
+  bool IsOver();
 
 private:
-  Renderer *m_rendererComponent;
-  int m_rendererWidth, m_rendererHeight;
-  Vector* m_position;
+  Renderer *m_rendererComponent = nullptr;
+  Vector *m_position = nullptr;
 };
 
 #endif // __UI_BUTTON__

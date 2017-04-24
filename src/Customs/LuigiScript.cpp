@@ -19,9 +19,9 @@ void LuigiScript::ComponentUpdate() {
   if (button->IsClicked())
     SceneManager::GetInstance()->SetCurrentScene("Main");
   if (button->IsOver())
-    renderer->SetSizes(std::make_pair(200, 200));
+    GetOwner()->SetSize(200, 200);
   else
-    renderer->SetSizes(std::make_pair(100, 100));
+    GetOwner()->SetSize(100, 100);
 }
 
 void LuigiScript::FixedComponentUpdate() {}
