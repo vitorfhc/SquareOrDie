@@ -21,12 +21,17 @@ protected:
 
 private:
   Vector *position;
+
+  int xMovement = 0, yMovement = 0;
+
   bool right, left, up, down;
+  bool boost, crouch;
+
   float normalSpeed = 5;
   float movementSpeed = normalSpeed;
   float boostedSpeed = 10;
   float crouchedSpeed = 2;
-  bool boost, crouch;
+  
   Renderer *renderer;
   InputSystem *input;
   GameController *gc = nullptr;

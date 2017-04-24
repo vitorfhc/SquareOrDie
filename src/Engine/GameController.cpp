@@ -25,8 +25,12 @@ bool GameController::GetButtonDown(int index) {}
 
 bool GameController::GetButtonUp(int index) {}
 
-bool GameController::GetButtonPressed(SDL_GameControllerButton button) {
-  return SDL_GameControllerGetButton(m_gameController, button);
+bool GameController::GetButtonPressed(GameControllerButton button) {
+  return SDL_GameControllerGetButton(m_gameController,
+                                     (SDL_GameControllerButton)button);
 }
 
-int GameController::GetAxis(int index) {}
+int GameController::GetAxis(GameControllerAxis axis) {
+  return SDL_GameControllerGetAxis(m_gameController,
+                                   (SDL_GameControllerAxis)axis);
+}

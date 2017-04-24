@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Engine/sdl2include.h"
+#include "Globals/GCInputs.h"
 
 class GameController {
 public:
@@ -12,8 +13,8 @@ public:
   void Update();
   bool GetButtonDown(int index);
   bool GetButtonUp(int index);
-  bool GetButtonPressed(SDL_GameControllerButton button);
-  int GetAxis(int index);
+  bool GetButtonPressed(GameControllerButton button);
+  int GetAxis(GameControllerAxis axis);
   int GetButtonsQuantity() { return m_buttonsQnt; };
 
 private:
