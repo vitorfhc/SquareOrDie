@@ -37,8 +37,8 @@ void MarioMovement::ComponentUpdate() {
     speed = 10;
 
   // checking input for movement
-  right = input->GetKeyPressed(INPUT_D);
-  left = input->GetKeyPressed(INPUT_A);
+  right = input->GetJoystick(1)->GetButtonPressed(5) * speed;
+  left = input->GetJoystick(1)->GetButtonPressed(7) * speed;
 
   // change scene
   if (input->GetKeyDown(INPUT_Z))
@@ -64,8 +64,11 @@ void MarioMovement::FixedComponentUpdate() {
   // changing position values
   position->m_x += right * speed;
   position->m_x -= left * speed;
-  position->m_y -= input->GetKeyPressed(INPUT_W) * speed;
-  position->m_y += input->GetKeyPressed(INPUT_S) * speed;
+  position->m_y -= input->GetJoystick(1)->GetButtonPressed(4) * speed;
+  position->m_y += input->GetJoystick(1)->GetButtonPressed(6) * speed;
+
+  position->m_x += input->GetJoystick(1)->GetAxis(0) * speed / 32768.0;
+  position->m_y += input->GetJoystick(1)->GetAxis(1) * speed / 32768.0;
 
   // window edge collision
   if (position->m_x + renderer->GetWidth() > 1280)
