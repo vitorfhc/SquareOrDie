@@ -145,5 +145,7 @@ void InputSystem::CheckJoystickConnections() {
 }
 
 Joystick *InputSystem::GetJoystick(int index) {
+  if (m_joysticks.size() < index + 1)
+    return nullptr;
   return m_joysticks.at(index);
 }

@@ -20,22 +20,34 @@ void MarioMovement::Start() {
     ERROR("NO RENDERER FOUND!");
     SDLSystem::GetInstance()->SetRunning(false);
   }
+  // getting joystick
+  if ((joystick = input->GetJoystick(1))) {};
 }
 
 void MarioMovement::ComponentUpdate() {
   // check for movements input
-  right = input->GetKeyPressed(INPUT_D);
-  up = input->GetKeyPressed(INPUT_W);
-  left = input->GetKeyPressed(INPUT_A);
-  down = input->GetKeyPressed(INPUT_S);
+  if (!joystick) {
+    right = input->GetKeyPressed(INPUT_D);
+    up = input->GetKeyPressed(INPUT_W);
+    left = input->GetKeyPressed(INPUT_A);
+    down = input->GetKeyPressed(INPUT_S);
+  } else {
+    right = joystick->GetButtonPressed(5);
+    up = joystick->GetButtonPressed(4);
+    left = joystick->GetButtonPressed(7);
+    down = joystick->GetButtonPressed(6);
+  }
 
   // special inputs
   boost = input->GetKeyPressed(INPUT_SPACE);
-  if (boost) movementSpeed = boostedSpeed;
-  else movementSpeed = normalSpeed;
+  if (boost)
+    movementSpeed = boostedSpeed;
+  else
+    movementSpeed = normalSpeed;
 
   crouch = input->GetKeyPressed(INPUT_LCTRL);
-  if (crouch) movementSpeed = crouchedSpeed;
+  if (crouch)
+    movementSpeed = crouchedSpeed;
 
   // rotate Mario to mouse
   std::pair<int, int> mousePos = input->GetMousePosition();

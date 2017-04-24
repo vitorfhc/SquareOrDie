@@ -14,7 +14,7 @@ public:
   bool GetButtonUp(int index);
   bool GetButtonPressed(int index);
   int GetAxis(int index);
-  bool CheckConnection();
+  int GetButtonsQuantity() { return m_buttonsQnt; };
 
 private:
   SDL_Joystick *m_joystick = nullptr;

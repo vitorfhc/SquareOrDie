@@ -1,4 +1,5 @@
 #include "Engine/Joystick.h"
+#include "Log/log.h"
 
 Joystick::Joystick(SDL_Joystick *joystick) {
   m_joystick = joystick;
@@ -15,36 +16,37 @@ Joystick::~Joystick() { m_joystick = nullptr; }
 
 void Joystick::Update() {
   m_oldButtonsStates = m_currentButtonsStates;
-
-  for (int index = 0; index < m_buttonsQnt; index++)
+  for (int index = 0; index < m_buttonsQnt; index++) {
     m_currentButtonsStates[index] = SDL_JoystickGetButton(m_joystick, index);
+  }
   for (int index = 0; index < m_axesQnt; index++)
     m_currentAxes[index] = SDL_JoystickGetAxis(m_joystick, index);
 }
 
 bool Joystick::GetButtonDown(int index) {
-  if (m_currentButtonsStates[index] && !m_oldButtonsStates[index])
+  if (m_currentButtonsStates[index] && !m_oldButtonsStates[index]) {
+    // INFO("Button " << index << " down");
     return true;
+  }
   return false;
 }
 
 bool Joystick::GetButtonUp(int index) {
-  if (!m_currentButtonsStates[index] && m_oldButtonsStates[index])
+  if (!m_currentButtonsStates[index] && m_oldButtonsStates[index]) {
+    // INFO("Button " << index << " up");
     return true;
+  }
   return false;
 }
 
 bool Joystick::GetButtonPressed(int index) {
-  if (m_currentButtonsStates[index])
+  if (m_currentButtonsStates[index]) {
+    // INFO("Button " << index << " pressed");
     return true;
+  }
   return false;
 }
 
 int Joystick::GetAxis(int index) {
   return m_currentAxes[index];
-}
-
-bool Joystick::CheckConnection() {
-  if (m_joystick) return true;
-  return false;
 }
