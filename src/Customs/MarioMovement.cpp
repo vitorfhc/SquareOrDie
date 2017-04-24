@@ -27,16 +27,8 @@ void MarioMovement::Start() {
 void MarioMovement::ComponentUpdate() {
   // check for movements input
   if (gc) {
-    xMovement = gc->GetAxis(GC_INPUT_AXIS_LEFTX);
-    if (xMovement > 0)
-      xMovement = 1;
-    else if (xMovement < 0)
-      xMovement = -1;
-    yMovement = gc->GetAxis(GC_INPUT_AXIS_LEFTY);
-    if (yMovement > 0)
-      yMovement = 1;
-    else if (yMovement < 0)
-      yMovement = -1;
+    xMovement = gc->GetAxis(GC_INPUT_AXIS_LEFTX) / 32767.0;
+    yMovement = gc->GetAxis(GC_INPUT_AXIS_LEFTY) / 32767.0;
   }
 
   right = input->GetKeyPressed(INPUT_D);
@@ -58,7 +50,7 @@ void MarioMovement::ComponentUpdate() {
 
   if (gc && gc->GetButtonUp(GC_INPUT_GUIDE))
     SDLSystem::GetInstance()->SetRunning(false);
-  
+
   if (input->GetKeyDown(INPUT_Z))
     SceneManager::GetInstance()->SetCurrentScene("luigi");
 
@@ -87,7 +79,8 @@ void MarioMovement::FixedComponentUpdate() {
 
   if (position->m_y < 0)
     position->m_y = 0;
-  else if (position->m_y + GetOwner()->GetHeight() > EngineGlobals::screen_height)
+  else if (position->m_y + GetOwner()->GetHeight() >
+           EngineGlobals::screen_height)
     position->m_y = EngineGlobals::screen_height - GetOwner()->GetHeight();
 
   // updating position according to new position

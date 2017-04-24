@@ -22,7 +22,7 @@ protected:
 private:
   Vector *position;
 
-  int xMovement = 0, yMovement = 0;
+  float xMovement = 0, yMovement = 0;
 
   bool right, left, up, down;
   bool boost, crouch;
