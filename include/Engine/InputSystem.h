@@ -22,7 +22,7 @@ public:
   bool GetMouseButtonUp(MouseInputGlobal button);
   bool GetMouseButtonPressed(MouseInputGlobal button);
   std::pair<int, int> GetMousePosition();
-  inline Joystick *GetJoystick(int index) { return m_joysticks.at(index); };
+  Joystick *GetJoystick(int index);
 
 private:
   // constructor and destructor

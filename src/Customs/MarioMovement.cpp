@@ -2,6 +2,7 @@
 #include "Components/Renderer.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SDLSystem.h"
+#include "Globals/EngineGlobals.h"
 #include "Log/log.h"
 #include "Math/Vector.h"
 
@@ -11,6 +12,7 @@ MarioMovement::MarioMovement(GameObject *owner) : Script(owner) {
 }
 
 void MarioMovement::Start() {
+  position = GetOwner()->GetPosition();
   // getting reference for the renderer component
   renderer = (Renderer *)GetOwner()->GetComponent("Renderer");
   // making an error raise if there no renderer component
@@ -21,34 +23,19 @@ void MarioMovement::Start() {
 }
 
 void MarioMovement::ComponentUpdate() {
-  // deactivate object
-  bool deactivate = input->GetKeyUp(INPUT_Q);
-  GetOwner()->active = !deactivate;
+  // check for movements input
+  right = input->GetKeyPressed(INPUT_D);
+  up = input->GetKeyPressed(INPUT_W);
+  left = input->GetKeyPressed(INPUT_A);
+  down = input->GetKeyPressed(INPUT_S);
 
-  // deactivate the renderer
-  if (input->GetKeyDown(INPUT_E))
-    isVisible = !isVisible;
-  renderer->active = isVisible;
+  // special inputs
+  boost = input->GetKeyPressed(INPUT_SPACE);
+  if (boost) movementSpeed = boostedSpeed;
+  else movementSpeed = normalSpeed;
 
-  // super speed
-  if (input->GetKeyDown(INPUT_SPACE))
-    speed = 20;
-  if (input->GetKeyUp(INPUT_SPACE))
-    speed = 10;
-
-  // checking input for movement
-  right = input->GetJoystick(1)->GetButtonPressed(5) * speed;
-  left = input->GetJoystick(1)->GetButtonPressed(7) * speed;
-
-  // change scene
-  if (input->GetKeyDown(INPUT_Z))
-    SceneManager::GetInstance()->SetCurrentScene("luigi");
-
-  // flip image
-  // if (left)
-  //   renderer->GetImage()->Flip(true, false);
-  // else if (right)
-  //   renderer->GetImage()->Flip(false, false);
+  crouch = input->GetKeyPressed(INPUT_LCTRL);
+  if (crouch) movementSpeed = crouchedSpeed;
 
   // rotate Mario to mouse
   std::pair<int, int> mousePos = input->GetMousePosition();
@@ -58,24 +45,23 @@ void MarioMovement::ComponentUpdate() {
 }
 
 void MarioMovement::FixedComponentUpdate() {
-  // getting current position ans setting speed
-  Vector* position = GetOwner()->GetPosition();
-
-  // changing position values
-  position->m_x += right * speed;
-  position->m_x -= left * speed;
-  position->m_y -= input->GetJoystick(1)->GetButtonPressed(4) * speed;
-  position->m_y += input->GetJoystick(1)->GetButtonPressed(6) * speed;
-
-  position->m_x += input->GetJoystick(1)->GetAxis(0) * speed / 32768.0;
-  position->m_y += input->GetJoystick(1)->GetAxis(1) * speed / 32768.0;
+  // change of position
+  position->m_x += right * movementSpeed;
+  position->m_x -= left * movementSpeed;
+  position->m_y -= up * movementSpeed;
+  position->m_y += down * movementSpeed;
 
   // window edge collision
-  if (position->m_x + renderer->GetWidth() > 1280)
-    position->m_x = 1280 - renderer->GetWidth();
-  if (position->m_x < 0)
+  if (position->m_x + renderer->GetWidth() > EngineGlobals::screen_width)
+    position->m_x = EngineGlobals::screen_width - renderer->GetWidth();
+  else if (position->m_x < 0)
     position->m_x = 0;
 
+  if (position->m_y < 0)
+    position->m_y = 0;
+  else if (position->m_y + renderer->GetHeight() > EngineGlobals::screen_height)
+    position->m_y = EngineGlobals::screen_height - renderer->GetHeight();
+
   // updating position according to new position
-  GetOwner()->SetPosition(position);
+  // GetOwner()->SetPosition(position);
 }

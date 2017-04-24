@@ -18,9 +18,13 @@ protected:
   std::string GetComponentName() override { return "MarioMovement"; };
 
 private:
-  bool right, left;
-  float speed = 10;
-  bool isVisible = true;
+  Vector *position;
+  bool right, left, up, down;
+  float normalSpeed = 5;
+  float movementSpeed = normalSpeed;
+  float boostedSpeed = 10;
+  float crouchedSpeed = 2;
+  bool boost, crouch;
   Renderer *renderer;
   InputSystem *input;
 };

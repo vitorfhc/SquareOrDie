@@ -143,3 +143,7 @@ void InputSystem::CheckJoystickConnections() {
     INFO("New connection to a joystick");
   }
 }
+
+Joystick *InputSystem::GetJoystick(int index) {
+  return m_joysticks.at(index);
+}
