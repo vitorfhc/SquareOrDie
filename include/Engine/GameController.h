@@ -1,23 +1,23 @@
-#ifndef __JOYSTICK__
-#define __JOYSTICK__
+#ifndef __GAME_CONTROLLER__
+#define __GAME_CONTROLLER__
 
 #include <vector>
 
 #include "Engine/sdl2include.h"
 
-class Joystick {
+class GameController {
 public:
-  Joystick(SDL_Joystick *joystick);
-  ~Joystick();
+  GameController(SDL_GameController *gc);
+  ~GameController();
   void Update();
   bool GetButtonDown(int index);
   bool GetButtonUp(int index);
-  bool GetButtonPressed(int index);
+  bool GetButtonPressed(SDL_GameControllerButton button);
   int GetAxis(int index);
   int GetButtonsQuantity() { return m_buttonsQnt; };
 
 private:
-  SDL_Joystick *m_joystick = nullptr;
+  SDL_GameController *m_gameController = nullptr;
 
   int m_buttonsQnt = 0;
   int m_axesQnt = 0;
@@ -27,4 +27,4 @@ private:
   std::vector<float> m_currentAxes;
 };
 
-#endif // __JOYSTICK__
+#endif // __GAME_CONTROLLER__

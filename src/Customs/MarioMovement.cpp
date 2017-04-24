@@ -20,23 +20,16 @@ void MarioMovement::Start() {
     ERROR("NO RENDERER FOUND!");
     SDLSystem::GetInstance()->SetRunning(false);
   }
-  // getting joystick
-  if ((joystick = input->GetJoystick(1))) {};
+  if (input->GetGameController(0))
+    gc = input->GetGameController(0);
 }
 
 void MarioMovement::ComponentUpdate() {
   // check for movements input
-  if (!joystick) {
-    right = input->GetKeyPressed(INPUT_D);
-    up = input->GetKeyPressed(INPUT_W);
-    left = input->GetKeyPressed(INPUT_A);
-    down = input->GetKeyPressed(INPUT_S);
-  } else {
-    right = joystick->GetButtonPressed(5);
-    up = joystick->GetButtonPressed(4);
-    left = joystick->GetButtonPressed(7);
-    down = joystick->GetButtonPressed(6);
-  }
+  right = input->GetKeyPressed(INPUT_D);
+  up = input->GetKeyPressed(INPUT_W);
+  left = input->GetKeyPressed(INPUT_A);
+  down = input->GetKeyPressed(INPUT_S);
 
   // special inputs
   boost = input->GetKeyPressed(INPUT_SPACE);

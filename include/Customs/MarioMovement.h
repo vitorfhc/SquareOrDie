@@ -2,7 +2,8 @@
 #define __MARIO_MOVEMENT__
 
 #include "Components/Script.h"
-#include "Engine/Joystick.h"
+#include "Engine/GameController.h"
+#include "Engine/sdl2include.h"
 
 class Renderer;
 class InputSystem;
@@ -28,7 +29,7 @@ private:
   bool boost, crouch;
   Renderer *renderer;
   InputSystem *input;
-  Joystick *joystick = nullptr;
+  GameController *gc = nullptr;
 };
 
 #endif // __MARIO_MOVEMENT__
