@@ -9,21 +9,32 @@ GameController::GameController(SDL_GameController *gc) {
     ERROR("    Could not open game controller " << SDL_GameControllerName(gc));
   }
 
-  // m_buttonsQnt = SDL_JoystickNumButtons(joystick);
-  // m_axesQnt = SDL_JoystickNumAxes(joystick);
-
-  // m_oldButtonsStates.resize(m_buttonsQnt, 0);
-  // m_currentButtonsStates.resize(m_buttonsQnt, 0);
-  // m_currentAxes.resize(m_axesQnt, 0);
+  m_oldButtonsStates.resize(GC_INPUT_MAX, 0);
+  m_currentButtonsStates.resize(GC_INPUT_MAX, 0);
 }
 
 GameController::~GameController() { m_gameController = nullptr; }
 
-void GameController::Update() {}
+void GameController::Update() {
+  m_oldButtonsStates = m_currentButtonsStates;
 
-bool GameController::GetButtonDown(int index) {}
+  for (int i = 0; i < GC_INPUT_MAX; i++) {
+    m_currentButtonsStates[i] = SDL_GameControllerGetButton(
+        m_gameController, (SDL_GameControllerButton)i);
+  }
+}
 
-bool GameController::GetButtonUp(int index) {}
+bool GameController::GetButtonDown(GameControllerButton button) {
+  if (m_currentButtonsStates[button] && !m_oldButtonsStates[button])
+    return true;
+  return false;
+}
+
+bool GameController::GetButtonUp(GameControllerButton button) {
+  if (!m_currentButtonsStates[button] && m_oldButtonsStates[button])
+    return true;
+  return false;
+}
 
 bool GameController::GetButtonPressed(GameControllerButton button) {
   return SDL_GameControllerGetButton(m_gameController,
