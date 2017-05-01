@@ -59,6 +59,7 @@ void SDLSystem::Run() {
       new GameObject("bla", new Vector(250, 250), 671 / 4, 267);
 
   Image *sprite = new Image("assets/sprites.png", 0, 0, 671, 267);
+  Renderer *rend = new Renderer(animated, sprite);
   Animation *anim = new Animation(animated, sprite);
 
   Frame *f1 = new Frame(0, 0, 671 / 4, 267);
@@ -69,6 +70,7 @@ void SDLSystem::Run() {
   anim->AddFrame(f2);
   anim->AddFrame(f3);
   anim->AddFrame(f4);
+
 
   luigiScene->AddGameObject(animated);
 

@@ -10,6 +10,10 @@ Animation::Animation(GameObject *owner, Image *image)
   m_image = image;
 }
 
+void Animation::Start() {
+  SetPlaying(true);
+}
+
 void Animation::SetFlip(bool horizontal, bool vertical) {
   m_image->Flip(horizontal, vertical);
 }
@@ -17,6 +21,14 @@ void Animation::SetFlip(bool horizontal, bool vertical) {
 void Animation::SetPlaying(bool condition) {
   if (m_isPlaying == condition)
     return;
+
+  if (condition) {
+    if (auto comp = GetOwner()->GetComponent("Renderer"))
+      comp->active = false;
+  } else {
+    if (auto comp = GetOwner()->GetComponent("Renderer"))
+      comp->active = true;
+  }
 
   m_isPlaying = condition;
   m_currentFrame = 0;

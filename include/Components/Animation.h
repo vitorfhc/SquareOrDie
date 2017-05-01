@@ -15,9 +15,10 @@ public:
   inline void SetHasExitTime(bool condition) { m_hasExitTime = condition; };
   inline void SetFramesPerSecond(int frames) { m_framesPerSecond = frames; };
   inline Frame *GetCurrentFrame() { return m_frames[m_currentFrame]; };
+  void ComponentUpdate() override;
+  void Start() override;
   void SetPlaying(bool condition);
   void SetFlip(bool horizontal, bool vertical);
-  void ComponentUpdate() override;
   void AddFrame(Frame *frame);
   void DrawCurrentFrame();
   std::string GetComponentName() override { return "Animation"; };
@@ -26,7 +27,7 @@ private:
   int m_framesQuantity = 0;
   int m_currentFrame = 0;
   int m_framesPerSecond = 12;
-  bool m_isPlaying = false;
+  bool m_isPlaying;
   bool m_hasExitTime = false;
   bool m_verticalFlip = false;
   bool m_horizontalFlip = false;
