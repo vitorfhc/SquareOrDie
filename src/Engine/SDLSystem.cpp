@@ -1,6 +1,7 @@
 #include "Engine/SDLSystem.h"
 
 // BEGIN OF TEST INCLUDE
+#include "Components/Animation.h"
 #include "Components/Renderer.h"
 #include "Components/UIButton.h"
 #include "Customs/CustomScene.h"
@@ -53,15 +54,34 @@ void SDLSystem::Run() {
   Scene *luigiScene = new Scene();
   SceneManager::GetInstance()->AddScene(std::make_pair("luigi", luigiScene));
 
-  Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
+  // animation tester
+  GameObject *animated =
+      new GameObject("bla", new Vector(250, 250), 671 / 4, 267);
 
-  GameObject *luigi = new GameObject("Luigi", new Vector(500, 200), 77, 102);
-  Renderer *luigiRenderer =
-      new Renderer(luigi, luigiImage);
-  LuigiScript *luigiScript = new LuigiScript(luigi);
-  UIButton *luigiButton = new UIButton(luigi);
+  Image *sprite = new Image("assets/sprites.png", 0, 0, 671, 267);
+  Animation *anim = new Animation(animated, sprite);
 
-  luigiScene->AddGameObject(luigi);
+  Frame *f1 = new Frame(0, 0, 671 / 4, 267);
+  Frame *f2 = new Frame(671 / 4 * 1, 0, 100, 267);
+  Frame *f3 = new Frame(671 / 4 * 2, 0, 671 / 4, 267);
+  Frame *f4 = new Frame(501, 0, 671 / 4, 267);
+  anim->AddFrame(f1);
+  anim->AddFrame(f2);
+  anim->AddFrame(f3);
+  anim->AddFrame(f4);
+
+  luigiScene->AddGameObject(animated);
+
+  // luigi button
+  // Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
+
+  // GameObject *luigi = new GameObject("Luigi", new Vector(500, 200), 77, 102);
+  // Renderer *luigiRenderer =
+  //     new Renderer(luigi, luigiImage);
+  // LuigiScript *luigiScript = new LuigiScript(luigi);
+  // UIButton *luigiButton = new UIButton(luigi);
+
+  // luigiScene->AddGameObject(luigi);
 
   // END OF TEST CODE
 

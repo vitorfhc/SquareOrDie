@@ -37,14 +37,13 @@ void MarioMovement::ComponentUpdate() {
   down = input->GetKeyPressed(INPUT_S);
 
   // special inputs
-  boost = input->GetKeyPressed(INPUT_SPACE) || gc->GetButtonPressed(GC_INPUT_A);
+  boost = input->GetKeyPressed(INPUT_SPACE);
   if (boost)
     movementSpeed = boostedSpeed;
   else
     movementSpeed = normalSpeed;
 
-  crouch = input->GetKeyPressed(INPUT_LCTRL) ||
-           gc->GetButtonPressed(GC_INPUT_LEFTSTICK);
+  crouch = input->GetKeyPressed(INPUT_LCTRL);
   if (crouch)
     movementSpeed = crouchedSpeed;
 

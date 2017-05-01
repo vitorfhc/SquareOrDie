@@ -1,6 +1,7 @@
 #include "Engine/GameObject.h"
 
-GameObject::GameObject(std::string name, Vector *position, int width, int height) {
+GameObject::GameObject(std::string name, Vector *position, int width,
+                       int height) {
   m_name = name;
   m_position = position;
   m_width = width;

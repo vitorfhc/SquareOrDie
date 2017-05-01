@@ -13,7 +13,6 @@ void Renderer::ComponentUpdate() {
 }
 
 Renderer::Renderer(GameObject *owner, Image *img) : Component(owner, C_DRAW) {
-  m_type = C_DRAW;
   m_image = img;
 
   m_position = GetOwner()->GetPosition();
