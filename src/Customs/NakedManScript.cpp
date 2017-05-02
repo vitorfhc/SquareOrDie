@@ -5,8 +5,8 @@ NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}
 void NakedManScript::Start() {
   inputSystem = InputSystem::GetInstance();
   owner = GetOwner();
-  if (owner->GetComponent("Animation"))
-    animation = (Animation *)owner->GetComponent("Animation");
+  animation = (Animation *)owner->GetComponent("Animation");
+  animation->SetHasExitTime(true);
   position = owner->GetPosition();
 }
 
