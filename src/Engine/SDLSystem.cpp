@@ -7,10 +7,11 @@
 #include "Customs/CustomScene.h"
 #include "Customs/LuigiScript.h"
 #include "Customs/MarioMovement.h"
+#include "Customs/NakedManScript.h"
 // END OF TEST INCLUDE
 
 // static variables initialization
-SDLSystem *SDLSystem::m_instance = 0;
+SDLSystem *SDLSystem::m_instance = nullptr;
 
 SDLSystem::SDLSystem() {
   m_frameCounter = 0;
@@ -55,35 +56,28 @@ void SDLSystem::Run() {
   SceneManager::GetInstance()->AddScene(std::make_pair("luigi", luigiScene));
 
   // animation tester
-  GameObject *animated =
-      new GameObject("bla", new Vector(250, 250), 671 / 4, 267);
+  GameObject *nakedMan = new GameObject("NakedMan", new Vector(0, 500), 64, 64);
+  Image *nakedManRImage = new Image("assets/BODY_male.png", 0, 192, 64, 256);
+  Renderer *nakedManRenderer = new Renderer(nakedMan, nakedManRImage);
 
-  Image *sprite = new Image("assets/sprites.png", 0, 0, 671, 267);
-  Renderer *rend = new Renderer(animated, sprite);
-  Animation *anim = new Animation(animated, sprite);
+  Image *nakedManSImage = new Image("assets/BODY_male.png", 0, 192, 576, 256);
+  Animation *nakedManAnimation = new Animation(nakedMan, nakedManSImage);
+  for (int k = 0; k < 9; k++) {
+    nakedManAnimation->AddFrame(new Frame(64 * k, 192, 64, 64));
+  }
+  NakedManScript *nakedManScript = new NakedManScript(nakedMan);
 
-  Frame *f1 = new Frame(0, 0, 671 / 4, 267);
-  Frame *f2 = new Frame(671 / 4 * 1, 0, 100, 267);
-  Frame *f3 = new Frame(671 / 4 * 2, 0, 671 / 4, 267);
-  Frame *f4 = new Frame(501, 0, 671 / 4, 267);
-  anim->AddFrame(f1);
-  anim->AddFrame(f2);
-  anim->AddFrame(f3);
-  anim->AddFrame(f4);
-
-
-  luigiScene->AddGameObject(animated);
+  luigiScene->AddGameObject(nakedMan);
 
   // luigi button
-  // Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
+  Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
 
-  // GameObject *luigi = new GameObject("Luigi", new Vector(500, 200), 77, 102);
-  // Renderer *luigiRenderer =
-  //     new Renderer(luigi, luigiImage);
-  // LuigiScript *luigiScript = new LuigiScript(luigi);
-  // UIButton *luigiButton = new UIButton(luigi);
+  GameObject *luigi = new GameObject("Luigi", new Vector(500, 200), 77, 102);
+  Renderer *luigiRenderer = new Renderer(luigi, luigiImage);
+  LuigiScript *luigiScript = new LuigiScript(luigi);
+  UIButton *luigiButton = new UIButton(luigi);
 
-  // luigiScene->AddGameObject(luigi);
+  luigiScene->AddGameObject(luigi);
 
   // END OF TEST CODE
 

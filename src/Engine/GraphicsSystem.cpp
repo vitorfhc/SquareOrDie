@@ -56,8 +56,9 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position) {
 
   int result;
   result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
-                            img->GetTexture(), frame->GetRect(), &dest, 0, NULL,
-                            (SDL_RendererFlip)0);
+                            img->GetTexture(), frame->GetRect(), &dest,
+                            img->GetRotationAngle(), img->GetSDLPivot(),
+                            img->GetSDLFlip());
 
   if (result < 0)
     ERROR(SDL_GetError());

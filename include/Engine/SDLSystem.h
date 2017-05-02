@@ -29,8 +29,8 @@ public:
 
 private:
   // SDL attributes
-  SDL_Window *m_window;
-  SDL_Renderer *m_renderer;
+  SDL_Window *m_window = nullptr;
+  SDL_Renderer *m_renderer = nullptr;
   // singleton instance
   static SDLSystem *m_instance;
   // game attributes

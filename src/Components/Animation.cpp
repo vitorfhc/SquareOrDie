@@ -3,15 +3,19 @@
 #include "Engine/GraphicsSystem.h"
 #include "Log/log.h"
 
-Animation::Animation(GameObject *owner, Image *image)
+Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
     : Component(owner, C_DRAW) {
   if (!image)
     ERROR("Null image not allowed");
   m_image = image;
+  m_isPlaying = playOnStart;
 }
 
 void Animation::Start() {
-  SetPlaying(true);
+  if (!m_isPlaying)
+    SetPlaying(false);
+  else
+    SetPlaying(true);
 }
 
 void Animation::SetFlip(bool horizontal, bool vertical) {

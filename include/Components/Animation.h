@@ -11,7 +11,7 @@
 
 class Animation : public Component {
 public:
-  Animation(GameObject *owner, Image *image);
+  Animation(GameObject *owner, Image *image, bool playOnStart = false);
   inline void SetHasExitTime(bool condition) { m_hasExitTime = condition; };
   inline void SetFramesPerSecond(int frames) { m_framesPerSecond = frames; };
   inline Frame *GetCurrentFrame() { return m_frames[m_currentFrame]; };
@@ -27,7 +27,7 @@ private:
   int m_framesQuantity = 0;
   int m_currentFrame = 0;
   int m_framesPerSecond = 12;
-  bool m_isPlaying;
+  bool m_isPlaying = false;
   bool m_hasExitTime = false;
   bool m_verticalFlip = false;
   bool m_horizontalFlip = false;
