@@ -18,6 +18,7 @@ public:
   void ComponentUpdate() override;
   void Start() override;
   void SetPlaying(bool condition);
+  void SetLoop(bool condition);
   void SetFlip(bool horizontal, bool vertical);
   void AddFrame(Frame *frame);
   void DrawCurrentFrame();
@@ -29,6 +30,7 @@ private:
   int m_framesPerSecond = 12;
   bool m_isPlaying = false;
   bool m_hasExitTime = false;
+  bool m_loop = false;
   bool m_verticalFlip = false;
   bool m_horizontalFlip = false;
   Uint32 m_lastDraw = 0;

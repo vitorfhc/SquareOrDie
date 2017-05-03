@@ -6,7 +6,8 @@ void NakedManScript::Start() {
   inputSystem = InputSystem::GetInstance();
   owner = GetOwner();
   animation = (Animation *)owner->GetComponent("Animation");
-  animation->SetHasExitTime(true);
+  animation->SetHasExitTime(false);
+  animation->SetLoop(false);
   position = owner->GetPosition();
 }
 

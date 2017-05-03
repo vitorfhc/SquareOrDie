@@ -50,8 +50,12 @@ void Animation::AddFrame(Frame *frame) {
 }
 
 void Animation::ComponentUpdate() {
-  if (m_isPlaying)
+  if (m_isPlaying) {
     DrawCurrentFrame();
+    if (!m_loop && m_currentFrame == m_framesQuantity - 1) {
+      SetPlaying(false);
+    }
+  }
 }
 
 void Animation::DrawCurrentFrame() {
@@ -66,3 +70,5 @@ void Animation::DrawCurrentFrame() {
     m_currentFrame = (m_currentFrame + 1) % m_framesQuantity;
   }
 }
+
+void Animation::SetLoop(bool condition) { m_loop = condition; }

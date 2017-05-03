@@ -22,8 +22,8 @@ private:
   GameObject *owner = nullptr;
   Animation *animation = nullptr;
   Vector *position = nullptr;
-  bool right, left;
-  int xMovement = 0;
+  bool right = false;
+  bool left = false;
 };
 
 #endif
