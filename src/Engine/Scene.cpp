@@ -61,3 +61,9 @@ void Scene::Deactivation() { OnDeactivation(); }
 void Scene::Shown() { OnShown(); }
 
 void Scene::Hidden() { OnHidden(); }
+
+GameObject *Scene::GetGameObject(std::string name) {
+  for (auto it : m_gameObjects)
+    if (it->GetName() == name)
+      return it;
+}

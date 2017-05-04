@@ -18,7 +18,9 @@ public:
   Vector operator*(float scalar);
   Vector operator/(float scalar);
   // vector maths
+  float GetDistance(Vector &vec);
   float GetLength();
+  float GetLength(Vector &vec);
   Vector GetNormalized();
 };
 

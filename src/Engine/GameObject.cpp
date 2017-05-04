@@ -75,12 +75,12 @@ Component *GameObject::GetComponent(std::string name) {
 }
 
 void GameObject::FixedUpdate() {
-  PhysicsUpdate();
-
   for (auto key = m_components.begin(); key != m_components.end(); key++) {
     for (auto value : key->second)
       value->FixedComponentUpdate();
   }
+
+  PhysicsUpdate();
 }
 
 void GameObject::SetSize(int width, int height) {

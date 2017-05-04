@@ -2,6 +2,7 @@
 
 // BEGIN OF TEST INCLUDE
 #include "Components/Animation.h"
+#include "Components/CircleCollider.h"
 #include "Components/Renderer.h"
 #include "Components/UIButton.h"
 #include "Customs/CustomScene.h"
@@ -56,7 +57,7 @@ void SDLSystem::Run() {
   SceneManager::GetInstance()->AddScene(std::make_pair("luigi", luigiScene));
 
   // animation tester
-  GameObject *nakedMan = new GameObject("NakedMan", new Vector(0, 500), 64, 64);
+  GameObject *nakedMan = new GameObject("NakedMan", new Vector(0, 200), 64, 64);
   Image *nakedManRImage = new Image("assets/BODY_male.png", 0, 192, 64, 256);
   Renderer *nakedManRenderer = new Renderer(nakedMan, nakedManRImage);
 
@@ -66,6 +67,8 @@ void SDLSystem::Run() {
     nakedManAnimation->AddFrame(new Frame(64 * k, 192, 64, 64));
   }
   NakedManScript *nakedManScript = new NakedManScript(nakedMan);
+  CircleCollider *nakedCollider =
+      new CircleCollider(nakedMan, new Vector(0, 0), 32);
 
   luigiScene->AddGameObject(nakedMan);
 
@@ -73,6 +76,7 @@ void SDLSystem::Run() {
   Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
 
   GameObject *luigi = new GameObject("Luigi", new Vector(500, 200), 77, 102);
+  CircleCollider *luigiCollider = new CircleCollider(luigi, new Vector(0, 0), 50);
   Renderer *luigiRenderer = new Renderer(luigi, luigiImage);
   LuigiScript *luigiScript = new LuigiScript(luigi);
   UIButton *luigiButton = new UIButton(luigi);

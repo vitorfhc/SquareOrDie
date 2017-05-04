@@ -1,4 +1,6 @@
 #include "Customs/NakedManScript.h"
+#include "Components/CircleCollider.h"
+#include "Engine/SceneManager.h"
 
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}
 
@@ -29,4 +31,10 @@ void NakedManScript::ComponentUpdate() {
 void NakedManScript::FixedComponentUpdate() {
   position->m_x += right * 5;
   position->m_x -= left * 5;
+
+  auto luigi =
+      SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Luigi");
+  auto luigiCol = (CircleCollider *)luigi->GetComponent("CircleCollider");
+  auto col = (CircleCollider *)GetOwner()->GetComponent("CircleCollider");
+  col->CheckCollision(luigiCol);
 }

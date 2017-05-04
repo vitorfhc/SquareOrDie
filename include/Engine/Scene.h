@@ -19,6 +19,7 @@ public:
   // handle gameobjects
   virtual void AddGameObject(GameObject *gameObject) final;
   virtual void AddGameObject(std::vector<GameObject *> gameObjects) final;
+  virtual GameObject *GetGameObject(std::string name) final;
   // states
   virtual void SetState(SceneStates state) final;
   virtual inline SceneStates GetState() final { return m_currentState; };

@@ -11,6 +11,7 @@ public:
   // singleton getter
   static SceneManager *GetInstance();
   // scene managing methods
+  Scene *GetCurrentScene() { return m_currentScene.second; };
   void SetCurrentScene(std::string sceneName);
   void AddScene(std::pair<std::string, Scene *> scenePair);
   // start and update handlers
