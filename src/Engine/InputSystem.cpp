@@ -45,8 +45,8 @@ void InputSystem::UpdateStates() {
 
 bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
   if (m_states[key] && !m_oldStates[key]) {
-    char message[] = "Key down: ";
-    strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
+    // char message[] = "Key down: ";
+    // strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
     // INFO(message);
     return true;
   }
@@ -55,8 +55,8 @@ bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
 
 bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
   if (!m_states[key] && m_oldStates[key]) {
-    char message[] = "Key up: ";
-    strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
+    // char message[] = "Key up: ";
+    // strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
     // INFO(message);
     return true;
   }
@@ -65,8 +65,8 @@ bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
 
 bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
   if (m_states[key]) {
-    char message[] = "Key pressed: ";
-    strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
+    // char message[] = "Key pressed: ";
+    // strcat(message, SDL_GetScancodeName((SDL_Scancode)key));
     // INFO(message);
     return true;
   }
