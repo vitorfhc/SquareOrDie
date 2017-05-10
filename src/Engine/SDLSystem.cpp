@@ -1,15 +1,9 @@
 #include "Engine/SDLSystem.h"
 
-// BEGIN OF TEST INCLUDE
-#include "Components/Animation.h"
-#include "Components/CircleCollider.h"
+// load commons includes
+#include "Components/Animator.h"
 #include "Components/Renderer.h"
-#include "Components/UIButton.h"
-#include "Customs/CustomScene.h"
-#include "Customs/LuigiScript.h"
-#include "Customs/MarioMovement.h"
 #include "Customs/NakedManScript.h"
-// END OF TEST INCLUDE
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -46,45 +40,7 @@ void SDLSystem::Run() {
 
   m_isRunning = true;
 
-  // BEGIN OF TEST CODE
-
-  // CustomScene derives Scene
-  CustomScene *customScene = new CustomScene();
-  SceneManager::GetInstance()->AddScene(std::make_pair("Main", customScene));
-
-  // Common scene
-  Scene *luigiScene = new Scene();
-  SceneManager::GetInstance()->AddScene(std::make_pair("luigi", luigiScene));
-
-  // animation tester
-  GameObject *nakedMan = new GameObject("NakedMan", new Vector(0, 200), 64, 64);
-  Image *nakedManRImage = new Image("assets/BODY_male.png", 0, 192, 64, 256);
-  Renderer *nakedManRenderer = new Renderer(nakedMan, nakedManRImage);
-
-  Image *nakedManSImage = new Image("assets/BODY_male.png", 0, 192, 576, 256);
-  Animation *nakedManAnimation = new Animation(nakedMan, nakedManSImage);
-  for (int k = 0; k < 9; k++) {
-    nakedManAnimation->AddFrame(new Frame(64 * k, 192, 64, 64));
-  }
-  NakedManScript *nakedManScript = new NakedManScript(nakedMan);
-  CircleCollider *nakedCollider =
-      new CircleCollider(nakedMan, new Vector(0, 0), 32);
-
-  luigiScene->AddGameObject(nakedMan);
-
-  // luigi button
-  Image *luigiImage = new Image("assets/luigi.png", 0, 0, 722, 1024);
-
-  GameObject *luigi = new GameObject("Luigi", new Vector(500, 200), 77, 102);
-  CircleCollider *luigiCollider = new CircleCollider(luigi, new Vector(0, 0), 50);
-  Renderer *luigiRenderer = new Renderer(luigi, luigiImage);
-  LuigiScript *luigiScript = new LuigiScript(luigi);
-  UIButton *luigiButton = new UIButton(luigi);
-
-  luigiScene->AddGameObject(luigi);
-
-  // END OF TEST CODE
-
+  LoadCommons();
   SceneManager::GetInstance()->SetCurrentScene(
       "Main"); // must be called here but scene name can be changed
   SceneManager::GetInstance()->Start();
@@ -234,4 +190,45 @@ void SDLSystem::CalculateFramerate() {
     // INFO("Framerate per second: " << m_framerate);
   }
   m_frameCounter++;
+}
+
+void SDLSystem::LoadCommons() {
+  auto mainScene = new Scene();
+  SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
+
+  int xPos, yPos;
+  xPos = EngineGlobals::screen_width / 2 - 32;
+  yPos = EngineGlobals::screen_height / 2 - 32;
+
+  auto nakedMan = new GameObject("NakedMan", new Vector(xPos, yPos), 64, 64);
+
+  // renderer
+  auto nakedManImage = new Image("assets/nakedmansprite.png", 0, 128, 64, 64);
+  auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
+
+  // animations
+  auto nakedManSprite = new Image("assets/nakedmansprite.png", 0, 0, 576, 256);
+
+  auto walkSideAnimation = new Animation(nakedMan, nakedManSprite);
+  for (int i = 0; i < 9; i++)
+    walkSideAnimation->AddFrame(new Frame(i * 64, 192, 64, 64));
+
+  auto walkUpAnimation = new Animation(nakedMan, nakedManSprite);
+  for (int i = 0; i < 9; i++)
+    walkUpAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
+
+  auto walkDownAnimation = new Animation(nakedMan, nakedManSprite);
+  for (int i = 0; i < 9; i++)
+    walkDownAnimation->AddFrame(new Frame(i * 64, 128, 64, 64));
+
+  // animator
+  auto nakedManAnimator = new Animator(nakedMan);
+  nakedManAnimator->AddAnimation("Walk Side", walkSideAnimation);
+  nakedManAnimator->AddAnimation("Walk Up", walkUpAnimation);
+  nakedManAnimator->AddAnimation("Walk Down", walkDownAnimation);
+
+  // script
+  auto nakedManScript = new NakedManScript(nakedMan);
+
+  mainScene->AddGameObject(nakedMan);
 }

@@ -114,11 +114,11 @@ void InputSystem::LoadGameControllers() {
     if (SDL_IsGameController(i)) {
       SDL_GameController *sdl_gc = SDL_GameControllerOpen(i);
       GameController *gc = new GameController(sdl_gc);
-      if (sdl_gc) m_gameControllers.push_back(gc);
+      if (sdl_gc)
+        m_gameControllers.push_back(gc);
     }
   }
 }
-
 
 void InputSystem::UpdateGameControllers() {
   CheckGameControllersConnections();
@@ -129,7 +129,7 @@ void InputSystem::UpdateGameControllers() {
 void InputSystem::CheckGameControllersConnections() {}
 
 GameController *InputSystem::GetGameController(int index) {
-  if (m_gameControllers.size() < index + 1)
+  if (m_gameControllers.size() < (unsigned)index + 1)
     return nullptr;
   return m_gameControllers.at(index);
 }

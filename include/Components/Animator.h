@@ -6,14 +6,19 @@
 
 #include "Components/Animation.h"
 #include "Engine/Component.h"
+#include "Log/log.h"
 
-typedef unordered_map<std::string, Animation *> AnimationMap;
+typedef std::unordered_map<std::string, Animation *> AnimationMap;
 
 class Animator : public Component {
 public:
   Animator(GameObject *owner);
   void AddAnimation(std::string name, Animation *animation);
-  void ToggleAnimation(std::string name);
+  void PlayAnimation(std::string name);
+  void StopAnimation(std::string name);
+  void StopAllAnimations();
+  Animation *GetAnimation(std::string name);
+  std::string GetComponentName() override { return "Animator"; };
 
 private:
   AnimationMap m_aMap;

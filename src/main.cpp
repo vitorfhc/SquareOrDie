@@ -1,7 +1,7 @@
 #include "Engine/SDLSystem.h"
 
-int main(int argc, char const *argv[]) {
-  
+int main() {
+
   SDLSystem::GetInstance()->Init();
   SDLSystem::GetInstance()->Run();
   SDLSystem::GetInstance()->Shutdown();

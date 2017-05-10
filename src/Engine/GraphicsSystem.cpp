@@ -25,11 +25,11 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
   dest.x = position->m_x;
   dest.y = position->m_y;
 
-  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 0, 255, 0,
-                         255);
-  SDL_RenderDrawRect(SDLSystem::GetInstance()->GetRenderer(), &dest);
-  SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), 0, 0, dest.x,
-                     dest.y);
+  // SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 0, 255, 0,
+  //                        255);
+  // SDL_RenderDrawRect(SDLSystem::GetInstance()->GetRenderer(), &dest);
+  // SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), 0, 0, dest.x,
+  //                    dest.y);
 
   int result;
   result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
@@ -48,11 +48,11 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position) {
   dest.x = position->m_x;
   dest.y = position->m_y;
 
-  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 0, 255, 0,
-                         255);
-  SDL_RenderDrawRect(SDLSystem::GetInstance()->GetRenderer(), &dest);
-  SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), 0, 0, dest.x,
-                     dest.y);
+  // SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 0, 255, 0,
+  //                        255);
+  // SDL_RenderDrawRect(SDLSystem::GetInstance()->GetRenderer(), &dest);
+  // SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), 0, 0, dest.x,
+  //                    dest.y);
 
   int result;
   result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),

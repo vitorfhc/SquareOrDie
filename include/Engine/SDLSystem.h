@@ -50,6 +50,8 @@ private:
   bool InitIMG();
   bool InitMixer();
   bool InitTTF();
+  // commons init
+  void LoadCommons();
   // graphics methods
   bool CreateWindow();
   bool CreateRenderer();
