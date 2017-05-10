@@ -27,11 +27,11 @@ private:
   bool right, left, up, down;
   bool boost, crouch;
 
-  float normalSpeed = 5;
+  float normalSpeed = 1;
   float movementSpeed = normalSpeed;
-  float boostedSpeed = 10;
-  float crouchedSpeed = 2;
-  
+  float boostedSpeed = 15;
+  float crouchedSpeed = 0.5;
+
   Renderer *renderer;
   InputSystem *input;
   GameController *gc = nullptr;

@@ -1,22 +1,28 @@
 #include "Customs/CustomScene.h"
 #include "Components/Renderer.h"
+#include "Customs/MapScript.h"
 #include "Customs/MarioMovement.h"
 #include "Engine/GameObject.h"
 #include "Engine/Image.h"
 #include "Log/log.h"
 
 void CustomScene::OnActivation() {
-  INFO("[SCENE] " << GetName() << " OnActivation() called");
   sceneManager = SceneManager::GetInstance();
 
-  GameObject *mario = new GameObject("Mario", new Vector(100, 100), 313 / 2, 207 / 2);
+  GameObject *character =
+      new GameObject("Character", new Vector(250, 250), 313 / 5, 207 / 5);
 
-  Image *marioImage = new Image("assets/topdown.png", 0, 0, 313, 207);
-  MarioMovement *marioMovement = new MarioMovement(mario);
-  Renderer *marioRenderer =
-      new Renderer(mario, marioImage);
+  Image *characterImage = new Image("assets/topdown.png", 0, 0, 313, 207);
+  MarioMovement *marioMovement = new MarioMovement(character);
+  Renderer *characterRenderer = new Renderer(character, characterImage);
 
-  AddGameObject(mario);
+  auto map = new GameObject("map", new Vector(0, 0), 2000, 2000);
+  auto mapImg = new Image("assets/map.png", 0, 0, 2000, 2000);
+  auto mapRenderer = new Renderer(map, mapImg);
+  auto mapScript = new MapScript(map);
+
+  AddGameObject(map);
+  AddGameObject(character);
 }
 
 void CustomScene::OnDeactivation() { sceneManager = nullptr; }

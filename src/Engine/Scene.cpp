@@ -66,4 +66,5 @@ GameObject *Scene::GetGameObject(std::string name) {
   for (auto it : m_gameObjects)
     if (it->GetName() == name)
       return it;
+  return nullptr;
 }
