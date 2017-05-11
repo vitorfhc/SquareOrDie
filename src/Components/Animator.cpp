@@ -31,4 +31,5 @@ Animation *Animator::GetAnimation(std::string name) {
   for (auto result : m_aMap)
     if (result.first == name)
       return result.second;
+  return nullptr;
 }

@@ -1,4 +1,5 @@
 #include "Engine/GameObject.h"
+#include "Log/log.h"
 
 GameObject::GameObject(std::string name, Vector *position, int width,
                        int height) {
@@ -71,6 +72,7 @@ Component *GameObject::GetComponent(std::string name) {
         return value;
     }
   }
+  INFO("Looking for null component " << name);
   return nullptr;
 }
 

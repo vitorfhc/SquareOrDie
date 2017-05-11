@@ -1,9 +1,7 @@
 #include "Engine/SDLSystem.h"
 
 // load commons includes
-#include "Components/Animator.h"
-#include "Components/Renderer.h"
-#include "Customs/NakedManScript.h"
+#include "Customs/MainScene.h"
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -193,42 +191,6 @@ void SDLSystem::CalculateFramerate() {
 }
 
 void SDLSystem::LoadCommons() {
-  auto mainScene = new Scene();
+  auto mainScene = new MainScene();
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
-
-  int xPos, yPos;
-  xPos = EngineGlobals::screen_width / 2 - 32;
-  yPos = EngineGlobals::screen_height / 2 - 32;
-
-  auto nakedMan = new GameObject("NakedMan", new Vector(xPos, yPos), 64, 64);
-
-  // renderer
-  auto nakedManImage = new Image("assets/nakedmansprite.png", 0, 128, 64, 64);
-  auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
-
-  // animations
-  auto nakedManSprite = new Image("assets/nakedmansprite.png", 0, 0, 576, 256);
-
-  auto walkSideAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 9; i++)
-    walkSideAnimation->AddFrame(new Frame(i * 64, 192, 64, 64));
-
-  auto walkUpAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 9; i++)
-    walkUpAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
-
-  auto walkDownAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 9; i++)
-    walkDownAnimation->AddFrame(new Frame(i * 64, 128, 64, 64));
-
-  // animator
-  auto nakedManAnimator = new Animator(nakedMan);
-  nakedManAnimator->AddAnimation("Walk Side", walkSideAnimation);
-  nakedManAnimator->AddAnimation("Walk Up", walkUpAnimation);
-  nakedManAnimator->AddAnimation("Walk Down", walkDownAnimation);
-
-  // script
-  auto nakedManScript = new NakedManScript(nakedMan);
-
-  mainScene->AddGameObject(nakedMan);
 }
