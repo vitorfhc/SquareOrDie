@@ -1,40 +1,51 @@
 #include "Customs/NakedManScript.h"
-#include "Components/CircleCollider.h"
-#include "Engine/SceneManager.h"
 
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {}
 
 void NakedManScript::Start() {
-  inputSystem = InputSystem::GetInstance();
-  owner = GetOwner();
-  animation = (Animation *)owner->GetComponent("Animation");
-  animation->SetHasExitTime(false);
-  animation->SetLoop(false);
-  position = owner->GetPosition();
+  position = GetOwner()->GetPosition();
+  animator = (Animator *)GetOwner()->GetComponent("Animator");
+  input = InputSystem::GetInstance();
 }
 
 void NakedManScript::ComponentUpdate() {
-  right = inputSystem->GetKeyPressed(INPUT_D);
-  left = inputSystem->GetKeyPressed(INPUT_A);
-
-  if (right != 0 || left != 0)
-    animation->SetPlaying(true);
-  else
-    animation->SetPlaying(false);
-
-  if (right)
-    animation->SetFlip(false, false);
-  else if (left)
-    animation->SetFlip(true, false);
+  // movement animation and input detection
+  movements = movements & 0x00;
+  if (input->GetKeyPressed(INPUT_W)) {
+    movements = movements | 0x08;
+    animator->PlayAnimation("Walk Up");
+  } else if (input->GetKeyPressed(INPUT_S)) {
+    movements = movements | 0x04;
+    animator->PlayAnimation("Walk Down");
+  } else if (input->GetKeyPressed(INPUT_A)) {
+    movements = movements | 0x02;
+    animator->GetAnimation("Walk Side")->SetFlip(true, false);
+    animator->PlayAnimation("Walk Side");
+  } else if (input->GetKeyPressed(INPUT_D)) {
+    movements = movements | 0x01;
+    animator->GetAnimation("Walk Side")->SetFlip(false, false);
+    animator->PlayAnimation("Walk Side");
+  } else {
+    animator->StopAllAnimations();
+  }
 }
 
 void NakedManScript::FixedComponentUpdate() {
-  position->m_x += right * 5;
-  position->m_x -= left * 5;
+  if (0x08 & movements)
+    position->m_y -= walkSpeed;
+  else if (0x04 & movements)
+    position->m_y += walkSpeed;
+  else if (0x02 & movements)
+    position->m_x -= walkSpeed;
+  else if (0x01 & movements)
+    position->m_x += walkSpeed;
 
-  auto luigi =
-      SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("Luigi");
-  auto luigiCol = (CircleCollider *)luigi->GetComponent("CircleCollider");
-  auto col = (CircleCollider *)GetOwner()->GetComponent("CircleCollider");
-  col->CheckCollision(luigiCol);
+  if (position->m_x + 64 >= deadzone_x)
+    position->m_x = deadzone_x - 64;
+  if (position->m_x <= deadzone_x - 200)
+    position->m_x = deadzone_x - 200;
+  if (position->m_y + 64 >= deadzone_y)
+    position->m_y = deadzone_y - 64;
+  if (position->m_y <= deadzone_y - 200)
+    position->m_y = deadzone_y - 200;
 }
