@@ -12,6 +12,7 @@ public:
   std::string GetComponentName() override { return "NakedManScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
+  char GetMovement() { return movements; };
 
 protected:
   void ComponentUpdate() override;
