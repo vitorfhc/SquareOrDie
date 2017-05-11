@@ -54,3 +54,12 @@ void SceneManager::FixedUpdate() {
   if (m_currentScene.second)
     m_currentScene.second->FixedUpdate();
 }
+
+Scene *SceneManager::GetScene(std::string name) {
+  for (auto pair : m_scenes) {
+    if (pair.first == name)
+      return pair.second;
+  }
+  ERROR("Looking for " << name << " scene which does not exist");
+  return nullptr;
+}

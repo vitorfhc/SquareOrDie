@@ -63,3 +63,8 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position) {
   if (result < 0)
     ERROR(SDL_GetError());
 }
+
+void GraphicsSystem::DrawText(SDL_Texture *texture, SDL_Rect *destRect) {
+  SDL_RenderCopy(SDLSystem::GetInstance()->GetRenderer(), texture, NULL,
+                 destRect);
+}

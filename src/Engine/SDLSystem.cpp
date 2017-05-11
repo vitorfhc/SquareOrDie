@@ -1,6 +1,7 @@
 #include "Engine/SDLSystem.h"
 
 // load commons includes
+#include "Customs/GamePlayScene.h"
 #include "Customs/MainScene.h"
 
 // static variables initialization
@@ -192,5 +193,8 @@ void SDLSystem::CalculateFramerate() {
 
 void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
+  auto gameplayScene = new GamePlayScene();
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
+  SceneManager::GetInstance()->AddScene(
+      std::make_pair("Gameplay", gameplayScene));
 }

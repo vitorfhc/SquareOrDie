@@ -12,6 +12,7 @@ public:
   static SceneManager *GetInstance();
   // scene managing methods
   Scene *GetCurrentScene() { return m_currentScene.second; };
+  Scene *GetScene(std::string name);
   void SetCurrentScene(std::string sceneName);
   void AddScene(std::pair<std::string, Scene *> scenePair);
   // start and update handlers

@@ -8,14 +8,6 @@
 UIButton::UIButton(GameObject *owner) : Component(owner, C_DRAW) {}
 
 void UIButton::Start() {
-  // checking for renderer component existance
-  m_rendererComponent = (Renderer *)GetOwner()->GetComponent("Renderer");
-  if (!m_rendererComponent) {
-    ERROR(
-        "UIButton couldn't find renderer component: " << GetOwner()->GetName());
-    SDLSystem::GetInstance()->SetRunning(false);
-  }
-
   // case exists
   m_position = GetOwner()->GetPosition();
 }

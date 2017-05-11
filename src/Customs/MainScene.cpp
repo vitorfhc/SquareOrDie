@@ -1,8 +1,8 @@
 #include "Customs/MainScene.h"
 
 void MainScene::OnActivation() {
-  CreateMap();
-  CreateNakedMan();
+  CreateLogo();
+  CreatePlayButton();
 }
 
 void MainScene::OnDeactivation() {}
@@ -11,53 +11,29 @@ void MainScene::OnShown() {}
 
 void MainScene::OnHidden() {}
 
-void MainScene::CreateNakedMan() {
-  int xPos, yPos;
-  xPos = EngineGlobals::screen_width / 2 - 32;
-  yPos = EngineGlobals::screen_height / 2 - 32;
+void MainScene::CreateLogo() {
+  int xMiddle = EngineGlobals::screen_width / 2 - 100;
 
-  auto nakedMan = new GameObject("NakedMan", new Vector(xPos, yPos), 64, 64);
+  auto logo = new GameObject("Logo", new Vector(xMiddle, 100), 200, 100);
 
-  // renderer
-  auto nakedManImage = new Image("assets/nakedmansprite.png", 0, 128, 64, 64);
-  auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
+  auto logoText =
+      new UIText(logo, "VoID", "assets/Archivo_Black/ArchivoBlack-Regular.ttf",
+                 200, 255, 255, 255, 255, 1);
 
-  // animations
-  auto nakedManSprite = new Image("assets/nakedmansprite.png", 0, 0, 576, 256);
-
-  auto walkSideAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 9; i++)
-    walkSideAnimation->AddFrame(new Frame(i * 64, 192, 64, 64));
-
-  auto walkUpAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 9; i++)
-    walkUpAnimation->AddFrame(new Frame(i * 64, 0, 64, 64));
-
-  auto walkDownAnimation = new Animation(nakedMan, nakedManSprite);
-  for (int i = 0; i < 9; i++)
-    walkDownAnimation->AddFrame(new Frame(i * 64, 128, 64, 64));
-
-  // animator
-  auto nakedManAnimator = new Animator(nakedMan);
-  nakedManAnimator->AddAnimation("Walk Side", walkSideAnimation);
-  nakedManAnimator->AddAnimation("Walk Up", walkUpAnimation);
-  nakedManAnimator->AddAnimation("Walk Down", walkDownAnimation);
-
-  // script
-  auto nakedManScript = new NakedManScript(nakedMan);
-
-  AddGameObject(nakedMan);
+  AddGameObject(logo);
 }
 
-void MainScene::CreateMap() {
-  auto map = new GameObject("Map", new Vector(0, 0), 2000, 2000);
+void MainScene::CreatePlayButton() {
+  int xMiddle = EngineGlobals::screen_width / 2 - 100;
 
-  // Renderer
-  auto mapImage = new Image("assets/map.png", 0, 0, 2000, 2000);
-  auto mapRenderer = new Renderer(map, mapImage);
+  auto play = new GameObject("Play", new Vector(xMiddle, 400), 200, 100);
 
-  // Script
-  auto mapScript = new MapScript(map);
+  auto playText = new UIText(play, "Play", "assets/Raleway/Raleway-Regular.ttf",
+                             200, 255, 255, 255, 150, 1);
 
-  AddGameObject(map);
+  auto playButton = new UIButton(play);
+
+  auto script = new PlayButtonScript(play);
+
+  AddGameObject(play);
 }

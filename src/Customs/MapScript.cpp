@@ -3,8 +3,9 @@
 MapScript::MapScript(GameObject *owner) : Script(owner) {}
 
 void MapScript::Start() {
-  nakedMan =
-      SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
+  nakedMan = SceneManager::GetInstance()
+                 ->GetScene("Gameplay")
+                 ->GetGameObject("NakedMan");
   nakedManPosition = nakedMan->GetPosition();
   script = (NakedManScript *)nakedMan->GetComponent("NakedManScript");
 }

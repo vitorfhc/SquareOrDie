@@ -26,12 +26,9 @@ public:
   // method for getting the component name
   virtual std::string GetComponentName() = 0;
   // start method
-  virtual void Start() {};
-  virtual void FixedComponentUpdate() {};
-
-protected:
-  // method to be overriden in derives components
-  virtual void ComponentUpdate() {};
+  virtual void Start(){};
+  virtual void FixedComponentUpdate(){};
+  virtual void ComponentUpdate(){};
 
   // component type
   ComponentType m_type;

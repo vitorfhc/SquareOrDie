@@ -1,9 +1,9 @@
 #ifndef __MAIN_SCENE__
 #define __MAIN_SCENE__
 
-#include "Components/Renderer.h"
-#include "Customs/MapScript.h"
-#include "Customs/NakedManScript.h"
+#include "Components/UIButton.h"
+#include "Components/UIText.h"
+#include "Customs/PlayButtonScript.h"
 #include "Engine/GameObject.h"
 #include "Engine/Scene.h"
 
@@ -15,8 +15,8 @@ public:
   virtual void OnHidden() override;
 
 private:
-  void CreateNakedMan();
-  void CreateMap();
+  void CreateLogo();
+  void CreatePlayButton();
 };
 
 #endif

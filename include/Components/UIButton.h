@@ -5,6 +5,7 @@
 
 #include "Components/Renderer.h"
 #include "Engine/Component.h"
+#include "Engine/SceneManager.h"
 
 class UIButton : public Component {
 public:
@@ -19,7 +20,6 @@ public:
   bool IsOver();
 
 private:
-  Renderer *m_rendererComponent = nullptr;
   Vector *m_position = nullptr;
 };
 
