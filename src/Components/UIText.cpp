@@ -15,23 +15,11 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
     SDL_TTF_ERROR("Font could not be loaded");
   m_color = {r, g, b, a};
 
-  SDL_Surface *surfaceMessage = nullptr;
-  SDL_Color m_background = {0, 0, 0, 0};
+  m_background = {0, 0, 0, 0};
 
-  switch (mode) {
-  case 0:
-    surfaceMessage = TTF_RenderText_Solid(m_font, m_message.c_str(), m_color);
-    break;
-  case 1:
-    surfaceMessage = TTF_RenderText_Blended(m_font, m_message.c_str(), m_color);
-    break;
-  case 2:
-    surfaceMessage =
-        TTF_RenderText_Shaded(m_font, m_message.c_str(), m_color, m_background);
-  }
+  m_mode = mode;
 
-  m_texture = SDL_CreateTextureFromSurface(
-      SDLSystem::GetInstance()->GetRenderer(), surfaceMessage);
+  OnPropertyChange();
 }
 
 void UIText::Start() {}
@@ -46,3 +34,29 @@ void UIText::ComponentUpdate() {
 }
 
 void UIText::FixedComponentUpdate() {}
+
+void UIText::OnPropertyChange() {
+  m_surface = nullptr;
+
+  switch (m_mode) {
+  case 0:
+    m_surface = TTF_RenderText_Solid(m_font, m_message.c_str(), m_color);
+    break;
+  case 1:
+    m_surface = TTF_RenderText_Blended(m_font, m_message.c_str(), m_color);
+    break;
+  case 2:
+    m_surface =
+        TTF_RenderText_Shaded(m_font, m_message.c_str(), m_color, m_background);
+  }
+
+  m_texture = SDL_CreateTextureFromSurface(
+      SDLSystem::GetInstance()->GetRenderer(), m_surface);
+
+  SDL_FreeSurface(m_surface);
+}
+
+void UIText::SetText(string text) {
+  m_message = text;
+  OnPropertyChange();
+}

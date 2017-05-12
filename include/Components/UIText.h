@@ -20,13 +20,19 @@ public:
   void Start() override;
   void FixedComponentUpdate() override;
   void ComponentUpdate() override;
+  void SetText(string text);
 
 private:
+  Uint8 m_mode = 0;
   string m_message;
+  SDL_Surface *m_surface = nullptr;
   TTF_Font *m_font = nullptr;
   SDL_Color m_color;
+  SDL_Color m_background;
   SDL_Texture *m_texture = nullptr;
   SDL_Rect m_rect;
+
+  void OnPropertyChange();
 };
 
 #endif

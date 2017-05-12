@@ -28,6 +28,15 @@ void NakedManScript::ComponentUpdate() {
   } else {
     animator->StopAllAnimations();
   }
+
+  if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
+    auto var = (UIText *)SceneManager::GetInstance()
+                   ->GetScene("Main")
+                   ->GetGameObject("Play")
+                   ->GetComponent("UIText");
+    var->SetText("Continue");
+    SceneManager::GetInstance()->SetCurrentScene("Main");
+  }
 }
 
 void NakedManScript::FixedComponentUpdate() {

@@ -3,7 +3,9 @@
 
 #include "Components/Animator.h"
 #include "Components/Script.h"
+#include "Components/UIText.h"
 #include "Engine/InputSystem.h"
+#include "Engine/SceneManager.h"
 #include "Globals/EngineGlobals.h"
 
 class NakedManScript : public Script {
