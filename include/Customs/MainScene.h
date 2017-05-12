@@ -4,6 +4,7 @@
 #include "Components/UIButton.h"
 #include "Components/UIText.h"
 #include "Customs/PlayButtonScript.h"
+#include "Customs/QuitButtonScript.h"
 #include "Engine/GameObject.h"
 #include "Engine/Scene.h"
 
@@ -17,6 +18,7 @@ public:
 private:
   void CreateLogo();
   void CreatePlayButton();
+  void CreateQuitButton();
 };
 
 #endif

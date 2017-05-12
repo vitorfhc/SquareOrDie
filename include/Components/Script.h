@@ -12,9 +12,6 @@ public:
   Script(GameObject *owner);
   // pure virtual name getter
   virtual std::string GetComponentName() = 0;
-
-protected:
-  // pure virtual comp update
   virtual void ComponentUpdate();
 };
 
