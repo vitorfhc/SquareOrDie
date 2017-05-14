@@ -43,7 +43,11 @@ void SDLSystem::Run() {
   SceneManager::GetInstance()->SetCurrentScene(
       "Main"); // must be called here but scene name can be changed
   SceneManager::GetInstance()->Start();
+
   while (m_isRunning) {
+    if (!FixFramerate())
+      continue;
+
     CalculateFramerate();
     InputSystem::GetInstance()->UpdateStates();
 
@@ -183,7 +187,7 @@ void SDLSystem::CalculateFramerate() {
     m_framerate = m_frameCounter;
     m_frameCounter = 0;
     m_lastFrameTicks = m_currentTicks;
-    // INFO("Framerate per second: " << m_framerate);
+    INFO("Framerate per second: " << m_framerate);
   }
   m_frameCounter++;
 }
@@ -194,4 +198,13 @@ void SDLSystem::LoadCommons() {
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
   SceneManager::GetInstance()->AddScene(
       std::make_pair("Gameplay", gameplayScene));
+}
+
+bool SDLSystem::FixFramerate() {
+  m_currentFix = SDL_GetTicks();
+  float interval = m_currentFix - m_lastFix;
+  if (interval < update_rate_interval)
+    return false;
+  m_lastFix = SDL_GetTicks();
+  return true;
 }

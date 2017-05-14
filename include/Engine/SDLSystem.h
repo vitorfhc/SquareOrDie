@@ -10,6 +10,7 @@
 #include "Log/sdl_log.h"
 
 using namespace std;
+using namespace EngineGlobals;
 
 class SDLSystem {
 public:
@@ -41,6 +42,8 @@ private:
   Uint32 m_lastFrameTicks;
   Uint32 m_gameEndTicks;
   Uint32 m_lastFixedUpdate;
+  Uint32 m_currentFix;
+  Uint32 m_lastFix;
 
   // constructor and destructor
   SDLSystem();
@@ -57,6 +60,7 @@ private:
   bool CreateRenderer();
   // system framerate counter
   void CalculateFramerate();
+  bool FixFramerate();
 };
 
 #endif //__SDLSYSTEM_H__
