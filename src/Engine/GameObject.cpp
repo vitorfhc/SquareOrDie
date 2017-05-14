@@ -2,11 +2,12 @@
 #include "Log/log.h"
 
 GameObject::GameObject(std::string name, Vector *position, int width,
-                       int height) {
+                       int height, Uint8 layer) {
   m_name = name;
   m_position = position;
   m_width = width;
   m_height = height;
+  m_layer = layer;
 }
 
 GameObject::~GameObject() { delete m_position; }
@@ -88,4 +89,10 @@ void GameObject::FixedUpdate() {
 void GameObject::SetSize(int width, int height) {
   m_width = width;
   m_height = height;
+}
+
+GameObject GameObject::operator<(const GameObject &go) {
+  if (this->m_layer < go.m_layer)
+    return go;
+  return *this;
 }

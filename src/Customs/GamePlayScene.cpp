@@ -1,8 +1,8 @@
 #include "Customs/GamePlayScene.h"
 
 void GamePlayScene::OnActivation() {
-  CreateMap();
   CreateNakedMan();
+  CreateMap();
 }
 
 void GamePlayScene::OnDeactivation() {}
@@ -16,7 +16,7 @@ void GamePlayScene::CreateNakedMan() {
   xPos = EngineGlobals::screen_width / 2 - 32;
   yPos = EngineGlobals::screen_height / 2 - 32;
 
-  auto nakedMan = new GameObject("NakedMan", new Vector(xPos, yPos), 64, 64);
+  auto nakedMan = new GameObject("NakedMan", new Vector(xPos, yPos), 64, 64, 1);
 
   // renderer
   auto nakedManImage = new Image("assets/nakedmansprite.png", 0, 128, 64, 64);

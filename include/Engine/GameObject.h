@@ -17,7 +17,8 @@ public:
   bool active = true;
 
   // constructor and destructor
-  GameObject(std::string name, Vector *position = new Vector(0, 0), int width = 0, int height = 0);
+  GameObject(std::string name, Vector *position = new Vector(0, 0),
+             int width = 0, int height = 0, Uint8 layer = 0);
   ~GameObject();
   // method for handling start and updates
   void Start();
@@ -35,6 +36,8 @@ public:
   inline int GetWidth() { return m_width; };
   inline int GetHeight() { return m_height; };
   void SetSize(int width, int height);
+  // operator overload
+  GameObject operator<(const GameObject &go);
 
 private:
   // map of components
@@ -44,6 +47,7 @@ private:
   Vector *m_position = new Vector(0, 0);
   int m_width = 0;
   int m_height = 0;
+  Uint8 m_layer;
 
   // methods for handling specific update
   void PhysicsUpdate();

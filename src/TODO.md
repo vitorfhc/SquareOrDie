@@ -10,6 +10,3 @@
 
 ### Collision System
 <p>Responsible for getting all objects with colliders and checking if collides</p>
-
-### Render Layers Order
-<p>Implement ordering to render layers so it doesn't depend of the implementation of code order</p>

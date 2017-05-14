@@ -1,6 +1,7 @@
 #ifndef __SCENE__
 #define __SCENE__
 
+#include <algorithm>
 #include <vector>
 
 #include "Engine/GameObject.h"

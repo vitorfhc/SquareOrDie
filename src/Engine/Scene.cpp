@@ -11,6 +11,7 @@ void Scene::Start() {
 }
 
 void Scene::Update() {
+  std::sort(m_gameObjects.begin(), m_gameObjects.end());
   for (auto it : m_gameObjects)
     if (it->active)
       it->Update();
