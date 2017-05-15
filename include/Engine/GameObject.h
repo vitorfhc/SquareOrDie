@@ -32,12 +32,14 @@ public:
   std::string GetName() { return m_name; };
   // getter and setter
   inline Vector *GetPosition() { return m_position; };
-  inline void SetPosition(Vector *value) { m_position = value; };
+  inline void SetPosition(Vector value) { *m_position = value; };
   inline int GetWidth() { return m_width; };
   inline int GetHeight() { return m_height; };
   void SetSize(int width, int height);
   // operator overload
   GameObject operator<(const GameObject &go);
+  // velocity
+  void AddVelocity(Vector velocity);
 
 private:
   // map of components
@@ -48,6 +50,7 @@ private:
   int m_width = 0;
   int m_height = 0;
   Uint8 m_layer;
+  Vector *m_velocity;
 
   // methods for handling specific update
   void PhysicsUpdate();

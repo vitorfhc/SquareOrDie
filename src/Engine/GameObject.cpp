@@ -8,9 +8,13 @@ GameObject::GameObject(std::string name, Vector *position, int width,
   m_width = width;
   m_height = height;
   m_layer = layer;
+  m_velocity = new Vector(0, 0);
 }
 
-GameObject::~GameObject() { delete m_position; }
+GameObject::~GameObject() {
+  delete m_position;
+  delete m_position;
+}
 
 void GameObject::Start() {
   for (auto key = m_components.begin(); key != m_components.end(); key++) {
@@ -95,4 +99,9 @@ GameObject GameObject::operator<(const GameObject &go) {
   if (this->m_layer < go.m_layer)
     return go;
   return *this;
+}
+
+void GameObject::AddVelocity(Vector velocity) {
+  m_velocity->m_x += velocity.m_x;
+  m_velocity->m_y += velocity.m_y;
 }
