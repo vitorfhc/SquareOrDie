@@ -13,7 +13,7 @@ public:
   CircleCollider(GameObject *owner, Vector &offset, float radius, int layer);
   Vector GetCenter() { return Vector(m_shape.x, m_shape.y); };
   float GetRadius() { return m_shape.radius; };
-  void FixedComponentUpdate();
+  void FixedComponentUpdate() override;
 
 private:
   Circle m_shape;
