@@ -47,7 +47,7 @@ void GamePlayScene::CreateNakedMan() {
   auto nakedManScript = new NakedManScript(nakedMan);
 
   // rigidbody
-  // auto nakedManRB = new Rigidbody(nakedMan);
+  auto nakedManRB = new Rigidbody(nakedMan);
 
   AddGameObject(nakedMan);
 }

@@ -38,6 +38,7 @@ public:
   inline int GetHeight() { return m_height; };
   void SetSize(int width, int height);
   inline Uint8 GetLayer() { return m_layer; };
+  Vector GetVelocity();
   // operator overload
   bool operator<(const GameObject &go) const;
   // velocity

@@ -103,3 +103,5 @@ void GameObject::AddVelocity(Vector velocity) {
   m_velocity->m_x += velocity.m_x;
   m_velocity->m_y += velocity.m_y;
 }
+
+Vector GameObject::GetVelocity() { return *m_velocity; }
