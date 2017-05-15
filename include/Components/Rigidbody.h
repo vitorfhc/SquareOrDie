@@ -14,8 +14,6 @@ public:
   inline void SetGravityForce(int force) { m_gravityForce = force; };
 
 private:
-  Vector *resultantForce = nullptr;
-  Vector *appliedForces = nullptr;
   bool m_gravity = true;
   float m_gravityForce = 0.4;
 };

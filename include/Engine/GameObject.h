@@ -1,6 +1,7 @@
 #ifndef __GAME_OBJECT__
 #define __GAME_OBJECT__
 
+#include <ostream>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -36,8 +37,9 @@ public:
   inline int GetWidth() { return m_width; };
   inline int GetHeight() { return m_height; };
   void SetSize(int width, int height);
+  inline Uint8 GetLayer() { return m_layer; };
   // operator overload
-  GameObject operator<(const GameObject &go);
+  bool operator<(const GameObject &go) const;
   // velocity
   void AddVelocity(Vector velocity);
 

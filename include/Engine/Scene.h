@@ -37,6 +37,10 @@ public:
   virtual void OnDeactivation(){};
   virtual void OnShown(){};
   virtual void OnHidden(){};
+  // compare gameobjects
+  static bool CompareGameObjects(GameObject *a, GameObject *b) {
+    return a->GetLayer() < b->GetLayer();
+  };
 
 private:
   // scene name

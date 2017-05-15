@@ -2,6 +2,7 @@
 #define __GAMEPLAYSCENE__
 
 #include "Components/Renderer.h"
+#include "Components/Rigidbody.h"
 #include "Components/UIText.h"
 #include "Customs/MapScript.h"
 #include "Customs/NakedManScript.h"

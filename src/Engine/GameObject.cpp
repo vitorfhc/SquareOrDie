@@ -95,10 +95,8 @@ void GameObject::SetSize(int width, int height) {
   m_height = height;
 }
 
-GameObject GameObject::operator<(const GameObject &go) {
-  if (this->m_layer < go.m_layer)
-    return go;
-  return *this;
+bool GameObject::operator<(const GameObject &go) const {
+  return m_layer < go.m_layer;
 }
 
 void GameObject::AddVelocity(Vector velocity) {
