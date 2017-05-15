@@ -14,7 +14,7 @@ const int screen_height = 800;
 const float fixed_update_rate = 50;
 const float fixed_update_interval = 1000 / fixed_update_rate;
 
-const float update_rate = 480;
+const float update_rate = 60;
 const float update_rate_interval = 1000 / update_rate;
 } // namespace EngineGlobals
 

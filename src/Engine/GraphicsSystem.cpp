@@ -68,3 +68,11 @@ void GraphicsSystem::DrawText(SDL_Texture *texture, SDL_Rect *destRect) {
   SDL_RenderCopy(SDLSystem::GetInstance()->GetRenderer(), texture, NULL,
                  destRect);
 }
+
+void GraphicsSystem::DrawPoint(Vector point) {
+  int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
+                                   point.m_x, point.m_y);
+  if (result) {
+    SDL_ERROR("Drawing point error");
+  }
+}

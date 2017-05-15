@@ -2,13 +2,13 @@
 #define __SHAPES__
 
 typedef struct {
-  int x, y;
-  int width, height;
+  float x, y;
+  float width, height;
 } Rectangle;
 
 typedef struct {
-  int x, y;
-  int radius;
+  float x, y;
+  float radius;
 } Circle;
 
 #endif

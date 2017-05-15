@@ -3,22 +3,20 @@
 
 #include <string>
 
-#include "Engine/Component.h"
+#include "Components/Collider.h"
+#include "Engine/GameObject.h"
 #include "Math/Shapes.h"
 #include "Math/Vector.h"
 
-class CircleCollider : public Component {
+class CircleCollider : public Collider {
 public:
-  CircleCollider(GameObject *owner, Vector *offset, int radius);
-  std::string GetComponentName() override { return "CircleCollider"; };
-  inline Circle GetShape() { return m_shape; };
-  void ComponentUpdate() override;
-  bool CheckCollision(CircleCollider *collider);
-  // bool CheckCollision(RectangleCollider *collider);
+  CircleCollider(GameObject *owner, Vector &offset, float radius, int layer);
+  Vector GetCenter() { return Vector(m_shape.x, m_shape.y); };
+  float GetRadius() { return m_shape.radius; };
+  void FixedComponentUpdate();
 
 private:
   Circle m_shape;
-  Vector *m_offset = nullptr;
 };
 
 #endif
