@@ -22,6 +22,9 @@ void GamePlayScene::CreateNakedMan() {
   auto nakedManImage = new Image("assets/nakedmansprite.png", 0, 128, 64, 64);
   auto nakedManRenderer = new Renderer(nakedMan, nakedManImage);
 
+  // circle renderer
+  // auto cr = new CircleRenderer(nakedMan, Vector(32, 32), 32);
+
   // animations
   auto nakedManSprite = new Image("assets/nakedmansprite.png", 0, 0, 576, 256);
 

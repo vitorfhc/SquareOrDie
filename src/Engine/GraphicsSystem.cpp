@@ -90,3 +90,18 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g,
       ERROR(SDL_GetError());
   }
 }
+
+void GraphicsSystem::DrawFillCircle(Vector &center, float radius, Uint8 r,
+                                    Uint8 g, Uint8 b, Uint8 a) {
+  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
+  Vector point;
+  for (float angle = 0; angle < 360; angle += 0.01) {
+    point.m_x = center.m_x + cos(angle) * radius;
+    point.m_y = center.m_y - sin(angle) * radius;
+    int result =
+        SDL_RenderDrawLine(SDLSystem::GetInstance()->GetRenderer(), center.m_x,
+                           center.m_y, point.m_x, point.m_y);
+    if (result < 0)
+      ERROR(SDL_GetError());
+  }
+}

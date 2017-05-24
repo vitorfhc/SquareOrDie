@@ -1,6 +1,7 @@
 #ifndef __GAMEPLAYSCENE__
 #define __GAMEPLAYSCENE__
 
+#include "Components/CircleRenderer.h"
 #include "Components/Renderer.h"
 #include "Components/Rigidbody.h"
 #include "Components/UIText.h"
