@@ -5,6 +5,8 @@
 #include "Engine/Image.h"
 #include "Math/Vector.h"
 
+#include <math.h>
+
 class Image;
 
 class GraphicsSystem {
@@ -16,6 +18,7 @@ public:
   void DrawFrame(Image *img, Frame *frame, Vector *position);
   void DrawText(SDL_Texture *texture, SDL_Rect *destRect);
   void DrawPoint(Vector point);
+  void DrawCircle(Vector &center, float radius);
 
 private:
   // singleton instance

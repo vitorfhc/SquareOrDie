@@ -76,3 +76,17 @@ void GraphicsSystem::DrawPoint(Vector point) {
     SDL_ERROR("Drawing point error");
   }
 }
+
+void GraphicsSystem::DrawCircle(Vector &center, float radius) {
+  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 255, 0, 0,
+                         255);
+  Vector point;
+  for (int angle = 0; angle < 360; angle++) {
+    point.m_x = center.m_x + cos(angle) * radius;
+    point.m_y = center.m_y - sin(angle) * radius;
+    int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
+                                     point.m_x, point.m_y);
+    if (result < 0)
+      ERROR(SDL_GetError());
+  }
+}
