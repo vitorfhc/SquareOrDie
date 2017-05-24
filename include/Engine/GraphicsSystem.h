@@ -18,7 +18,8 @@ public:
   void DrawFrame(Image *img, Frame *frame, Vector *position);
   void DrawText(SDL_Texture *texture, SDL_Rect *destRect);
   void DrawPoint(Vector point);
-  void DrawCircle(Vector &center, float radius);
+  void DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g, Uint8 b,
+                  Uint8 a);
 
 private:
   // singleton instance

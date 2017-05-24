@@ -77,9 +77,9 @@ void GraphicsSystem::DrawPoint(Vector point) {
   }
 }
 
-void GraphicsSystem::DrawCircle(Vector &center, float radius) {
-  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), 255, 0, 0,
-                         255);
+void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 r, Uint8 g,
+                                Uint8 b, Uint8 a) {
+  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
   Vector point;
   for (int angle = 0; angle < 360; angle++) {
     point.m_x = center.m_x + cos(angle) * radius;
