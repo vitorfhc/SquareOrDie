@@ -22,6 +22,8 @@ public:
                   Uint8 a);
   void DrawFillCircle(Vector &center, float radius, Uint8 r, Uint8 g, Uint8 b,
                       Uint8 a);
+  void DrawFillRectangle(Vector &position, int width, int height, Uint8 r,
+                         Uint8 g, Uint8 b, Uint8 a);
 
 private:
   // singleton instance

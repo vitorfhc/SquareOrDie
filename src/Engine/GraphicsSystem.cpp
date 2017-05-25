@@ -105,3 +105,19 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius, Uint8 r,
       ERROR(SDL_GetError());
   }
 }
+
+void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
+                                       Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+  SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
+
+  SDL_Rect rect;
+  rect.x = position.m_x;
+  rect.y = position.m_y;
+  rect.w = width;
+  rect.h = height;
+
+  int result =
+      SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(), &rect);
+  if (result < 0)
+    ERROR(SDL_GetError());
+}

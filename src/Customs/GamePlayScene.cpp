@@ -2,7 +2,7 @@
 
 void GamePlayScene::OnActivation() {
   CreateNakedMan();
-  // CreateMap();
+  CreateMap();
 }
 
 void GamePlayScene::OnDeactivation() {}
@@ -24,6 +24,9 @@ void GamePlayScene::CreateNakedMan() {
 
   // circle renderer
   // auto cr = new CircleRenderer(nakedMan, Vector(32, 32), 32);
+
+  // rect renderer
+  // auto rr = new RectangleRenderer(nakedMan, Vector(0, 0), 64, 64);
 
   // animations
   auto nakedManSprite = new Image("assets/nakedmansprite.png", 0, 0, 576, 256);
