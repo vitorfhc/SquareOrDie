@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(ZebraEngine LANGUAGES CXX)
+project(SquareOrDie LANGUAGES CXX)
 
 
 
@@ -35,9 +35,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 
 #### Executable ####
 
-add_executable(ZebraEngine ${SOURCES})
+add_executable(SquareOrDie ${SOURCES})
 
-target_link_libraries(ZebraEngine
+target_link_libraries(SquareOrDie
   SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 
@@ -45,6 +45,6 @@ target_link_libraries(ZebraEngine
 #### Custom Commands ####
 
 # Copy assets folder to build
-add_custom_command(TARGET ZebraEngine POST_BUILD
+add_custom_command(TARGET SquareOrDie POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                    ${PROJECT_ASSETS_DIR} ${CMAKE_BINARY_DIR}/assets)
