@@ -23,6 +23,7 @@ private:
   void CreatePlayButton();
   void CreateQuitButton();
   void CreateBackground();
+  void CreateGamemodes();
 };
 
 #endif

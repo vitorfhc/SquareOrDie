@@ -9,6 +9,7 @@ void MainScene::OnActivation() {
   CreatePlayButton();
   CreateQuitButton();
   CreateBackground();
+  CreateGamemodes();
 }
 
 void MainScene::OnDeactivation() {}
@@ -27,6 +28,8 @@ void MainScene::CreatePlayButton() {
   auto playButtonText =
       new UIText(playButton, "Play", "assets/UIpack/Font/kenvector_future.ttf",
                  120, 255, 255, 255, 255, 1);
+  auto vec = Vector(10, 0);
+  playButtonText->SetOffset(vec);
 
   AddGameObject(playButton);
 }
@@ -42,6 +45,8 @@ void MainScene::CreateQuitButton() {
   auto quitButtonText =
       new UIText(quitButton, "Quit", "assets/UIpack/Font/kenvector_future.ttf",
                  120, 255, 255, 255, 255, 1);
+  auto vec = Vector(10, 0);
+  quitButtonText->SetOffset(vec);
 
   AddGameObject(quitButton);
 }
@@ -51,6 +56,34 @@ void MainScene::CreateBackground() {
                                    m_width_middle * 2, m_height_middle * 2, 0);
   auto backgroundRectangle = new RectangleRenderer(
       background, Vector(0, 0), m_width_middle * 2, m_height_middle * 2);
-  backgroundRectangle->SetColor(255, 255, 255, 255);
+  backgroundRectangle->SetColor(20, 20, 20, 255);
   AddGameObject(background);
+}
+
+void MainScene::CreateGamemodes() {
+  // catch all
+  auto catchAllButton = new GameObject(
+      "CatchAllButton", new Vector(m_width_middle - 100 - 5, 300), 100, 100, 1);
+  auto catchAllImage =
+      new Image("assets/UIpack/Spritesheet/greySheet.png", 190, 98, 100, 100);
+  auto catchAllRenderer = new Renderer(catchAllButton, catchAllImage);
+  AddGameObject(catchAllButton);
+  auto catchAllText = new UIText(catchAllButton, "Catch All",
+                                 "assets/UIpack/Font/kenvector_future_thin.ttf",
+                                 100, 0, 0, 0, 255, 1);
+  auto vec = Vector(2, 0);
+  catchAllText->SetOffset(vec);
+
+  // missile
+  auto missileButton = new GameObject(
+      "MissileButton", new Vector(m_width_middle + 5, 300), 100, 100, 1);
+  auto missileImage =
+      new Image("assets/UIpack/Spritesheet/greySheet.png", 190, 98, 100, 100);
+  auto missileRenderer = new Renderer(missileButton, catchAllImage);
+  auto missileText = new UIText(missileButton, "Missile",
+                                "assets/UIpack/Font/kenvector_future_thin.ttf",
+                                100, 0, 0, 0, 255, 1);
+  vec = Vector(2, 0);
+  missileText->SetOffset(vec);
+  AddGameObject(missileButton);
 }
