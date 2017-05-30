@@ -50,6 +50,9 @@ void SDLSystem::Run() {
     CalculateFramerate();
     InputSystem::GetInstance()->UpdateStates();
 
+    if (InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
+      break;
+
     // all updates but draw are called here
     SceneManager::GetInstance()->Update();
     if (SDL_GetTicks() - m_lastFixedUpdate >
@@ -192,8 +195,8 @@ void SDLSystem::CalculateFramerate() {
 }
 
 void SDLSystem::LoadCommons() {
-  auto mainScene = new Scene();
-  SceneManager::GetInstance()->AddScene("Main", mainScene);
+  auto mainScene = new MainScene();
+  SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
 }
 
 bool SDLSystem::FixFramerate() {
