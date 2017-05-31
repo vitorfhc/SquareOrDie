@@ -1,6 +1,7 @@
 #include "Engine/SDLSystem.h"
 
 // load commons includes
+#include "Customs/CatchAllScene.h"
 #include "Customs/MainScene.h"
 
 // static variables initialization
@@ -196,7 +197,11 @@ void SDLSystem::CalculateFramerate() {
 
 void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
+  auto catchAllScene = new CatchAllScene();
+
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
+  SceneManager::GetInstance()->AddScene(
+      std::make_pair("CatchAll", catchAllScene));
 }
 
 bool SDLSystem::FixFramerate() {

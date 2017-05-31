@@ -8,6 +8,6 @@ void PlayButtonScript::Start() {
 
 void PlayButtonScript::ComponentUpdate() {
   if (m_uiButton->IsClicked()) {
-    // throw new scene
+    SceneManager::GetInstance()->SetCurrentScene("CatchAll");
   }
 }
