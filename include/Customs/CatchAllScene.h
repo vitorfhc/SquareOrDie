@@ -1,7 +1,9 @@
 #ifndef __CATCH_ALL_SCENE__
 #define __CATCH_ALL_SCENE__
 
+#include "Components/CircleCollider.h"
 #include "Components/CircleRenderer.h"
+#include "Components/RectangleCollider.h"
 #include "Components/RectangleRenderer.h"
 #include "Customs/PlayerScript.h"
 #include "Engine/Scene.h"

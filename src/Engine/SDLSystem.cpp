@@ -59,6 +59,7 @@ void SDLSystem::Run() {
     if (SDL_GetTicks() - m_lastFixedUpdate >
         EngineGlobals::fixed_update_interval) {
       SceneManager::GetInstance()->FixedUpdate();
+      CollisionSystem::GetInstance()->Update();
       m_lastFixedUpdate = SDL_GetTicks();
     }
 
