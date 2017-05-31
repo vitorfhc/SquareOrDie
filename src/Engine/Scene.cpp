@@ -12,16 +12,12 @@ void Scene::Start() {
 
 void Scene::Update() {
   std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
-  INFO("BEG");
   for (auto it : m_gameObjects)
-    if (it->active) {
+    if (it->active)
       it->Update();
-      INFO(it->GetLayer());
-    }
 }
 
 void Scene::DrawUpdate() {
-  INFO("HERE");
   std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
   for (auto it : m_gameObjects)
     if (it->active)
@@ -38,7 +34,6 @@ void Scene::AddGameObject(std::vector<GameObject *> gameObjects) {
 }
 
 void Scene::FixedUpdate() {
-  INFO("WHAT");
   for (auto it : m_gameObjects)
     if (it->active)
       it->FixedUpdate();
