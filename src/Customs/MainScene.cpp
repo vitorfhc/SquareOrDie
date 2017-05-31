@@ -10,7 +10,6 @@ void MainScene::OnActivation() {
   CreateQuitButton();
   CreateBackground();
   CreateGamemodes();
-  // CreateHudfel();
 }
 
 void MainScene::OnDeactivation() {}
@@ -69,7 +68,7 @@ void MainScene::CreateGamemodes() {
   // instruction text
   auto instruction =
       new GameObject("InstructionText",
-                     new Vector(m_width_middle - 100 - 5, 210), 400, 100, 1);
+                     new Vector(m_width_middle - 100 - 5, 250), 400, 100, 1);
   auto instructionUIText = new UIText(instruction, "Choose a gamemode",
                                       "assets/UIpack/Font/kenvector_future.ttf",
                                       200, 255, 255, 255, 255, 1);
@@ -79,13 +78,15 @@ void MainScene::CreateGamemodes() {
 
   // catch all
   auto catchAllButton = new GameObject(
-      "CatchAllButton", new Vector(m_width_middle - 100 - 5, 300), 100, 100, 1);
+      "CatchAllButton", new Vector(m_width_middle - 100 - 5, 340), 100, 100, 1);
   auto catchAllImage =
       new Image("assets/UIpack/Spritesheet/greySheet.png", 190, 98, 100, 100);
   auto catchAllRenderer = new Renderer(catchAllButton, catchAllImage);
   auto catchAllText = new UIText(catchAllButton, "Catch All",
                                  "assets/UIpack/Font/kenvector_future_thin.ttf",
                                  100, 0, 0, 0, 255, 1);
+  auto catchAllScript = new CatchAllButtonScript(catchAllButton);
+  auto catchAllUIB = new UIButton(catchAllButton);
   auto vec = Vector(2, 0);
   catchAllText->SetOffset(vec);
   AddGameObject(catchAllButton);
@@ -99,13 +100,15 @@ void MainScene::CreateGamemodes() {
 
   // missile
   auto missileButton = new GameObject(
-      "MissileButton", new Vector(m_width_middle + 5, 300), 100, 100, 1);
+      "MissileButton", new Vector(m_width_middle + 5, 340), 100, 100, 1);
   auto missileImage =
       new Image("assets/UIpack/Spritesheet/greySheet.png", 190, 98, 100, 100);
   auto missileRenderer = new Renderer(missileButton, catchAllImage);
   auto missileText = new UIText(missileButton, "Missile",
                                 "assets/UIpack/Font/kenvector_future_thin.ttf",
                                 100, 0, 0, 0, 255, 1);
+  auto missileUIB = new UIButton(missileButton);
+  auto missileScript = new MissileButtonScript(missileButton);
   vec = Vector(2, 0);
   missileText->SetOffset(vec);
   AddGameObject(missileButton);
@@ -113,16 +116,6 @@ void MainScene::CreateGamemodes() {
   auto missile_CB =
       new GameObject("Missile_CB", missileButton->GetPosition(), 38, 36, 3);
   auto missile_CBRenderer = new Renderer(missile_CB, checkBoxImage);
-  missile_CBRenderer->active = false;
+  missile_CBRenderer->active = true;
   AddGameObject(missile_CB);
-}
-
-void MainScene::CreateHudfel() {
-  // 806 454
-  auto hudfel = new GameObject(
-      "Hudfel", new Vector(m_width_middle - (806 / 2), 450), 806, 300, 2);
-  auto hudfelImage = new Image("assets/Images/hudfel.jpg", 0, 0, 806, 300);
-  auto hudfelRenderer = new Renderer(hudfel, hudfelImage);
-
-  AddGameObject(hudfel);
 }

@@ -5,6 +5,8 @@
 #include "Components/Renderer.h"
 #include "Components/UIButton.h"
 #include "Components/UIText.h"
+#include "Customs/CatchAllButtonScript.h"
+#include "Customs/MissileButtonScript.h"
 #include "Customs/PlayButtonScript.h"
 #include "Customs/QuitButtonScript.h"
 #include "Engine/Image.h"
@@ -27,7 +29,6 @@ private:
   void CreateQuitButton();
   void CreateBackground();
   void CreateGamemodes();
-  void CreateHudfel();
 };
 
 #endif
