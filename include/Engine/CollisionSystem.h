@@ -3,7 +3,9 @@
 
 #include <vector>
 
+#include "Components/CircleCollider.h"
 #include "Components/Collider.h"
+#include "Components/RectangleCollider.h"
 #include "Engine/SceneManager.h"
 #include "Log/log.h"
 
@@ -18,6 +20,9 @@ private:
   CollisionSystem();
   void DetectCollisions();
   void PushColliders();
+  void CircleCircle(CircleCollider *c1, CircleCollider *c2);
+  void RectRect(RectangleCollider *r1, RectangleCollider *r2);
+  void CircleRect(CircleCollider *c, RectangleCollider *r);
 
   static CollisionSystem *m_instance;
   vector<Collider *> m_colliders;

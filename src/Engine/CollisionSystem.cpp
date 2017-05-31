@@ -15,7 +15,33 @@ void CollisionSystem::Update() {
   DetectCollisions();
 }
 
-void CollisionSystem::DetectCollisions() {}
+void CollisionSystem::DetectCollisions() {
+  for (int i = 0; i < m_colliders.size(); i++) {
+    for (int k = i; k < m_colliders.size(); k++) {
+      if (m_colliders[i]->GetComponentName() ==
+              m_colliders[k]->GetComponentName() &&
+          m_colliders[i]->GetComponentName() == "CircleCollider")
+        CircleCircle((CircleCollider *)m_colliders[i],
+                     (CircleCollider *)m_colliders[k]);
+
+      else if (m_colliders[i]->GetComponentName() ==
+                   m_colliders[k]->GetComponentName() &&
+               m_colliders[i]->GetComponentName() == "RectangleCollider")
+        RectRect((RectangleCollider *)m_colliders[i],
+                 (RectangleCollider *)m_colliders[k]);
+
+      else if (m_colliders[i]->GetComponentName() !=
+                   m_colliders[k]->GetComponentName() &&
+               m_colliders[i]->GetComponentName() == "CircleCollider")
+        CircleRect((CircleCollider *)m_colliders[i],
+                   (RectangleCollider *)m_colliders[k]);
+
+      else
+        CircleRect((CircleCollider *)m_colliders[k],
+                   (RectangleCollider *)m_colliders[i]);
+    }
+  }
+}
 
 void CollisionSystem::PushColliders() {
   m_colliders.clear();
@@ -35,3 +61,9 @@ void CollisionSystem::PushColliders() {
     }
   }
 }
+
+void CollisionSystem::CircleCircle(CircleCollider *c1, CircleCollider *c2) {}
+
+void CollisionSystem::RectRect(RectangleCollider *r1, RectangleCollider *r2) {}
+
+void CollisionSystem::CircleRect(CircleCollider *c, RectangleCollider *r) {}
