@@ -90,10 +90,10 @@ void MainScene::CreateGamemodes() {
 }
 
 void MainScene::CreateHudfel() {
-  // 368 339
+  // 806 454
   auto hudfel = new GameObject(
-      "Hudfel", new Vector(m_width_middle - (368 / 2), 450), 368, 339, 2);
-  auto hudfelImage = new Image("assets/Images/hudfel.png", 0, 0, 368, 339);
+      "Hudfel", new Vector(m_width_middle - (806 / 2), 450), 806, 300, 2);
+  auto hudfelImage = new Image("assets/Images/hudfel.jpg", 0, 0, 806, 300);
   auto hudfelRenderer = new Renderer(hudfel, hudfelImage);
 
   AddGameObject(hudfel);
