@@ -31,6 +31,8 @@ void MainScene::CreatePlayButton() {
                  120, 255, 255, 255, 255, 1);
   auto vec = Vector(10, 0);
   playButtonText->SetOffset(vec);
+  auto playButtonUIB = new UIButton(playButton);
+  auto playButtonScript = new PlayButtonScript(playButton);
 
   AddGameObject(playButton);
 }
@@ -48,6 +50,8 @@ void MainScene::CreateQuitButton() {
                  120, 255, 255, 255, 255, 1);
   auto vec = Vector(10, 0);
   quitButtonText->SetOffset(vec);
+  auto quitButtonUIB = new UIButton(quitButton);
+  auto quitButtonScript = new QuitButtonScript(quitButton);
 
   AddGameObject(quitButton);
 }

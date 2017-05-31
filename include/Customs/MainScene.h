@@ -3,7 +3,10 @@
 
 #include "Components/RectangleRenderer.h"
 #include "Components/Renderer.h"
+#include "Components/UIButton.h"
 #include "Components/UIText.h"
+#include "Customs/PlayButtonScript.h"
+#include "Customs/QuitButtonScript.h"
 #include "Engine/Image.h"
 #include "Engine/Scene.h"
 #include "Globals/EngineGlobals.h"
