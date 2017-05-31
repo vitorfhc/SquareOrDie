@@ -10,6 +10,7 @@ void MainScene::OnActivation() {
   CreateQuitButton();
   CreateBackground();
   CreateGamemodes();
+  CreateHudfel();
 }
 
 void MainScene::OnDeactivation() {}
@@ -86,4 +87,14 @@ void MainScene::CreateGamemodes() {
   vec = Vector(2, 0);
   missileText->SetOffset(vec);
   AddGameObject(missileButton);
+}
+
+void MainScene::CreateHudfel() {
+  // 368 339
+  auto hudfel = new GameObject(
+      "Hudfel", new Vector(m_width_middle - (368 / 2), 450), 368, 339, 2);
+  auto hudfelImage = new Image("assets/Images/hudfel.png", 0, 0, 368, 339);
+  auto hudfelRenderer = new Renderer(hudfel, hudfelImage);
+
+  AddGameObject(hudfel);
 }

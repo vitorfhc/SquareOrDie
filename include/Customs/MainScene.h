@@ -24,6 +24,7 @@ private:
   void CreateQuitButton();
   void CreateBackground();
   void CreateGamemodes();
+  void CreateHudfel();
 };
 
 #endif
