@@ -20,6 +20,7 @@ public:
 
 private:
   Rectangle m_shape;
+  Vector m_offset;
 };
 
 #endif // __RECTANGLE_COLLIDER__

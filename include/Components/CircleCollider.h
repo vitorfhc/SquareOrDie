@@ -20,6 +20,7 @@ public:
 
 private:
   Circle m_shape;
+  Vector m_offset;
 };
 
 #endif
