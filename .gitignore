@@ -15,3 +15,6 @@ Makefile
 # Executable
 ZebraEngine
 SquareOrDie
+
+*.o
+*.gch

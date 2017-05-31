@@ -1,6 +1,7 @@
 #ifndef __CATCH_ALL_SCENE__
 #define __CATCH_ALL_SCENE__
 
+#include "Components/CircleRenderer.h"
 #include "Components/RectangleRenderer.h"
 #include "Customs/PlayerScript.h"
 #include "Engine/Scene.h"
@@ -12,6 +13,7 @@ public:
 
 private:
   void CreatePlayer();
+  void CreateObstacles();
 };
 
 #endif
