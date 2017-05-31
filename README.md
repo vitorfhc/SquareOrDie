@@ -5,6 +5,9 @@
 Moving: W A S D <br>
 Special (if available in gamemode): Space <br>
 
+#### Keep moving!
+Yeah, if you stop moving you die. Keep moving.
+
 ---
 ### Gamemodes
 #### Catch All
