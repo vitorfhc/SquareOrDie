@@ -10,7 +10,7 @@ void MainScene::OnActivation() {
   CreateQuitButton();
   CreateBackground();
   CreateGamemodes();
-  CreateHudfel();
+  // CreateHudfel();
 }
 
 void MainScene::OnDeactivation() {}
@@ -66,18 +66,36 @@ void MainScene::CreateBackground() {
 }
 
 void MainScene::CreateGamemodes() {
+  // instruction text
+  auto instruction =
+      new GameObject("InstructionText",
+                     new Vector(m_width_middle - 100 - 5, 210), 400, 100, 1);
+  auto instructionUIText = new UIText(instruction, "Choose a gamemode",
+                                      "assets/UIpack/Font/kenvector_future.ttf",
+                                      200, 255, 255, 255, 255, 1);
+  auto vecOff = Vector(-100, 0);
+  instructionUIText->SetOffset(vecOff);
+  AddGameObject(instruction);
+
   // catch all
   auto catchAllButton = new GameObject(
       "CatchAllButton", new Vector(m_width_middle - 100 - 5, 300), 100, 100, 1);
   auto catchAllImage =
       new Image("assets/UIpack/Spritesheet/greySheet.png", 190, 98, 100, 100);
   auto catchAllRenderer = new Renderer(catchAllButton, catchAllImage);
-  AddGameObject(catchAllButton);
   auto catchAllText = new UIText(catchAllButton, "Catch All",
                                  "assets/UIpack/Font/kenvector_future_thin.ttf",
                                  100, 0, 0, 0, 255, 1);
   auto vec = Vector(2, 0);
   catchAllText->SetOffset(vec);
+  AddGameObject(catchAllButton);
+
+  auto catchAll_CB =
+      new GameObject("CatchAll_CB", catchAllButton->GetPosition(), 38, 36, 3);
+  auto checkBoxImage =
+      new Image("assets/UIpack/Spritesheet/greenSheet.png", 380, 0, 38, 36);
+  auto catchAll_CBRenderer = new Renderer(catchAll_CB, checkBoxImage);
+  AddGameObject(catchAll_CB);
 
   // missile
   auto missileButton = new GameObject(
@@ -91,6 +109,12 @@ void MainScene::CreateGamemodes() {
   vec = Vector(2, 0);
   missileText->SetOffset(vec);
   AddGameObject(missileButton);
+
+  auto missile_CB =
+      new GameObject("Missile_CB", missileButton->GetPosition(), 38, 36, 3);
+  auto missile_CBRenderer = new Renderer(missile_CB, checkBoxImage);
+  missile_CBRenderer->active = false;
+  AddGameObject(missile_CB);
 }
 
 void MainScene::CreateHudfel() {
