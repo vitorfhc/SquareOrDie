@@ -8,6 +8,7 @@
 #include "Components/RectangleCollider.h"
 #include "Engine/SceneManager.h"
 #include "Log/log.h"
+#include "Math/Vector.h"
 
 using namespace std;
 
