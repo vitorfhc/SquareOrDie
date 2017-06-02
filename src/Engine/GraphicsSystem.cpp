@@ -95,7 +95,7 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius, Uint8 r,
                                     Uint8 g, Uint8 b, Uint8 a) {
   SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), r, g, b, a);
   Vector point;
-  for (float angle = 0; angle < 360; angle += 0.01) {
+  for (float angle = 0; angle < 360; angle += 1) {
     point.m_x = center.m_x + cos(angle) * radius;
     point.m_y = center.m_y - sin(angle) * radius;
     int result =
