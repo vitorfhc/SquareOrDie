@@ -9,13 +9,9 @@ void CatchAllScene::OnActivation() {
 
 void CatchAllScene::CreatePlayer() {
   auto player = new GameObject("Player", new Vector(25, 25), 40, 40, 2);
-  // auto playerCircle = new CircleRenderer(player, Vector(0, 0), 20);
-  // playerCircle->SetColor(255, 255, 255, 255);
   auto playerRectangle = new RectangleRenderer(player, Vector(0, 0), 40, 40);
   playerRectangle->SetColor(0, 150, 0, 255);
   auto playerScript = new PlayerScript(player);
-  // auto colliderOffset = Vector(20, 20);
-  // auto playerCollider = new CircleCollider(player, colliderOffset, 20, 0);
   auto playerCollider = new RectangleCollider(player, Vector(0, 0), 40, 40, 0);
   AddGameObject(player);
 }

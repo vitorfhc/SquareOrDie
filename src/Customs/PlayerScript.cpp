@@ -1,6 +1,6 @@
 #include "Customs/PlayerScript.h"
 
-PlayerScript::PlayerScript(GameObject *owner) : Script(owner){};
+PlayerScript::PlayerScript(GameObject *owner) : Script(owner) {}
 
 void PlayerScript::ComponentUpdate() { HandleInput(); }
 
@@ -22,8 +22,6 @@ void PlayerScript::HandleInput() {
 void PlayerScript::FixedComponentUpdate() {
   GetOwner()->GetPosition()->m_x += m_movement.m_x * m_speed;
   GetOwner()->GetPosition()->m_y += m_movement.m_y * m_speed;
-
-  INFO(GetOwner()->GetCollisions().size());
 
   if (GetOwner()->GetCollisions().size() > 0) {
     auto comp =

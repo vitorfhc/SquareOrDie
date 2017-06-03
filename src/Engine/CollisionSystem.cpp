@@ -16,11 +16,11 @@ void CollisionSystem::Update() {
 }
 
 void CollisionSystem::DetectCollisions() {
-  for (int i = 0; i < m_colliders.size(); i++)
+  for (unsigned int i = 0; i < m_colliders.size(); i++)
     m_colliders[i]->GetOwner()->ClearCollisions();
 
-  for (int i = 0; i < m_colliders.size(); i++) {
-    for (int k = i + 1; k < m_colliders.size(); k++) {
+  for (unsigned int i = 0; i < m_colliders.size(); i++) {
+    for (unsigned int k = i + 1; k < m_colliders.size(); k++) {
 
       if (m_colliders[i]->GetLayer() != m_colliders[k]->GetLayer())
         continue;
