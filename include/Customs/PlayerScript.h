@@ -1,8 +1,11 @@
 #ifndef __PLAYER_SCRIPT__
 #define __PLAYER_SCRIPT__
 
+#include "Components/RectangleRenderer.h"
 #include "Components/Script.h"
+#include "Engine/GameObject.h"
 #include "Engine/InputSystem.h"
+#include "Log/log.h"
 
 using namespace std;
 

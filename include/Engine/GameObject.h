@@ -46,6 +46,10 @@ public:
   bool operator<(const GameObject &go) const;
   // velocity
   void AddVelocity(Vector velocity);
+  // Collision
+  void AddCollision(GameObject *gameobject);
+  void ClearCollisions();
+  std::vector<GameObject *> GetCollisions();
 
 private:
   // map of components
@@ -57,6 +61,7 @@ private:
   int m_height = 0;
   Uint8 m_layer;
   Vector *m_velocity;
+  std::vector<GameObject *> m_colliding;
 
   // methods for handling specific update
   void PhysicsUpdate();

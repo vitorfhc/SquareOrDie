@@ -16,8 +16,15 @@ void CollisionSystem::Update() {
 }
 
 void CollisionSystem::DetectCollisions() {
+  for (int i = 0; i < m_colliders.size(); i++)
+    m_colliders[i]->GetOwner()->ClearCollisions();
+
   for (int i = 0; i < m_colliders.size(); i++) {
     for (int k = i + 1; k < m_colliders.size(); k++) {
+
+      if (m_colliders[i]->GetLayer() != m_colliders[k]->GetLayer())
+        continue;
+
       if (m_colliders[i]->GetComponentName() ==
               m_colliders[k]->GetComponentName() &&
           m_colliders[i]->GetComponentName() == "CircleCollider")
@@ -70,8 +77,8 @@ void CollisionSystem::CircleCircle(CircleCollider *c1, CircleCollider *c2) {
     collision = true;
 
   if (collision) {
-    INFO("CIRCLE CIRCLE");
-    INFO("COLLIDED");
+    c1->GetOwner()->AddCollision(c2->GetOwner());
+    c2->GetOwner()->AddCollision(c1->GetOwner());
   }
 }
 
@@ -85,8 +92,8 @@ void CollisionSystem::RectRect(RectangleCollider *r1, RectangleCollider *r2) {
     collision = true;
 
   if (collision) {
-    INFO("COLLIDED");
-    INFO("RECT RECT");
+    r1->GetOwner()->AddCollision(r2->GetOwner());
+    r2->GetOwner()->AddCollision(r1->GetOwner());
   }
 }
 
@@ -102,8 +109,8 @@ void CollisionSystem::CircleRect(CircleCollider *c, RectangleCollider *r) {
   double dx = distX - r->GetWidth() / 2;
   double dy = distY - r->GetHeight() / 2;
   // Checks if the distance on x-axis between centers are greater than
-  // RectWidth/2 + CircleRadius,in that case  there is no Collision.The same logic
-  // is used on y-axis
+  // RectWidth/2 + CircleRadius,in that case  there is no Collision.The same
+  // logic is used on y-axis
   if (!((distX > (r->GetWidth() / 2 + c->GetRadius())) ||
         (distY > (r->GetHeight() / 2 + c->GetRadius()))))
     /*verify if the distance between centers are lesser than rect width and
@@ -113,8 +120,9 @@ void CollisionSystem::CircleRect(CircleCollider *c, RectangleCollider *r) {
     if (((distX <= (r->GetWidth() / 2)) || (distY <= (r->GetHeight() / 2))) ||
         (dx * dx + dy * dy <= (c->GetRadius() * c->GetRadius())))
       collision = true;
+
   if (collision) {
-    INFO("COLLIDED");
-    INFO("RECT CIRCLE");
+    c->GetOwner()->AddCollision(r->GetOwner());
+    r->GetOwner()->AddCollision(c->GetOwner());
   }
 }

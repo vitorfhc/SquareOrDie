@@ -77,7 +77,7 @@ Component *GameObject::GetComponent(std::string name) {
         return value;
     }
   }
-  INFO("Looking for null component " << name);
+  // INFO("Looking for null component " << name);
   return nullptr;
 }
 
@@ -105,3 +105,11 @@ void GameObject::AddVelocity(Vector velocity) {
 }
 
 Vector GameObject::GetVelocity() { return *m_velocity; }
+
+void GameObject::AddCollision(GameObject *gameobject) {
+  m_colliding.push_back(gameobject);
+}
+
+void GameObject::ClearCollisions() { m_colliding.clear(); }
+
+std::vector<GameObject *> GameObject::GetCollisions() { return m_colliding; }
