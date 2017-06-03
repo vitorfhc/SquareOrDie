@@ -43,8 +43,8 @@ void PlayerScript::FixedComponentUpdate() {
 
     for(auto obj : GetOwner()->GetCollisions()) {
         if(obj->GetTag() == "Catcher") {
-            CatchAllController::GetInstance()->KillPlayer(GetOwner());
             INFO("CATCHER GOT ONE");
+            CatchAllController::GetInstance()->KillPlayer(GetOwner());
         }
     }
 }

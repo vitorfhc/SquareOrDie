@@ -26,9 +26,13 @@ private:
   vector<GameObject *> m_players;
   int m_alive;
   int m_catcher;
+  int m_wPos[3] = {0, EngineGlobals::screen_width - 40, 0};
+  int m_hPos[3] = {0, EngineGlobals::screen_height - 60,
+                   EngineGlobals::screen_height - 60};
 
   void DefineCatcher();
   void ActivatePlayers();
+  void DeactivatePlayers();
 };
 
 #endif // SQUAREORDIE_CATCHALLCONTROLLER_H

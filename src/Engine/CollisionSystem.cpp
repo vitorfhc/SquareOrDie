@@ -25,6 +25,11 @@ void CollisionSystem::DetectCollisions() {
       if (m_colliders[i]->GetLayer() != m_colliders[k]->GetLayer())
         continue;
 
+      if (!m_colliders[i]->GetOwner()->active ||
+          !m_colliders[k]->GetOwner()->active || !m_colliders[i]->active ||
+          !m_colliders[k]->active)
+        continue;
+
       if (m_colliders[i]->GetComponentName() ==
               m_colliders[k]->GetComponentName() &&
           m_colliders[i]->GetComponentName() == "CircleCollider")
