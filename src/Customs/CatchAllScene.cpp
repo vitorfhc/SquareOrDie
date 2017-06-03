@@ -11,7 +11,8 @@ void CatchAllScene::OnActivation() {
 void CatchAllScene::CreatePlayers() {
   for (unsigned int i = 0; i < 3; i++) {
     std::string playerName = "Player" + std::to_string(i + 1);
-    auto player = new GameObject(playerName, new Vector(0, 0), 40, 60, 2);
+    auto player =
+        new GameObject(playerName, new Vector(m_wPos[i], m_hPos[i]), 40, 60, 2);
     player->SetTag("Player");
     auto playerRectangle = new RectangleRenderer(player, Vector(0, 0), 40, 60);
     srand(time(NULL) * i);
@@ -31,19 +32,6 @@ void CatchAllScene::CreatePlayers() {
 }
 
 void CatchAllScene::CreateObstacles() {
-  auto obsRect = new GameObject("ObsRect", new Vector(200, 200), 40, 40, 1);
-  auto obsRectRect = new RectangleRenderer(obsRect, Vector(0, 0), 40, 40);
-  obsRectRect->SetColor(255, 255, 255, 255);
-  auto obsRectCollider =
-      new RectangleCollider(obsRect, Vector(0, 0), 40, 40, 0);
-  AddGameObject(obsRect);
-
-  auto obsCircle = new GameObject("ObsCircle", new Vector(400, 400), 40, 40, 1);
-  auto obsCircleCircle = new CircleRenderer(obsCircle, Vector(0, 0), 20);
-  obsCircleCircle->SetColor(255, 255, 255, 255);
-  auto colliderOffset = Vector(0, 0);
-  auto obsCircleCollider = new CircleCollider(obsCircle, colliderOffset, 20, 0);
-  AddGameObject(obsCircle);
 }
 
 void CatchAllScene::CreateMessenger() {
@@ -57,5 +45,5 @@ void CatchAllScene::CreateMessenger() {
 }
 
 void CatchAllScene::OnShown() {
-    CatchAllController::GetInstance()->StartGame();
+  CatchAllController::GetInstance()->StartGame();
 }

@@ -11,3 +11,7 @@ bool Timer::HasPassed(Uint32 seconds) {
 }
 
 void Timer::ResetStartingTime() { m_startTime = SDL_GetTicks(); }
+
+Uint32 Timer::GetCurrentTime() {
+    return SDL_GetTicks();
+}

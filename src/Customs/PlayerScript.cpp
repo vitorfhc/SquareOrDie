@@ -1,3 +1,4 @@
+#include <Customs/CatchAllController.h>
 #include "Customs/PlayerScript.h"
 
 PlayerScript::PlayerScript(GameObject *owner) : Script(owner) {}
@@ -39,4 +40,11 @@ void PlayerScript::HandleInput() {
 void PlayerScript::FixedComponentUpdate() {
   GetOwner()->GetPosition()->m_x += m_movement.m_x * m_speed;
   GetOwner()->GetPosition()->m_y += m_movement.m_y * m_speed;
+
+    for(auto obj : GetOwner()->GetCollisions()) {
+        if(obj->GetTag() == "Catcher") {
+            CatchAllController::GetInstance()->KillPlayer(GetOwner());
+            INFO("CATCHER GOT ONE");
+        }
+    }
 }

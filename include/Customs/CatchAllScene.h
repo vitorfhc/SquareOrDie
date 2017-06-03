@@ -11,16 +11,15 @@
 #include "Engine/Scene.h"
 #include "Globals/EngineGlobals.h"
 
+#include <stdlib.h>
 #include <string>
 #include <time.h>
-#include <stdlib.h>
 
 class CatchAllScene : public Scene {
 public:
   CatchAllScene();
-  virtual void OnActivation() override;
-
-    void OnShown() override;
+  void OnActivation() override;
+  void OnShown() override;
 
 private:
   void CreatePlayers();
@@ -29,6 +28,8 @@ private:
 
   int m_screenWidth = EngineGlobals::screen_width;
   int m_screenHeight = EngineGlobals::screen_height;
+  int m_wPos[3] = {200, 50, 100};
+  int m_hPos[3] = {200, 50, 100};
 };
 
 #endif

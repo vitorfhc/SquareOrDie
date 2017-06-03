@@ -8,6 +8,7 @@ public:
     Timer();
     void ResetStartingTime();
     bool HasPassed(Uint32 seconds);
+    Uint32 GetCurrentTime();
 
 private:
     Uint32 m_startTime;
