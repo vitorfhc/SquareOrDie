@@ -35,6 +35,8 @@ public:
   };
   std::string GetName() { return m_name; };
   // getter and setter
+  inline void SetTag(std::string tag) { m_tag = tag; };
+  inline std::string GetTag() { return m_tag; };
   inline Vector *GetPosition() { return m_position; };
   inline void SetPosition(Vector value) { *m_position = value; };
   inline int GetWidth() { return m_width; };
@@ -56,6 +58,7 @@ private:
   std::unordered_map<Uint32, std::vector<Component *>> m_components;
   // object properties
   std::string m_name = "no_name_defined";
+  std::string m_tag = "";
   Vector *m_position = new Vector(0, 0);
   int m_width = 0;
   int m_height = 0;
