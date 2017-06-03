@@ -7,13 +7,30 @@ void PlayerScript::ComponentUpdate() { HandleInput(); }
 void PlayerScript::HandleInput() {
   m_movement.m_x = m_movement.m_y = 0;
 
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_D))
+  if (GetOwner()->GetName() == "Player1") {
+    m_up = INPUT_W;
+    m_left = INPUT_A;
+    m_right = INPUT_D;
+    m_down = INPUT_S;
+  } else if (GetOwner()->GetName() == "Player2") {
+    m_up = INPUT_U;
+    m_left = INPUT_H;
+    m_right = INPUT_K;
+    m_down = INPUT_J;
+  } else if (GetOwner()->GetName() == "Player3") {
+    m_up = INPUT_UP;
+    m_left = INPUT_LEFT;
+    m_right = INPUT_RIGHT;
+    m_down = INPUT_DOWN;
+  }
+
+  if (InputSystem::GetInstance()->GetKeyPressed(m_right))
     m_movement.m_x += 1;
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_A))
+  if (InputSystem::GetInstance()->GetKeyPressed(m_left))
     m_movement.m_x -= 1;
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_S))
+  if (InputSystem::GetInstance()->GetKeyPressed(m_down))
     m_movement.m_y += 1;
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_W))
+  if (InputSystem::GetInstance()->GetKeyPressed(m_up))
     m_movement.m_y -= 1;
 
   m_movement = m_movement.GetNormalized();
@@ -22,14 +39,4 @@ void PlayerScript::HandleInput() {
 void PlayerScript::FixedComponentUpdate() {
   GetOwner()->GetPosition()->m_x += m_movement.m_x * m_speed;
   GetOwner()->GetPosition()->m_y += m_movement.m_y * m_speed;
-
-  if (GetOwner()->GetCollisions().size() > 0) {
-    auto comp =
-        (RectangleRenderer *)GetOwner()->GetComponent("RectangleRenderer");
-    comp->SetColor(200, 0, 0, 255);
-  } else {
-    auto comp =
-        (RectangleRenderer *)GetOwner()->GetComponent("RectangleRenderer");
-    comp->SetColor(0, 150, 0, 255);
-  }
 }

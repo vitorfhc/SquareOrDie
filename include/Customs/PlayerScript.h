@@ -18,8 +18,9 @@ public:
 
 private:
   Vector m_movement = Vector(0, 0);
-  float m_speed = 5;
+  float m_speed = 10;
   void HandleInput();
+  KeyboardInputGlobal m_up, m_down, m_left, m_right;
 };
 
 #endif
