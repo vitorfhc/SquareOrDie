@@ -4,7 +4,6 @@ CatchAllController *CatchAllController::m_instance = nullptr;
 
 void CatchAllController::AddPlayer(GameObject *player) {
   m_players.push_back(player);
-  player->active = false;
 }
 
 CatchAllController::CatchAllController() { m_alive = 0; }
@@ -16,60 +15,82 @@ CatchAllController *CatchAllController::GetInstance() {
 }
 
 void CatchAllController::StartGame() {
+  auto msgText = (UIText *)m_messenger->GetComponent("UIText");
+  msgText->SetText("");
+  m_alive = 3;
+  DeactivatePlayers();
+  PositPlayers();
   ActivatePlayers();
   DefineCatcher();
 }
 
-void CatchAllController::EndGame() {
-  INFO("CATCH ALL END");
+void CatchAllController::PositPlayers() {
+  for (int i = 0; i < 3; i++)
+    m_players[i]->SetPosition(Vector(m_wPos[i], m_hPos[i]));
+}
 
-  DeactivatePlayers();
-
-  auto timer = Timer();
-  while (!timer.HasPassed(1500)) {
+void CatchAllController::EndGame(bool runnersWin) {
+  if (runnersWin) {
+    auto msgText = (UIText *)m_messenger->GetComponent("UIText");
+    msgText->SetText("The runners win! Press ESC.");
+    DeactivatePlayers();
+    return;
   }
-
-  SceneManager::GetInstance()->SetCurrentScene("Main");
+  if (m_alive <= 1) {
+    auto msgText = (UIText *)m_messenger->GetComponent("UIText");
+    auto winner = GetWinner();
+    msgText->SetText(winner->GetName() + " wins! Press ESC.");
+    DeactivatePlayers();
+  }
 }
 
 void CatchAllController::KillPlayer(GameObject *player) {
   player->active = false;
   m_alive--;
-  if (m_alive < 2)
-    EndGame();
+  EndGame(false);
 }
 
 void CatchAllController::DefineCatcher() {
-  srand(time(NULL));
-  m_catcher = rand() % 2;
-  // auto catcherText = new UIText(m_players[m_catcher], "C",
-  //                              "assets/UIpack/Font/kenvector_future_thin.ttf",
-  //                              100, 255, 0, 0, 255, 1);
-  // Vector offset = Vector(5, 40);
-  // catcherText->SetOffset(offset);
-  m_players[m_catcher]->SetTag("Catcher");
+  auto chosen = GetRandomPlayer();
+  chosen->SetTag("Catcher");
+  auto playerText = (UIText *)chosen->GetComponent("UIText");
+  playerText->SetText("C");
 }
 
-std::vector<GameObject *> CatchAllController::GetPlayers() { return m_players; }
-
 void CatchAllController::ActivatePlayers() {
-  int i = 0;
   for (auto player : m_players) {
-    INFO("ACTIVATING PLAYER");
+    auto text = (UIText *)player->GetComponent("UIText");
+    std::string name = player->GetName();
+    text->SetText(std::to_string(name.back() - 48));
+    player->ClearCollisions();
     player->SetTag("Player");
-    player->SetPosition(Vector(m_wPos[i], m_hPos[i]));
     player->active = true;
-    i++;
   }
-  m_alive = m_players.size();
 }
 
 void CatchAllController::DeactivatePlayers() {
   for (auto player : m_players) {
-    INFO("DEACTIVATING PLAYER");
-    player->SetTag("Player");
     player->active = false;
-    player->SetPosition(Vector(0, 0));
   }
-  m_alive = m_players.size();
+}
+
+void CatchAllController::AddMessenger(GameObject *messenger) {
+  m_messenger = messenger;
+  m_messenger->SetSize(EngineGlobals::screen_width - 100, 100);
+  m_messenger->SetPosition(Vector(
+      EngineGlobals::screen_width / 2 - (m_messenger->GetWidth() / 2),
+      EngineGlobals::screen_height / 2 - (m_messenger->GetHeight() / 2)));
+}
+
+GameObject *CatchAllController::GetRandomPlayer() {
+  srand(time(NULL));
+  int playerIndex = rand() % 3;
+  return m_players[playerIndex];
+}
+
+GameObject *CatchAllController::GetWinner() {
+  for (auto player : m_players) {
+    if (player->active)
+      return player;
+  }
 }

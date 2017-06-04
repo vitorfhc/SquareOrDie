@@ -21,6 +21,10 @@ private:
   float m_speed = 10;
   void HandleInput();
   KeyboardInputGlobal m_up, m_down, m_left, m_right;
+
+  void ScreenCollisionCheck();
+  void Move();
+  void GameCollisionCheck();
 };
 
 #endif

@@ -31,13 +31,13 @@ void CatchAllScene::CreatePlayers() {
 }
 
 void CatchAllScene::CreateMessenger() {
-  auto messenger = new GameObject(
-      "Messenger", new Vector(m_screenWidth / 2, m_screenHeight / 2), 200, 100,
-      5);
-  auto messengerText =
-      new UIText(messenger, "", "assets/UIpack/Font/kenvector_future_thin.ttf",
-                 200, 255, 255, 255, 255, 1);
-  AddGameObject(messenger);
+    auto messenger = new GameObject("Messenger", new Vector(0, 0), 500, 100, 5);
+    auto messengerText =
+            new UIText(messenger, "", "assets/UIpack/Font/kenvector_future_thin.ttf",
+                       100, 255, 255, 255, 255, 1);
+
+    CatchAllController::GetInstance()->AddMessenger(messenger);
+    AddGameObject(messenger);
 }
 
 void CatchAllScene::OnShown() {

@@ -39,15 +39,57 @@ void PlayerScript::HandleInput() {
 }
 
 void PlayerScript::FixedComponentUpdate() {
+  Move();
+  GameCollisionCheck();
+  ScreenCollisionCheck();
+}
+
+void PlayerScript::ScreenCollisionCheck() {
+  if (GetOwner()->GetTag() != "Catcher") {
+    if (GetOwner()->GetPosition()->m_x + 40 < -1)
+      GetOwner()->SetPosition(
+          Vector(EngineGlobals::screen_width, GetOwner()->GetPosition()->m_y));
+    if (GetOwner()->GetPosition()->m_x > EngineGlobals::screen_width + 1)
+      GetOwner()->SetPosition(Vector(-39, GetOwner()->GetPosition()->m_y));
+    if (GetOwner()->GetPosition()->m_y + 60 < -1)
+      GetOwner()->SetPosition(Vector(GetOwner()->GetPosition()->m_x,
+                                     EngineGlobals::screen_height - 1));
+    if (GetOwner()->GetPosition()->m_y > EngineGlobals::screen_height + 1)
+      GetOwner()->SetPosition(Vector(GetOwner()->GetPosition()->m_x, -59));
+
+  } else {
+
+    if (GetOwner()->GetPosition()->m_x < 0)
+      GetOwner()->SetPosition(Vector(0, GetOwner()->GetPosition()->m_y));
+    if (GetOwner()->GetPosition()->m_x + 40 > EngineGlobals::screen_width)
+      GetOwner()->SetPosition(Vector(EngineGlobals::screen_width - 40,
+                                     GetOwner()->GetPosition()->m_y));
+    if (GetOwner()->GetPosition()->m_y < 0)
+      GetOwner()->SetPosition(Vector(GetOwner()->GetPosition()->m_x, 0));
+    if (GetOwner()->GetPosition()->m_y + 60 > EngineGlobals::screen_height)
+      GetOwner()->SetPosition(Vector(GetOwner()->GetPosition()->m_x,
+                                     EngineGlobals::screen_height - 60));
+  }
+}
+
+void PlayerScript::Move() {
+  if (GetOwner()->GetTag() == "Catcher") {
+    m_speed *= 1.0015;
+    INFO(m_speed);
+    if (m_speed >= 45) {
+      CatchAllController::GetInstance()->EndGame(true);
+    }
+  } else
+    m_speed = 10;
   GetOwner()->GetPosition()->m_x += m_movement.m_x * m_speed;
   GetOwner()->GetPosition()->m_y += m_movement.m_y * m_speed;
+}
 
+void PlayerScript::GameCollisionCheck() {
   for (auto obj : GetOwner()->GetCollisions()) {
     if (obj->GetTag() == "Catcher") {
-      INFO("CATCHER GOT ONE");
       CatchAllController::GetInstance()->KillPlayer(GetOwner());
     } else if (obj->GetTag() == "Missile") {
-      INFO("MISSILE GOT ONE");
       MissileController::GetInstance()->KillPlayer(GetOwner());
     }
   }
