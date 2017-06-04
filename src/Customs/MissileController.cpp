@@ -2,6 +2,7 @@
 #include <Components/UIText.h>
 #include <Engine/SceneManager.h>
 #include <Engine/Timer.h>
+#include <Customs/PlayerScript.h>
 
 MissileController *MissileController::m_instance = nullptr;
 
@@ -32,6 +33,8 @@ void MissileController::PositPlayers() {
 
 void MissileController::ActivatePlayers() {
   for (auto player : m_players) {
+    auto script = (PlayerScript *)player->GetComponent("PlayerScript");
+    script->ResetMovementCheck();
     player->ClearCollisions();
     player->active = true;
   }

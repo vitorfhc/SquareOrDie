@@ -1,4 +1,5 @@
 #include "Customs/CatchAllController.h"
+#include <Customs/PlayerScript.h>
 
 CatchAllController *CatchAllController::m_instance = nullptr;
 
@@ -61,6 +62,8 @@ void CatchAllController::ActivatePlayers() {
   for (auto player : m_players) {
     auto text = (UIText *)player->GetComponent("UIText");
     std::string name = player->GetName();
+    auto script = (PlayerScript *)player->GetComponent("PlayerScript");
+    script->ResetMovementCheck();
     text->SetText(std::to_string(name.back() - 48));
     player->ClearCollisions();
     player->SetTag("Player");

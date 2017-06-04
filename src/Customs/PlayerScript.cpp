@@ -40,6 +40,7 @@ void PlayerScript::HandleInput() {
 
 void PlayerScript::FixedComponentUpdate() {
   Move();
+  CheckMovement();
   GameCollisionCheck();
   ScreenCollisionCheck();
 }
@@ -75,8 +76,7 @@ void PlayerScript::ScreenCollisionCheck() {
 void PlayerScript::Move() {
   if (GetOwner()->GetTag() == "Catcher") {
     m_speed *= 1.0015;
-    INFO(m_speed);
-    if (m_speed >= 45) {
+    if (m_speed >= 40) {
       CatchAllController::GetInstance()->EndGame(true);
     }
   } else
@@ -94,3 +94,14 @@ void PlayerScript::GameCollisionCheck() {
     }
   }
 }
+
+void PlayerScript::CheckMovement() {
+  if (!m_movement.m_x && !m_movement.m_y)
+    m_framesNotMoving++;
+  else
+    m_framesNotMoving = 0;
+  if (m_framesNotMoving > EngineGlobals::fixed_update_rate * 2)
+    CatchAllController::GetInstance()->KillPlayer(GetOwner());
+}
+
+void PlayerScript::ResetMovementCheck() { m_framesNotMoving = 0; }

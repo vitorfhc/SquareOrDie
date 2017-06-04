@@ -15,8 +15,10 @@ public:
   virtual string GetComponentName() override { return "PlayerScript"; };
   void ComponentUpdate() override;
   void FixedComponentUpdate() override;
+  void ResetMovementCheck();
 
 private:
+  int m_framesNotMoving = 0;
   Vector m_movement = Vector(0, 0);
   float m_speed = 10;
   void HandleInput();
@@ -25,6 +27,7 @@ private:
   void ScreenCollisionCheck();
   void Move();
   void GameCollisionCheck();
+  void CheckMovement();
 };
 
 #endif
