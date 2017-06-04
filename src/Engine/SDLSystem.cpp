@@ -52,8 +52,12 @@ void SDLSystem::Run() {
     CalculateFramerate();
     InputSystem::GetInstance()->UpdateStates();
 
-    if (InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE))
-      break;
+    if (InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE)) {
+        if(SceneManager::GetInstance()->GetCurrentScene()->GetName() != "Main") {
+            SceneManager::GetInstance()->SetCurrentScene("Main");
+        }
+    }
+
 
     // all updates but draw are called here
     SceneManager::GetInstance()->Update();

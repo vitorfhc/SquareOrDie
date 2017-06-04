@@ -77,10 +77,11 @@ void MissileController::KillPlayer(GameObject *player) {
 }
 
 void MissileController::AddMessenger(GameObject *messenger) {
-    m_messenger = messenger;
-    m_messenger->SetSize(EngineGlobals::screen_width - 100, 100);
-    m_messenger->SetPosition(Vector(EngineGlobals::screen_width / 2 - (m_messenger->GetWidth() / 2),
-                                  EngineGlobals::screen_height / 2 - (m_messenger->GetHeight() / 2)));
+  m_messenger = messenger;
+  m_messenger->SetSize(EngineGlobals::screen_width - 100, 100);
+  m_messenger->SetPosition(Vector(
+      EngineGlobals::screen_width / 2 - (m_messenger->GetWidth() / 2),
+      EngineGlobals::screen_height / 2 - (m_messenger->GetHeight() / 2)));
 }
 
 GameObject *MissileController::GetWinner() {

@@ -15,7 +15,6 @@ public:
   void EndGame();
   GameObject *GetRandomPlayer();
   void AddMissile(GameObject *missile);
-
   void AddMessenger(GameObject *messenger);
 
 private:
