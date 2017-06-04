@@ -1,9 +1,8 @@
-# SquareOrDie
+# Square Or Die
 ----
 ## Mechanics
 #### Movements
 Moving: W A S D <br>
-Special (if available in gamemode): Space <br>
 
 #### Keep moving!
 Yeah, if you stop moving you die. Keep moving.
@@ -11,11 +10,13 @@ Yeah, if you stop moving you die. Keep moving.
 ---
 ### Gamemodes
 #### Catch All
-One of the players are randomly chose for being the killer and the rest will be the runners. Each runner the killer collides with he gets a point, if a runner survives he gets 2 points. <br>
-<i>Special: killer can get invisible for a certain amount of time</i>
+One of the players is randomly chosen for being the catcher and the rest will be the runners. <br>
+If the runner is caught he dies, with all runners dead the catcher wins. After sometime if the catcher doesn't kill all the runners, the runners win. <br>
+<i>Special: catcher speed is increased over time</i> <br>
+<i>Special: runners can teleport from a side of the screen to another</i>
 
-#### INCOMING!
-In this mode there's a missile that follows a random player, when it gets in a specific range of any player it will explode, if you are in this range, you die.
+#### Missile
+In this mode there's a missile that follows a random player, when it gets in a specific range of any player it will explode, if you are in this range, you die, event not being the randomly chosen.
 
 ----
 ### About
