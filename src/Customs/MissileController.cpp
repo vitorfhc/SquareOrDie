@@ -63,12 +63,10 @@ GameObject *MissileController::GetRandomPlayer() {
 void MissileController::EndGame() {
   if (m_alive <= 1) {
     auto msgText = (UIText *)m_messenger->GetComponent("UIText");
-    msgText->SetText("End of the game!");
-    Timer timer = Timer();
-    while (!timer.HasPassed(1500)) {
-    }
-    msgText->SetText("");
-    SceneManager::GetInstance()->SetCurrentScene("Main");
+    auto winner = GetWinner();
+    msgText->SetText(winner->GetName() + " wins! Press ESC.");
+    DeactivateMissile();
+    DeactivatePlayers();
   }
 }
 
@@ -79,7 +77,15 @@ void MissileController::KillPlayer(GameObject *player) {
 }
 
 void MissileController::AddMessenger(GameObject *messenger) {
-  m_messenger = messenger;
-  m_messenger->SetPosition(Vector(EngineGlobals::screen_width / 2 - 250,
-                                  EngineGlobals::screen_height / 2 - 50));
+    m_messenger = messenger;
+    m_messenger->SetSize(EngineGlobals::screen_width - 100, 100);
+    m_messenger->SetPosition(Vector(EngineGlobals::screen_width / 2 - (m_messenger->GetWidth() / 2),
+                                  EngineGlobals::screen_height / 2 - (m_messenger->GetHeight() / 2)));
+}
+
+GameObject *MissileController::GetWinner() {
+  for (auto player : m_players) {
+    if (player->active)
+      return player;
+  }
 }

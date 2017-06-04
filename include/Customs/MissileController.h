@@ -26,6 +26,7 @@ private:
   void DeactivatePlayers();
   void ActivateMissile();
   void DeactivateMissile();
+  GameObject *GetWinner();
   std::vector<GameObject *> m_players;
   GameObject *m_missile = nullptr;
   GameObject *m_messenger = nullptr;
