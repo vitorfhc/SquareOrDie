@@ -3,6 +3,7 @@
 // load commons includes
 #include "Customs/CatchAllScene.h"
 #include "Customs/MainScene.h"
+#include <Customs/MissileScene.h>
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -191,7 +192,7 @@ void SDLSystem::CalculateFramerate() {
     m_framerate = m_frameCounter;
     m_frameCounter = 0;
     m_lastFrameTicks = m_currentTicks;
-    //INFO("Framerate per second: " << m_framerate);
+    // INFO("Framerate per second: " << m_framerate);
   }
   m_frameCounter++;
 }
@@ -199,7 +200,9 @@ void SDLSystem::CalculateFramerate() {
 void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
   auto catchAllScene = new CatchAllScene();
+  auto missileScene = new MissileScene();
 
+  SceneManager::GetInstance()->AddScene(std::make_pair("Missile", missileScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
   SceneManager::GetInstance()->AddScene(
       std::make_pair("CatchAll", catchAllScene));

@@ -1,5 +1,6 @@
-#include <Customs/CatchAllController.h>
 #include "Customs/PlayerScript.h"
+#include <Customs/CatchAllController.h>
+#include <Customs/MissileController.h>
 
 PlayerScript::PlayerScript(GameObject *owner) : Script(owner) {}
 
@@ -41,10 +42,13 @@ void PlayerScript::FixedComponentUpdate() {
   GetOwner()->GetPosition()->m_x += m_movement.m_x * m_speed;
   GetOwner()->GetPosition()->m_y += m_movement.m_y * m_speed;
 
-    for(auto obj : GetOwner()->GetCollisions()) {
-        if(obj->GetTag() == "Catcher") {
-            INFO("CATCHER GOT ONE");
-            CatchAllController::GetInstance()->KillPlayer(GetOwner());
-        }
+  for (auto obj : GetOwner()->GetCollisions()) {
+    if (obj->GetTag() == "Catcher") {
+      INFO("CATCHER GOT ONE");
+      CatchAllController::GetInstance()->KillPlayer(GetOwner());
+    } else if (obj->GetTag() == "Missile") {
+      INFO("MISSILE GOT ONE");
+      MissileController::GetInstance()->KillPlayer(GetOwner());
     }
+  }
 }

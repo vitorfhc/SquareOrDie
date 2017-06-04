@@ -24,12 +24,9 @@ public:
 private:
   void CreatePlayers();
   void CreateMessenger();
-  void CreateObstacles();
 
   int m_screenWidth = EngineGlobals::screen_width;
   int m_screenHeight = EngineGlobals::screen_height;
-  int m_wPos[3] = {200, 50, 100};
-  int m_hPos[3] = {200, 50, 100};
 };
 
 #endif

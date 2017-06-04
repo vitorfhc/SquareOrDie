@@ -3,7 +3,6 @@
 CatchAllScene::CatchAllScene() {}
 
 void CatchAllScene::OnActivation() {
-  CreateObstacles();
   CreatePlayers();
   CreateMessenger();
 }
@@ -12,7 +11,7 @@ void CatchAllScene::CreatePlayers() {
   for (unsigned int i = 0; i < 3; i++) {
     std::string playerName = "Player" + std::to_string(i + 1);
     auto player =
-        new GameObject(playerName, new Vector(m_wPos[i], m_hPos[i]), 40, 60, 2);
+        new GameObject(playerName, new Vector(0, 0), 40, 60, 2);
     player->SetTag("Player");
     auto playerRectangle = new RectangleRenderer(player, Vector(0, 0), 40, 60);
     srand(time(NULL) * i);
@@ -29,9 +28,6 @@ void CatchAllScene::CreatePlayers() {
     CatchAllController::GetInstance()->AddPlayer(player);
     AddGameObject(player);
   }
-}
-
-void CatchAllScene::CreateObstacles() {
 }
 
 void CatchAllScene::CreateMessenger() {
