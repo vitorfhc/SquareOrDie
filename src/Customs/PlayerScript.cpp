@@ -1,5 +1,6 @@
 #include "Customs/PlayerScript.h"
 #include <Customs/CatchAllController.h>
+#include <Customs/MenuController.h>
 #include <Customs/MissileController.h>
 
 PlayerScript::PlayerScript(GameObject *owner) : Script(owner) {}
@@ -104,9 +105,14 @@ void PlayerScript::CheckMovement() {
       m_framesNotMoving = 0;
   }
   if (m_framesNotMoving > EngineGlobals::fixed_update_rate * 2) {
-    CatchAllController::GetInstance()->KillPlayer(GetOwner());
-    if (GetOwner()->GetTag() == "Catcher")
-      CatchAllController::GetInstance()->EndGame(true);
+    if (MenuController::GetInstance()->GetGamemode() & 0x02) {
+      CatchAllController::GetInstance()->KillPlayer(GetOwner());
+      if (GetOwner()->GetTag() == "Catcher")
+        CatchAllController::GetInstance()->EndGame(true);
+    }
+      else if (MenuController::GetInstance()->GetGamemode() & 0x01) {
+        MissileController::GetInstance()->KillPlayer(GetOwner());
+    }
   }
 }
 

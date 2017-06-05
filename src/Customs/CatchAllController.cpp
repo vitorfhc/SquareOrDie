@@ -47,6 +47,7 @@ void CatchAllController::EndGame(bool runnersWin) {
 
 void CatchAllController::KillPlayer(GameObject *player) {
   player->active = false;
+  GetPlayerLifeBar(player)->active = false;
   m_alive--;
   EndGame(false);
 }
@@ -67,12 +68,14 @@ void CatchAllController::ActivatePlayers() {
     text->SetText(std::to_string(name.back() - 48));
     player->ClearCollisions();
     player->SetTag("Player");
+    GetPlayerLifeBar(player)->active = true;
     player->active = true;
   }
 }
 
 void CatchAllController::DeactivatePlayers() {
   for (auto player : m_players) {
+    GetPlayerLifeBar(player)->active = false;
     player->active = false;
   }
 }
@@ -96,4 +99,13 @@ GameObject *CatchAllController::GetWinner() {
     if (player->active)
       return player;
   }
+}
+
+GameObject *CatchAllController::GetPlayerLifeBar(GameObject *player) {
+  std::string playerName = player->GetName();
+  std::string lifeName = "LifeBar";
+  lifeName += playerName[6];
+  return SceneManager::GetInstance()
+      ->GetScene("CatchAll")
+      ->GetGameObject(lifeName);
 }

@@ -34,6 +34,13 @@ void MissileScene::CreatePlayers() {
 
     MissileController::GetInstance()->AddPlayer(player);
     AddGameObject(player);
+
+    auto lifeBar = new GameObject("LifeBar" + std::to_string(i + 1),
+                                  player->GetPosition(), 40, 10, 2);
+    auto lifeBarRectangle =
+        new RectangleRenderer(lifeBar, Vector(0, -15), 40, 10);
+    lifeBarRectangle->SetColor(255, 0, 0, 255);
+    AddGameObject(lifeBar);
   }
 }
 
@@ -43,8 +50,8 @@ void MissileScene::CreateMessenger() {
       new UIText(messenger, "", "assets/UIpack/Font/kenvector_future_thin.ttf",
                  100, 255, 255, 255, 255, 1);
 
-    MissileController::GetInstance()->AddMessenger(messenger);
-    AddGameObject(messenger);
+  MissileController::GetInstance()->AddMessenger(messenger);
+  AddGameObject(messenger);
 }
 
 void MissileScene::CreateMissile() {

@@ -18,6 +18,7 @@ public:
   void AddMessenger(GameObject *messenger);
 
 private:
+  GameObject *GetPlayerLifeBar(GameObject *player);
   MissileController();
   void PositPlayers();
   void PositMissile();

@@ -21,6 +21,7 @@ public:
   void AddMessenger(GameObject *messenger);
 
 private:
+  GameObject *GetPlayerLifeBar(GameObject *player);
   void PositPlayers();
   GameObject *GetWinner();
   GameObject *GetRandomPlayer();

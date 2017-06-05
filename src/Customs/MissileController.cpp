@@ -1,8 +1,8 @@
 #include "Customs/MissileController.h"
 #include <Components/UIText.h>
+#include <Customs/PlayerScript.h>
 #include <Engine/SceneManager.h>
 #include <Engine/Timer.h>
-#include <Customs/PlayerScript.h>
 
 MissileController *MissileController::m_instance = nullptr;
 
@@ -37,12 +37,15 @@ void MissileController::ActivatePlayers() {
     script->ResetMovementCheck();
     player->ClearCollisions();
     player->active = true;
+    GetPlayerLifeBar(player)->active = true;
   }
 }
 
 void MissileController::DeactivatePlayers() {
-  for (auto player : m_players)
+  for (auto player : m_players) {
     player->active = false;
+    GetPlayerLifeBar(player)->active = false;
+  }
 }
 
 MissileController::MissileController() {}
@@ -74,6 +77,7 @@ void MissileController::EndGame() {
 }
 
 void MissileController::KillPlayer(GameObject *player) {
+  GetPlayerLifeBar(player)->active = false;
   player->active = false;
   m_alive--;
   EndGame();
@@ -92,4 +96,12 @@ GameObject *MissileController::GetWinner() {
     if (player->active)
       return player;
   }
+}
+
+GameObject *MissileController::GetPlayerLifeBar(GameObject *player) {
+  std::string playerName = player->GetName();
+  std::string lifeName = "LifeBar";
+  lifeName += playerName[6];
+  return SceneManager::GetInstance()->GetScene("Missile")->GetGameObject(
+      lifeName);
 }
