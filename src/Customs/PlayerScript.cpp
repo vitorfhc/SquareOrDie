@@ -98,8 +98,11 @@ void PlayerScript::GameCollisionCheck() {
 void PlayerScript::CheckMovement() {
   if (!m_movement.m_x && !m_movement.m_y)
     m_framesNotMoving++;
-  else
-    m_framesNotMoving = 0;
+  else {
+    m_framesNotMoving -= 2;
+    if (m_framesNotMoving < 0)
+      m_framesNotMoving = 0;
+  }
   if (m_framesNotMoving > EngineGlobals::fixed_update_rate * 2) {
     CatchAllController::GetInstance()->KillPlayer(GetOwner());
     if (GetOwner()->GetTag() == "Catcher")
