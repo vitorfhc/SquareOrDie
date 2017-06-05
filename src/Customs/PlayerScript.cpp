@@ -100,8 +100,11 @@ void PlayerScript::CheckMovement() {
     m_framesNotMoving++;
   else
     m_framesNotMoving = 0;
-  if (m_framesNotMoving > EngineGlobals::fixed_update_rate * 2)
+  if (m_framesNotMoving > EngineGlobals::fixed_update_rate * 2) {
     CatchAllController::GetInstance()->KillPlayer(GetOwner());
+    if (GetOwner()->GetTag() == "Catcher")
+      CatchAllController::GetInstance()->EndGame(true);
+  }
 }
 
 void PlayerScript::ResetMovementCheck() { m_framesNotMoving = 0; }
