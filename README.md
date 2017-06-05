@@ -2,10 +2,14 @@
 ----
 ## Mechanics
 #### Movements
-Moving: W A S D <br>
+Moving: <br>
+Player 1: W A S D <br>
+Player 2: U H J K <br>
+Player 3: KB ARROWS <br>
 
 #### Keep moving!
-Yeah, if you stop moving you die. Keep moving.
+Yeah, if you stop moving you die. Keep moving. <br>
+<i>You have 100 of life, each second stopped make you loose some, but if you walk you recover it.</i>
 
 ---
 ### Gamemodes
