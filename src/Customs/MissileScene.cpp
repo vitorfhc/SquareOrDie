@@ -3,9 +3,10 @@
 #include <Components/RectangleRenderer.h>
 #include <Components/UIText.h>
 #include <Customs/CatchAllController.h>
-#include <Customs/MissileController.h>
-#include <Customs/PlayerScript.h>
 #include <Customs/LifeBarScript.h>
+#include <Customs/MissileController.h>
+#include <Customs/MissileScript.h>
+#include <Customs/PlayerScript.h>
 
 void MissileScene::OnActivation() {
   CreatePlayers();
@@ -60,6 +61,7 @@ void MissileScene::CreateMessenger() {
 void MissileScene::CreateMissile() {
   auto missile = new GameObject("Missile", new Vector(0, 0), 40, 40, 2);
   missile->SetTag("Missile");
+  auto missileScript = new MissileScript(missile);
   auto missileRectRend = new RectangleRenderer(missile, Vector(0, 0), 40, 40);
   auto missileCol = new RectangleCollider(missile, Vector(0, 0), 40, 40, 0);
 

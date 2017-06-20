@@ -1,5 +1,6 @@
 #include "Customs/MissileController.h"
 #include <Components/UIText.h>
+#include <Customs/MissileScript.h>
 #include <Customs/PlayerScript.h>
 #include <Engine/SceneManager.h>
 #include <Engine/Timer.h>
@@ -54,7 +55,11 @@ void MissileController::AddMissile(GameObject *missile) { m_missile = missile; }
 
 void MissileController::DeactivateMissile() { m_missile->active = false; }
 
-void MissileController::ActivateMissile() { m_missile->active = true; }
+void MissileController::ActivateMissile() {
+  m_missile->active = true;
+  auto script = (MissileScript *)m_missile->GetComponent("MissileScript");
+  script->Activate();
+}
 
 void MissileController::PositMissile() {
   m_missile->SetPosition(Vector(m_wPos[3], m_hPos[3]));
