@@ -5,6 +5,7 @@
 #include <Customs/CatchAllController.h>
 #include <Customs/MissileController.h>
 #include <Customs/PlayerScript.h>
+#include <Customs/LifeBarScript.h>
 
 void MissileScene::OnActivation() {
   CreatePlayers();
@@ -39,6 +40,8 @@ void MissileScene::CreatePlayers() {
                                   player->GetPosition(), 40, 10, 2);
     auto lifeBarRectangle =
         new RectangleRenderer(lifeBar, Vector(0, -15), 40, 10);
+    auto lifeBarScript = new LifeBarScript(lifeBar);
+    lifeBarScript->SetPlayer(playerScript);
     lifeBarRectangle->SetColor(255, 0, 0, 255);
     AddGameObject(lifeBar);
   }
