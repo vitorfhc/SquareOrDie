@@ -18,8 +18,9 @@ public:
 
 private:
   void SelectTarget();
-
   void FollowTarget();
+
+  int m_speed = 8;
 };
 
 #endif // SQUAREORDIE_MISSILESCRIPT_H

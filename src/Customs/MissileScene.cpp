@@ -64,6 +64,7 @@ void MissileScene::CreateMissile() {
   auto missileScript = new MissileScript(missile);
   auto missileRectRend = new RectangleRenderer(missile, Vector(0, 0), 40, 40);
   auto missileCol = new RectangleCollider(missile, Vector(0, 0), 40, 40, 0);
+  auto offset = Vector(0, 0);
 
   MissileController::GetInstance()->AddMissile(missile);
   AddGameObject(missile);

@@ -21,11 +21,14 @@ void MissileScript::FixedComponentUpdate() {
   if (!m_chosen || !m_chosen->active)
     SelectTarget();
   FollowTarget();
-  INFO(m_chosen->GetName());
 }
 
 void MissileScript::FollowTarget() {
-  // folows the target
+  Vector direction;
+  direction.m_x = m_chosen->GetPosition()->m_x - GetOwner()->GetPosition()->m_x;
+  direction.m_y = m_chosen->GetPosition()->m_y - GetOwner()->GetPosition()->m_y;
+  direction = direction.GetNormalized();
+  GetOwner()->SetPosition(*GetOwner()->GetPosition() + direction * m_speed);
 }
 
 void MissileScript::Activate() { SelectTarget(); }
