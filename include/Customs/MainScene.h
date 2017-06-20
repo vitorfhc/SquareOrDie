@@ -29,6 +29,7 @@ private:
   void CreateQuitButton();
   void CreateBackground();
   void CreateGamemodes();
+  void CreateMusic();
 };
 
 #endif

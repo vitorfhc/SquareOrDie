@@ -1,3 +1,4 @@
+#include <Components/UISound.h>
 #include "Customs/MainScene.h"
 
 MainScene::MainScene() {}
@@ -10,6 +11,7 @@ void MainScene::OnActivation() {
   CreateQuitButton();
   CreateBackground();
   CreateGamemodes();
+  CreateMusic();
 }
 
 void MainScene::OnDeactivation() {}
@@ -37,10 +39,10 @@ void MainScene::CreatePlayButton() {
 }
 
 void MainScene::CreateQuitButton() {
-  auto quitButton = new GameObject(
-      "QuitButton",
-      new Vector(m_width_middle - (190 * 1.4 / 2), 100 + (45 * 1.4)), 190 * 1.4,
-      45 * 1.4, 1);
+  auto quitButton =
+      new GameObject("QuitButton", new Vector(m_width_middle - (190 * 1.4 / 2),
+                                              100 + (45 * 1.4)),
+                     190 * 1.4, 45 * 1.4, 1);
   auto quitButtonImage =
       new Image("assets/UIpack/Spritesheet/redSheet.png", 0, 94, 190, 45);
   auto quitButtonRenderer = new Renderer(quitButton, quitButtonImage);
@@ -118,4 +120,11 @@ void MainScene::CreateGamemodes() {
   auto missile_CBRenderer = new Renderer(missile_CB, checkBoxImage);
   missile_CBRenderer->active = true;
   AddGameObject(missile_CB);
+}
+
+void MainScene::CreateMusic() {
+  auto music = new GameObject("Music", new Vector(200, 200), 200, 100);
+  auto themeMusic =
+      new UISound(music, "Music", "assets/Audio/beat.wav", false, true);
+  AddGameObject(music);
 }
