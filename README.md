@@ -20,7 +20,7 @@ If the runner is caught he dies, with all runners dead the catcher wins. After s
 <i>Special: runners can teleport from a side of the screen to another</i>
 
 #### Missile
-In this mode there's a missile that follows a random player, when it gets in a specific range of any player it will explode, if you are in this range, you die, event not being the randomly chosen.
+In this mode there's a missile that follows a random player, when it collides with a player, he dies! The randomly chosen player has to trick the missile to hit another one!
 
 ----
 ### About
