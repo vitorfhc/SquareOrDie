@@ -22,3 +22,8 @@ void RectangleRenderer::SetColor(int r, int g, int b, int a) {
   m_b = b;
   m_a = a;
 }
+
+void RectangleRenderer::SetSize(int w, int h) {
+  m_width = w;
+  m_height = h;
+}

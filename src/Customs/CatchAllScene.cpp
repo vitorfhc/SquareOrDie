@@ -1,4 +1,5 @@
 #include "Customs/CatchAllScene.h"
+#include <Customs/LifeBarScript.h>
 
 CatchAllScene::CatchAllScene() {}
 
@@ -10,8 +11,7 @@ void CatchAllScene::OnActivation() {
 void CatchAllScene::CreatePlayers() {
   for (unsigned int i = 0; i < 3; i++) {
     std::string playerName = "Player" + std::to_string(i + 1);
-    auto player =
-        new GameObject(playerName, new Vector(0, 0), 40, 60, 2);
+    auto player = new GameObject(playerName, new Vector(0, 0), 40, 60, 2);
     player->SetTag("Player");
     auto playerRectangle = new RectangleRenderer(player, Vector(0, 0), 40, 60);
     srand(time(NULL) * i);
@@ -28,21 +28,25 @@ void CatchAllScene::CreatePlayers() {
     CatchAllController::GetInstance()->AddPlayer(player);
     AddGameObject(player);
 
-    auto lifeBar = new GameObject("LifeBar" + std::to_string(i + 1), player->GetPosition(), 40, 10, 2);
-    auto lifeBarRectangle = new RectangleRenderer(lifeBar, Vector(0, -15), 40, 10);
+    auto lifeBar = new GameObject("LifeBar" + std::to_string(i + 1),
+                                  player->GetPosition(), 40, 10, 2);
+    auto lifeBarRectangle =
+        new RectangleRenderer(lifeBar, Vector(0, -15), 40, 10);
+    auto lifeBarScript = new LifeBarScript(lifeBar);
+    lifeBarScript->SetPlayer(playerScript);
     lifeBarRectangle->SetColor(255, 0, 0, 255);
     AddGameObject(lifeBar);
   }
 }
 
 void CatchAllScene::CreateMessenger() {
-    auto messenger = new GameObject("Messenger", new Vector(0, 0), 500, 100, 5);
-    auto messengerText =
-            new UIText(messenger, "", "assets/UIpack/Font/kenvector_future_thin.ttf",
-                       100, 255, 255, 255, 255, 1);
+  auto messenger = new GameObject("Messenger", new Vector(0, 0), 500, 100, 5);
+  auto messengerText =
+      new UIText(messenger, "", "assets/UIpack/Font/kenvector_future_thin.ttf",
+                 100, 255, 255, 255, 255, 1);
 
-    CatchAllController::GetInstance()->AddMessenger(messenger);
-    AddGameObject(messenger);
+  CatchAllController::GetInstance()->AddMessenger(messenger);
+  AddGameObject(messenger);
 }
 
 void CatchAllScene::OnShown() {

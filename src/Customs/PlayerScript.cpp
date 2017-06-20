@@ -109,11 +109,12 @@ void PlayerScript::CheckMovement() {
       CatchAllController::GetInstance()->KillPlayer(GetOwner());
       if (GetOwner()->GetTag() == "Catcher")
         CatchAllController::GetInstance()->EndGame(true);
-    }
-      else if (MenuController::GetInstance()->GetGamemode() & 0x01) {
-        MissileController::GetInstance()->KillPlayer(GetOwner());
+    } else if (MenuController::GetInstance()->GetGamemode() & 0x01) {
+      MissileController::GetInstance()->KillPlayer(GetOwner());
     }
   }
 }
 
 void PlayerScript::ResetMovementCheck() { m_framesNotMoving = 0; }
+
+int PlayerScript::GetFramesNotMoving() { return m_framesNotMoving; }

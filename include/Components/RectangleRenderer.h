@@ -14,6 +14,7 @@ class RectangleRenderer : public Component {
 public:
   RectangleRenderer(GameObject *owner, Vector offset, int width, int height);
   void SetColor(int r, int g, int b, int a);
+  void SetSize(int w, int h);
   virtual string GetComponentName() override { return "RectangleRenderer"; };
   virtual void ComponentUpdate() override;
 

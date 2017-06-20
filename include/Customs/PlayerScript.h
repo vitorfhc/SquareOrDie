@@ -16,6 +16,7 @@ public:
   void ComponentUpdate() override;
   void FixedComponentUpdate() override;
   void ResetMovementCheck();
+  int GetFramesNotMoving();
 
 private:
   int m_framesNotMoving = 0;
